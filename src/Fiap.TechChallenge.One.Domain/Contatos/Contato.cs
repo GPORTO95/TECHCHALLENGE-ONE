@@ -7,7 +7,8 @@ public sealed class Contato : Entity
     private Contato(
         Guid id,
         Nome nome,
-        Email email)
+        Email email,
+        Telefone telefone)
     {
         Id = id;
         Nome = nome;
@@ -18,14 +19,15 @@ public sealed class Contato : Entity
 
     public Email Email { get; private set; }
 
-    //TODO: Criar objeto de valor para telefone
+    public Telefone Telefone { get; private set; }
 
     public static Result<Contato> Criar(
-        Nome nome, Email email)
+        Nome nome, Email email, Telefone telefone)
     {
         return new Contato(
             Guid.NewGuid(),
             nome,
-            email);
+            email,
+            telefone);
     }
 }
