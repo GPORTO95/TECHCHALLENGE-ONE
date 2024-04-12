@@ -13,6 +13,7 @@ public sealed class Contato : Entity
         Id = id;
         Nome = nome;
         Email = email;
+        Telefone = telefone;
     }
 
     public Nome Nome { get; private set; }
