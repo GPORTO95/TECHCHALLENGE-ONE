@@ -1,4 +1,4 @@
-## :fire: FIAP | Desafio TechChallenge One | O Desafio
+## :fire: FIAP | Desafio TechChallenge One
 Contruir uma API em .Net 8 para que seja possível realizar o cadastro, atualização, consulta e exclusão de contatos que contenha os seguintes campos.
 - (Obrigátorio) Nome 
 - (Obrigátorio) Email
