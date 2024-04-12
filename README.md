@@ -11,6 +11,7 @@ Contruir uma API em .Net 8 para que seja possível realizar o cadastro, atualiza
 - FluentValidator
 - MediatR
 - Teste de unidade
+- Unit Of Work
 
 ## :building_construction: Arquitetura 
 - **Application**: CQRS, interfaces para serviços externos, pipeline behaviors e validações de comandos.com fluent validator
