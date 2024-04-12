@@ -5,9 +5,16 @@ Contruir uma API em .Net 8 para que seja possível realizar o cadastro, atualiza
 - (Obrigátorio) Telefone
 - (Obrigátorio) Associação de DDD
 
-## :building_construction: Arquitetura 3 camadas
-- **Application**: Camada onde fica os comandos e queries, interfaces de serviços externos, pipelines e validações de comandos.
-- **Domain**: Toda parte de entidade, objeto de valor, interface de repositorios e mensagens de erros
-- **Infrastructure**: Camada de acesso a dados, cache e serviços externos
+## :woman_technologist: Tecnologias
+- .NET 8
+- Entity Framework Core 8
+- FluentValidator
+- MediatR
+- Teste de unidade
+
+## :building_construction: Arquitetura 
+- **Application**: CQRS, interfaces para serviços externos, pipeline behaviors e validações de comandos.com fluent validator
+- **Domain**: Classes compartilhadas, entidades, objetos de valor, interface de repositorios e mensagens de erros
+- **Infrastructure**: Camada de acesso a dados, cache e classes concretas de acesso a serviços externos
 - **Application.UnitTests**: Testes unitário para classes de comandos, queries e validações
 - **Domain.UnitTests**: Testes unitário para entidades e objetos de valor
