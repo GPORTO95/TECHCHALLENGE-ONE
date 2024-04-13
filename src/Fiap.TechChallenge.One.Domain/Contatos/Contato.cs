@@ -31,4 +31,13 @@ public sealed class Contato : Entity
             email,
             telefone);
     }
+
+    public void AtualizarEmail(Email email) =>
+        Email = email;
+
+    public void AtualizarNome(Nome nome) =>
+        Nome = nome;
+
+    public void AtualizarTelefone(Telefone telefone) =>
+        Telefone = telefone;
 }

@@ -19,8 +19,9 @@
 		</AssemblyAttribute>
 	</ItemGroup>
 
+
 	<ItemGroup>
-		<ProjectReference Include="..\..\tests\Domain.TestsUnits\Domain.UnitTests.csproj" />
+	  <ProjectReference Include="..\..\tests\Domain.UnitTests\Domain.UnitTests.csproj" />
 	</ItemGroup>
 
 </Project>
