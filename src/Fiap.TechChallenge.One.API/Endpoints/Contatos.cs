@@ -1,8 +1,10 @@
 ﻿using Fiap.TechChallenge.One.API.Extensions;
 using Fiap.TechChallenge.One.API.Infrastructure;
+using Fiap.TechChallenge.One.Application.Contatos;
 using Fiap.TechChallenge.One.Application.Contatos.Atualizar;
 using Fiap.TechChallenge.One.Application.Contatos.Criar;
 using Fiap.TechChallenge.One.Application.Contatos.Excluir;
+using Fiap.TechChallenge.One.Application.Contatos.Listar;
 using Fiap.TechChallenge.One.Domain.Kernel;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +15,15 @@ public class Contatos : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
+        app.MapGet("contatos", async (
+            ISender sender,
+            CancellationToken cancellationToken) =>
+        {
+            Result<IEnumerable<ContatoResponse>> result = await sender.Send(new ListarContatosQuery(), cancellationToken);
+
+            return result.Match(Results.Ok, CustomResults.Problem);
+        });
+
         app.MapPost("contatos", async (
             CriarContatoCommand command,
             ISender sender,

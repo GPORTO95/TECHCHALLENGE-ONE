@@ -4,6 +4,8 @@ namespace Fiap.TechChallenge.One.Domain.Contatos;
 
 public sealed class Contato : Entity
 {
+    protected Contato() { }
+
     private Contato(
         Guid id,
         Nome nome,
