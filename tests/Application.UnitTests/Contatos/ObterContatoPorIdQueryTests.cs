@@ -1,4 +1,5 @@
-﻿using Fiap.TechChallenge.One.Application.Contatos.ObterPorId;
+﻿using Fiap.TechChallenge.One.Application.Contatos;
+using Fiap.TechChallenge.One.Application.Contatos.ObterPorId;
 using Fiap.TechChallenge.One.Domain.Contatos;
 using Fiap.TechChallenge.One.Domain.Kernel;
 using FluentAssertions;
