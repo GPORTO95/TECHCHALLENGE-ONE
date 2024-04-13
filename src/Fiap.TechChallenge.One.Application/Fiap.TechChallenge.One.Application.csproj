@@ -21,7 +21,7 @@
 
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\tests\Domain.UnitTests\Domain.UnitTests.csproj" />
+	  <ProjectReference Include="..\Fiap.TechChallenge.One.Domain\Fiap.TechChallenge.One.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

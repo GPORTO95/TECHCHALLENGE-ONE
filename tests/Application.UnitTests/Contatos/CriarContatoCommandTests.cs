@@ -8,9 +8,9 @@ namespace Application.UnitTests.Contatos;
 
 public class CriarContatoCommandTests
 {
-    private static readonly CriarUsuarioCommand Command = new("test@test.com", "Gabriel Test", "987654321");
+    private static readonly CriarContatoCommand Command = new("test@test.com", "Gabriel Test", "987654321");
     
-    private readonly CriarUsuarioCommandHandler _handler;
+    private readonly CriarContatoCommandHandler _handler;
     private readonly IContatoRepository _contatoRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
 
@@ -41,7 +41,7 @@ public class CriarContatoCommandTests
     public async Task Handle_Deve_RetornarErro_QuandoEmailEhInvalido()
     {
         // Arrange
-        CriarUsuarioCommand emailInvalidoCommand = Command with
+        CriarContatoCommand emailInvalidoCommand = Command with
         {
             Email = "teste@test"
         };
@@ -58,7 +58,7 @@ public class CriarContatoCommandTests
     public async Task Handle_Deve_RetornarErro_QuandoNomeEhInvalido()
     {
         // Arrange
-        CriarUsuarioCommand nomeInvalidoCommand = Command with
+        CriarContatoCommand nomeInvalidoCommand = Command with
         {
             Nome = "Gabriel T3ste"
         };
@@ -75,7 +75,7 @@ public class CriarContatoCommandTests
     public async Task Handle_Deve_RetornarErro_QuandoTelefoneEhInvalido()
     {
         // Arrange
-        CriarUsuarioCommand telefoneInvalido = Command with
+        CriarContatoCommand telefoneInvalido = Command with
         {
             Telefone = "9765490A1"
         };

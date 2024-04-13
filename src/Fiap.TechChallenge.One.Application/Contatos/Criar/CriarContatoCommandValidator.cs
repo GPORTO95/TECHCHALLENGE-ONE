@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fiap.TechChallenge.One.Application.Contatos.Criar
 {
-    internal class CriarUsuarioCommandValidator
+    internal class CriarContatoCommandValidator
     {
     }
 }

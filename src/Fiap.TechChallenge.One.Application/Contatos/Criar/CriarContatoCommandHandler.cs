@@ -5,15 +5,15 @@ using Fiap.TechChallenge.One.Domain.Kernel;
 
 namespace Fiap.TechChallenge.One.Application.Contatos.Criar;
 
-internal sealed class CriarUsuarioCommandHandler(
+internal sealed class CriarContatoCommandHandler(
     IContatoRepository contatoRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<CriarUsuarioCommand, Guid>
+    : ICommandHandler<CriarContatoCommand, Guid>
 {
     private readonly IContatoRepository _contatoRepository = contatoRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public async Task<Result<Guid>> Handle(CriarUsuarioCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(CriarContatoCommand request, CancellationToken cancellationToken)
     {
         Result<Email> emailResult = Email.Criar(request.Email);
 
