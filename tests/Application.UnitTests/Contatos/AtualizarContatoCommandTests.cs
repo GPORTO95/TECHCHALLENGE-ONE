@@ -11,7 +11,8 @@ public class AtualizarContatoCommandTests
     private static readonly Contato Contato = Contato.Criar(
         Nome.Criar("Gabriel Teste").Value,
         Email.Criar("gabriel.test@test.com").Value,
-        Telefone.Criar("987654321").Value).Value;
+        Telefone.Criar("987654321").Value,
+        Guid.NewGuid()).Value;
 
     private static readonly AtualizarContatoCommand Command = new(
         Guid.NewGuid(),

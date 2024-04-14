@@ -20,3 +20,7 @@ public sealed class Ddd : Entity
             estado);
     }
 }
+public static class DddErrors
+{
+    public static Error NaoEncontrado(Guid id) => Error.Problem("Ddd.NaoEncontrado", $"Ddd não encontrado para o Id = '{id}' informado");
+}

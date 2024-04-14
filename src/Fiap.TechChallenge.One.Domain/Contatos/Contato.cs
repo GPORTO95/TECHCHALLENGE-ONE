@@ -10,12 +10,15 @@ public sealed class Contato : Entity
         Guid id,
         Nome nome,
         Email email,
-        Telefone telefone)
+        Telefone telefone,
+        Guid dddId)
     {
         Id = id;
         Nome = nome;
         Email = email;
         Telefone = telefone;
+
+        DddId = dddId;
     }
 
     public Nome Nome { get; private set; }
@@ -24,14 +27,17 @@ public sealed class Contato : Entity
 
     public Telefone Telefone { get; private set; }
 
+    public Guid DddId { get; private set; }
+
     public static Result<Contato> Criar(
-        Nome nome, Email email, Telefone telefone)
+        Nome nome, Email email, Telefone telefone, Guid dddId)
     {
         return new Contato(
             Guid.NewGuid(),
             nome,
             email,
-            telefone);
+            telefone,
+            dddId);
     }
 
     public void AtualizarEmail(Email email) =>

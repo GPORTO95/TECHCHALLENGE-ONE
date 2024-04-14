@@ -43,12 +43,14 @@ public class ListarContatosQueryTests
         Contato contato1 = Contato.Criar(
             Nome.Criar("Gabriel Teste").Value,
             Email.Criar("gabriel.test@test.com").Value,
-            Telefone.Criar("987654321").Value).Value;
+            Telefone.Criar("987654321").Value,
+            Guid.NewGuid()).Value;
 
         Contato contato2 = Contato.Criar(
             Nome.Criar("Gabriel Teste Test").Value,
             Email.Criar("gabriel.test.3@test.com").Value,
-            Telefone.Criar("987654323").Value).Value;
+            Telefone.Criar("987654323").Value,
+            Guid.NewGuid()).Value;
 
         List<Contato> contatos = [contato1, contato2];
 

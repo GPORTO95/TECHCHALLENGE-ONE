@@ -47,7 +47,8 @@ public class ExcluirContatoCommandTests
         Contato contato = Contato.Criar(
             Nome.Criar("Gabriel Teste").Value,
             Email.Criar("gabriel.test@test.com").Value,
-            Telefone.Criar("987654321").Value).Value;
+            Telefone.Criar("987654321").Value,
+            Guid.NewGuid()).Value;
 
         _contatoRepositoryMock.ObterPorIdAsync(
             Command.ContatoId, Arg.Any<CancellationToken>())
