@@ -4,12 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.TechChallenge.One.Infrastructure.Data;
 
-public sealed class ApplicationDbContext : DbContext, IUnitOfWork
+public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+    : DbContext(options), IUnitOfWork
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    { }
-
     public DbSet<Contato> Contatos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

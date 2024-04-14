@@ -3,7 +3,7 @@
 namespace Fiap.TechChallenge.One.Application.Contatos;
 
 public sealed record ContatoResponse(
-    Guid Id,
+    Guid ContatoId,
     string Nome,
     string Email,
     string Telefone)
