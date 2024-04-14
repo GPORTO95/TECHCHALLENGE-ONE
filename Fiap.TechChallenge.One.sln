@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.One.Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "tests\Application.UnitTests\Application.UnitTests.csproj", "{566C83CB-FED2-43F7-9CB7-B23F3D81BEE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.One.Infrastructure", "src\Fiap.TechChallenge.One.Infrastructure\Fiap.TechChallenge.One.Infrastructure.csproj", "{42CD5E68-0573-4855-9B05-133E2E291C9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.One.Infrastructure", "src\Fiap.TechChallenge.One.Infrastructure\Fiap.TechChallenge.One.Infrastructure.csproj", "{42CD5E68-0573-4855-9B05-133E2E291C9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.One.API", "src\Fiap.TechChallenge.One.API\Fiap.TechChallenge.One.API.csproj", "{8ED16DFA-E569-40EC-8082-D15F77F6503B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.One.API", "src\Fiap.TechChallenge.One.API\Fiap.TechChallenge.One.API.csproj", "{8ED16DFA-E569-40EC-8082-D15F77F6503B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
