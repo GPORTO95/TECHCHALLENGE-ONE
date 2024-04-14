@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Fiap.TechChallenge.One.Domain.Contatos;
 using Fiap.TechChallenge.One.Infrastructure.Repositories;
+using Fiap.TechChallenge.One.Domain.Ddds;
 
 namespace Fiap.TechChallenge.One.Infrastructure;
 
@@ -22,5 +23,6 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
         services.AddScoped<IContatoRepository, ContatoRepository>();
+        services.AddScoped<IDddRepository, DddRepository>();
     }
 }

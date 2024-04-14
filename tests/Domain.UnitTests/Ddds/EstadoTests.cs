@@ -1,7 +1,5 @@
-﻿using Fiap.TechChallenge.One.Domain.Contatos;
-using Fiap.TechChallenge.One.Domain.Ddds;
+﻿using Fiap.TechChallenge.One.Domain.Ddds;
 using FluentAssertions;
-using System.Drawing;
 
 namespace Domain.UnitTests.Ddds;
 
