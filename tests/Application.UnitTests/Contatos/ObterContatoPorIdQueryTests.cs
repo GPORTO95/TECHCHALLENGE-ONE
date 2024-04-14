@@ -57,6 +57,6 @@ public class ObterContatoPorIdQueryTests
         // Assert
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();
-        result.Value.Id.Should().Be(Contato.Id);
+        result.Value.ContatoId.Should().Be(Contato.Id);
     }
 }
