@@ -1,17 +1,20 @@
 ﻿using Fiap.TechChallenge.One.Application.Abstractions.Data;
 using Fiap.TechChallenge.One.Application.Abstractions.Messaging;
 using Fiap.TechChallenge.One.Domain.Contatos;
+using Fiap.TechChallenge.One.Domain.Ddds;
 using Fiap.TechChallenge.One.Domain.Kernel;
 
 namespace Fiap.TechChallenge.One.Application.Contatos.Atualizar;
 
 internal sealed class AtualizarContatoCommandHandler(
     IContatoRepository contatoRepository,
-    IUnitOfWork unitOfWork)
+    IUnitOfWork unitOfWork,
+    IDddRepository dddRepository)
     : ICommandHandler<AtualizarContatoCommand>
 {
     private readonly IContatoRepository _contatoRepository = contatoRepository;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IDddRepository _dddRepository = dddRepository;
 
     public async Task<Result> Handle(AtualizarContatoCommand request, CancellationToken cancellationToken)
     {
@@ -56,6 +59,16 @@ internal sealed class AtualizarContatoCommandHandler(
             }
 
             contato.AtualizarTelefone(telefoneResult.Value);
+        }
+
+        if (request.DddId != contato.DddId)
+        {
+            if (!await _dddRepository.ExisteAsync(request.DddId, cancellationToken))
+            {
+                return Result.Failure<Guid>(DddErrors.NaoEncontrado(request.DddId));
+            }
+
+            contato.AtualizarDdd(contato.DddId);
         }
 
         _contatoRepository.Atualizar(contato);

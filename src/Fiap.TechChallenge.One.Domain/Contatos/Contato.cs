@@ -40,6 +40,9 @@ public sealed class Contato : Entity
             dddId);
     }
 
+    public void AtualizarDdd(Guid dddId) =>
+        DddId = dddId;
+
     public void AtualizarEmail(Email email) =>
         Email = email;
 

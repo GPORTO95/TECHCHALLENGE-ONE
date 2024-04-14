@@ -6,4 +6,5 @@ public sealed record AtualizarContatoCommand(
     Guid ContatoId,
     string Email,
     string Nome,
-    string Telefone) : ICommand;
+    string Telefone,
+    Guid DddId) : ICommand;

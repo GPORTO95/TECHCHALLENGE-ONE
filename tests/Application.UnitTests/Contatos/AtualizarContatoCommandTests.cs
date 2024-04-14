@@ -1,6 +1,7 @@
 ﻿using Fiap.TechChallenge.One.Application.Abstractions.Data;
 using Fiap.TechChallenge.One.Application.Contatos.Atualizar;
 using Fiap.TechChallenge.One.Domain.Contatos;
+using Fiap.TechChallenge.One.Domain.Ddds;
 using FluentAssertions;
 using NSubstitute;
 
@@ -18,18 +19,21 @@ public class AtualizarContatoCommandTests
         Guid.NewGuid(),
         "gabriel.test@test.com",
         "Gabriel Teste",
-        "987654321");
+        "987654321",
+        Contato.DddId);
 
     private readonly AtualizarContatoCommandHandler _handler;
     private readonly IContatoRepository _contatoRepositoryMock;
     private readonly IUnitOfWork _unitOfWorkMock;
+    private readonly IDddRepository _dddRepositoryMock;
 
     public AtualizarContatoCommandTests()
     {
         _contatoRepositoryMock = Substitute.For<IContatoRepository>();
         _unitOfWorkMock = Substitute.For<IUnitOfWork>();
+        _dddRepositoryMock = Substitute.For<IDddRepository>();
 
-        _handler = new(_contatoRepositoryMock, _unitOfWorkMock);
+        _handler = new(_contatoRepositoryMock, _unitOfWorkMock, _dddRepositoryMock);
     }
 
     [Fact]
@@ -127,5 +131,30 @@ public class AtualizarContatoCommandTests
         // Assert
         result.IsFailure.Should().BeTrue();
         result.Error.Should().Be(TelefoneErrors.FormatoInvalido);
+    }
+
+    [Fact]
+    public async Task Handle_Deve_RetornarErro_QuandoDddEhDiferenteEInvalido()
+    {
+        // Arrange
+        AtualizarContatoCommand commandInvalido = Command with
+        {
+            DddId = Guid.NewGuid()
+        };
+
+        _contatoRepositoryMock.ObterPorIdAsync(
+            Arg.Is<Guid>(e => e == Command.ContatoId), Arg.Any<CancellationToken>())
+            .Returns(Contato);
+
+        _dddRepositoryMock.ExisteAsync(
+            Arg.Is<Guid>(e => e == commandInvalido.DddId), Arg.Any<CancellationToken>())
+            .Returns(false);
+
+        // Act
+        var result = await _handler.Handle(commandInvalido, default);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(DddErrors.NaoEncontrado(commandInvalido.DddId));
     }
 }
