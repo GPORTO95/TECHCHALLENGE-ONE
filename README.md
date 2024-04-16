@@ -24,16 +24,16 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 
 <details>
     <summary>[GET - Lista contatos]</summary>
-- `GET {urlbase}/api/v1/contatos`
+`{urlbase}/api/v1/contatos`
 
-- ### Caso de sucesso
+- #### Caso de sucesso
     - Retornado lista de Contatos podendo filtrar por Ddd
 
-- ### Query Params
+- #### Query Params
     - **ddd** | string: Deve ser informado o ddd que deseja obter os contatos
 
-- ### Exemplo Request
-    - #### Response - Será retornado uma lista
+- #### Exemplo Request
+    - ##### Response - Será retornado uma lista
     ```
     [
         {
