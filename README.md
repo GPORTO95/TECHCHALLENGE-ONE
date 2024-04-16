@@ -24,6 +24,8 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 
 <details>
     <summary>[GET - Lista contatos]</summary>
+    -----------------------------------------
+
 `{urlbase}/api/v1/contatos`
 
 - #### Caso de sucesso
