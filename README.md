@@ -22,15 +22,16 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 
 ## :bookmark: Gerenciamento de Contatos
 GET - Lista contatos
+- `{urlbase}/api/v1/contatos`
 
 POST - Inseri um novo contato
-`{urlbase}/api/v1/contatos`
+- `{urlbase}/api/v1/contatos`
 
 PUT - Atualiza dados de contato
-`{urlbase}/api/v1/contatos`
+- `{urlbase}/api/v1/contatos`
 
 DELETE - Remove o cadastro de um contato
-`{urlbase}/api/v1/contatos`
+- `{urlbase}/api/v1/contatos`
 
 ## :warning: Requisitos
 - Ter o docker instalado com imagem do SQL Server ou SQL Server Management Studio
