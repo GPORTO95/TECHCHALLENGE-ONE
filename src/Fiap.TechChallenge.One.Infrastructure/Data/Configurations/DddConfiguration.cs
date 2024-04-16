@@ -21,5 +21,12 @@ internal sealed class DddConfiguration : IEntityTypeConfiguration<Ddd>
                 b.Property(e => e.Sigla).HasColumnName("SiglaEstado").HasMaxLength(2);
                 b.Property(e => e.Descricao).HasColumnName("DescricaoEstado").HasMaxLength(100);
             });
+
+        builder.ComplexProperty(
+            d => d.CodigoRegiao,
+            b =>
+            {
+                b.Property(e => e.Valor).HasColumnName("Codigo").HasMaxLength(2);
+            });
     }
 }
