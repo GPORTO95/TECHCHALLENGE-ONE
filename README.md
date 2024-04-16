@@ -20,10 +20,39 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 - **Application.UnitTests**: Testes unitário para classes de comandos, queries e validações
 - **Domain.UnitTests**: Testes unitário para entidades e objetos de valor
 
-## :bookmark: Gerenciamento de Contatos
-GET - Lista contatos
-- `{urlbase}/api/v1/contatos`
+## :bookmark: Métodos
 
+<details>
+    <summary>[GET - Lista contatos]</summary>
+- `GET {urlbase}/api/v1/contatos`
+
+- ### Caso de sucesso
+    - Retornado lista de Contatos podendo filtrar por Ddd
+
+- ### Query Params
+    - **ddd** | string: Deve ser informado o ddd que deseja obter os contatos
+
+- ### Exemplo Request
+    - #### Response - Será retornado uma lista
+    ```
+    [
+        {
+            "contatoId": "1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc",
+            "nome": "Gabriel Teste",
+            "email": "teste@tes.com.br",
+            "telefone": "956432451",
+            "ddd": 21
+        },
+        {
+            "contatoId": "7119a005-575f-4316-bcf4-c0b435b711f6",
+            "nome": "Andre Teste",
+            "email": "andre@tes.com.br",
+            "telefone": "956432453",
+            "ddd": 11
+        }
+    ]
+    ```
+</details>
 POST - Inseri um novo contato
 - `{urlbase}/api/v1/contatos`
 
