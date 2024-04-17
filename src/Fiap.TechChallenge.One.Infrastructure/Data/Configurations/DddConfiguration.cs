@@ -12,7 +12,7 @@ internal sealed class DddConfiguration : IEntityTypeConfiguration<Ddd>
 
         builder.HasKey(d => d.Id);
 
-        builder.HasIndex(d => d.Estado.Sigla).IsUnique();
+        //builder.HasIndex(d => d.Estado.Sigla).IsUnique();
 
         builder.ComplexProperty(
             d => d.Estado,

@@ -1,4 +1,5 @@
-﻿using Fiap.TechChallenge.One.Domain.Kernel;
+﻿using Fiap.TechChallenge.One.Domain.Ddds;
+using Fiap.TechChallenge.One.Domain.Kernel;
 
 namespace Fiap.TechChallenge.One.Domain.Contatos;
 
@@ -28,6 +29,7 @@ public sealed class Contato : Entity
     public Telefone Telefone { get; private set; }
 
     public Guid DddId { get; private set; }
+    public Ddd Ddd { get; private set; }
 
     public static Result<Contato> Criar(
         Nome nome, Email email, Telefone telefone, Guid dddId)

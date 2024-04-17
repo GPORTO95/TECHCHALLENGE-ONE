@@ -6,4 +6,4 @@ public sealed record CriarContatoCommand(
     string Email,
     string Nome,
     string Telefone,
-    Guid DddId) : ICommand<Guid>;
+    string Ddd) : ICommand<Guid>;

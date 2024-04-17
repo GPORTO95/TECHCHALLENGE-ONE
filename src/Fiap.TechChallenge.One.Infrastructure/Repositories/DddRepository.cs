@@ -13,4 +13,12 @@ internal sealed class DddRepository(ApplicationDbContext dbContext) : IDddReposi
         return await _dbContext.Ddds
             .AnyAsync(d => d.Id == dddId, cancellationToken);
     }
+
+    public async Task<Guid> ObterPorCodigoAsync(Codigo codigo, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Ddds
+            .Where(d => d.CodigoRegiao == codigo)
+            .Select(d => d.Id)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
 }

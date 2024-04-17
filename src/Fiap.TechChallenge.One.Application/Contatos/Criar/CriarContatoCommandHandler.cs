@@ -39,16 +39,25 @@ internal sealed class CriarContatoCommandHandler(
             return Result.Failure<Guid>(telefoneResult.Error);
         }
 
-        if (!await _dddRepository.ExisteAsync(request.DddId, cancellationToken))
+        Result<Codigo> codigoRegiaoResult = Codigo.Criar(request.Ddd);
+
+        if (codigoRegiaoResult.IsFailure)
         {
-            return Result.Failure<Guid>(DddErrors.NaoEncontrado(request.DddId));
+            return Result.Failure<Guid>(codigoRegiaoResult.Error);
+        }
+
+        Guid dddId = await _dddRepository.ObterPorCodigoAsync(codigoRegiaoResult.Value, cancellationToken);
+
+        if (dddId == Guid.Empty)
+        {
+            return Result.Failure<Guid>(DddErrors.CodigoNaoEncontrado(request.Ddd));
         }
 
         Result<Contato> contatoResult = Contato.Criar(
             nomeResult.Value,
             emailResult.Value,
             telefoneResult.Value,
-            request.DddId);
+            dddId);
 
         _contatoRepository.Adicionar(contatoResult.Value);
 

@@ -4,6 +4,8 @@ namespace Fiap.TechChallenge.One.Domain.Ddds;
 
 public sealed class Ddd : Entity
 {
+    protected Ddd() { }
+
     private Ddd(
         Guid id, Codigo codigoRegiao, Estado estado)
     {
@@ -29,4 +31,6 @@ public sealed class Ddd : Entity
 public static class DddErrors
 {
     public static Error NaoEncontrado(Guid id) => Error.Problem("Ddd.NaoEncontrado", $"Ddd não encontrado para o Id = '{id}' informado");
+
+    public static Error CodigoNaoEncontrado(string ddd) => Error.Problem("Ddd.NaoEncontrado", $"Ddd não encontrado para o Valor = '{ddd}' informado");
 }
