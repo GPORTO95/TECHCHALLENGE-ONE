@@ -24,7 +24,6 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 
 <details>
     <summary>[GET - Lista contatos]</summary>
-    -----------------------------------------
 
 `{urlbase}/api/v1/contatos`
 
@@ -55,8 +54,89 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
     ]
     ```
 </details>
-POST - Inseri um novo contato
-- `{urlbase}/api/v1/contatos`
+<details>
+    <summary>[POST - Inserir contato]</summary>
+    
+`{urlbase}/api/v1/contatos`
+
+- #### Caso de sucesso
+    - Inseri dados de contato na tabela com associação para ddd
+
+- #### Use Case
+    - Caso o `ddd` informado não exista, será retornado um 404 NotFound informando que não existe
+
+- ### Validators
+    - Caso o `email` informado não esteja em um formato válido, será retornado um 400 BadRequest 
+    - Caso o `nome` informado não esteja em um formato válido, será retornado um 400 BadRequest  
+    - Caso o `telefone` informado não esteja em um formato válido, será retornado um 400 BadRequest  
+    - Caso o ddd informado não seja informado no padrão válido, será retornado um 400 BadRequest
+
+- #### Atributos
+    - (Obrigatório) **nome** | String: Deve ser informado o nome do contato
+    - (Obrigatório) **email** | String: Deve ser informado o e-mail do contato
+    - (Obrigatório) **telefone** | String: Deve ser informado o telefone do contato
+    - (Obrigatório) **ddd** | String: Deve ser informado o ddd
+
+- #### Exemplo Request
+    - ##### Válido
+    ```
+    {
+        "email": "teste@tes.com",
+        "nome": "Gabriel Teste",
+        "telefone": "956432451",
+        "ddd": "11"
+    }
+    ```
+    - ##### Response - Será retornado um Guid com o Id do contato
+    ```
+    "28eb0baa-e67a-4f64-86e1-cfa1326301c6"
+    ```
+    - ##### Validator - Email inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "Email.FormatoInvalido",
+        "status": 400,
+        "detail": "Email está inválido"
+    }
+    ```
+    - ##### Validator - Nome inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "Nome.NomeIncompleto",
+        "status": 400,
+        "detail": "Informe o nome completo"
+    }
+    ```
+    - ##### Validator - Telefone inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "Telefone.FormatoInvalido",
+        "status": 400,
+        "detail": "Formato inválido, deve ser fornecido 9########"
+    }
+    ```
+     - ##### Validator - Ddd inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "CodigoRegiao.ValorInvalido",
+        "status": 400,
+        "detail": "O valor informado para DDD não é valido"
+    }
+    ```
+     - ##### Use Case - ddd não encontrado
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "Ddd.NaoEncontrado",
+        "status": 400,
+        "detail": "Ddd não encontrado para o Valor = '19' informado"
+    }
+    ```
+</details>
 
 PUT - Atualiza dados de contato
 - `{urlbase}/api/v1/contatos`

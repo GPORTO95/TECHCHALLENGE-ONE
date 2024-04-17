@@ -9,7 +9,7 @@ namespace Application.UnitTests.Contatos;
 
 public class CriarContatoCommandTests
 {
-    private static readonly CriarContatoCommand Command = new("test@test.com", "Gabriel Test", "987654321", Guid.NewGuid());
+    private static readonly CriarContatoCommand Command = new("test@test.com", "Gabriel Test", "987654321", "11");
     
     private readonly CriarContatoCommandHandler _handler;
     private readonly IContatoRepository _contatoRepositoryMock;
@@ -29,8 +29,8 @@ public class CriarContatoCommandTests
     public async Task Handle_Deve_RetornarSucesso_QuandoTudoEhValido()
     {
         // Arrange
-        _dddRepositoryMock.ExisteAsync(Arg.Is<Guid>(e => e == Command.DddId), Arg.Any<CancellationToken>())
-            .Returns(true);
+        _dddRepositoryMock.ObterPorCodigoAsync(Arg.Is<Codigo>(e => e == Codigo.Criar(Command.Ddd).Value), Arg.Any<CancellationToken>())
+            .Returns(Guid.NewGuid());
 
         // Act
         var result = await _handler.Handle(Command, default);
@@ -95,17 +95,34 @@ public class CriarContatoCommandTests
     }
 
     [Fact]
+    public async Task Handle_Deve_RetornarErro_QuandoDddNaoEhValido()
+    {
+        // Arrange
+        CriarContatoCommand dddInvalido = Command with
+        {
+            Ddd = "1a"
+        };
+
+        // Act
+        var result = await _handler.Handle(dddInvalido, default);
+
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(CodigoErrors.ValorInvalido);
+    }
+
+    [Fact]
     public async Task Handle_Deve_RetornarErro_QuandoDddNaoExiste()
     {
         // Arrange
-        _dddRepositoryMock.ExisteAsync(Arg.Is<Guid>(e => e == Command.DddId), Arg.Any<CancellationToken>())
-            .Returns(false);
+        _dddRepositoryMock.ObterPorCodigoAsync(Arg.Is<Codigo>(e => e == Codigo.Criar(Command.Ddd).Value), Arg.Any<CancellationToken>())
+            .Returns(Guid.Empty);
 
         // Act
         var result = await _handler.Handle(Command, default);
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.Error.Should().Be(DddErrors.NaoEncontrado(Command.DddId));
+        result.Error.Should().Be(DddErrors.CodigoNaoEncontrado(Command.Ddd));
     }
 }
