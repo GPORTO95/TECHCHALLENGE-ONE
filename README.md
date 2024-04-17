@@ -22,7 +22,7 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 
 ## :bookmark: Métodos
 
-- #### :bangbang: Atenção
+#### :bangbang: Atenção :bangbang:
 - Propriedades marcado com o ícone :diamonds: são de preenchimento obrigatório
 
 <details>
