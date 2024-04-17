@@ -23,7 +23,7 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 ## :bookmark: Métodos
 
 #### :bangbang: ATENÇÃO :bangbang:
-- Propriedades marcado com o ícone :small_orange_diamond: são de preenchimento obrigatório
+Propriedades marcado com o ícone :small_orange_diamond: são de preenchimento obrigatório
 
 <details>
     <summary>[GET - Lista contatos]</summary>
