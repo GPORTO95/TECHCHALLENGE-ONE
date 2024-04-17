@@ -22,7 +22,7 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 
 ## :bookmark: Métodos
 
-#### :bangbang: Atenção :bangbang:
+#### :bangbang: ATENÇÃO :bangbang:
 - Propriedades marcado com o ícone :diamonds: são de preenchimento obrigatório
 
 <details>
@@ -75,10 +75,10 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
     - Caso o `ddd` informado não seja informado no padrão válido, será retornado um 400 BadRequest
 
 - #### Atributos
-    - <sup>(Obrigatório)</sup> **nome** | String: Deve ser informado o nome do contato
-    - (Obrigatório) **email** | String: Deve ser informado o e-mail do contato
-    - (Obrigatório) **telefone** | String: Deve ser informado o telefone do contato
-    - (Obrigatório) **ddd** | String: Deve ser informado o ddd
+    - :bangbang: **nome** | String: Deve ser informado o nome do contato
+    - :bangbang: **email** | String: Deve ser informado o e-mail do contato
+    - :bangbang: **telefone** | String: Deve ser informado o telefone do contato
+    - :bangbang: **ddd** | String: Deve ser informado o ddd
 
 - #### Exemplo Request
     - ##### Válido
