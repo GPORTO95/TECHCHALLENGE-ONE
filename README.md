@@ -140,12 +140,128 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
     }
     ```
 </details>
+<details>
+    <summary>[PUT - Atualizar contato]</summary>
+    
+`{urlbase}/api/v1/contatos`
 
-PUT - Atualiza dados de contato
-- `{urlbase}/api/v1/contatos`
+- #### Caso de sucesso
+    - Atualiza dados de contato
 
-DELETE - Remove o cadastro de um contato
-- `{urlbase}/api/v1/contatos`
+- #### Use Case
+    - Caso o `contatoId` informado não exista, será retornado um 404 NotFound informando que o contato não existe
+    - Caso o `ddd` informado não exista, será retornado um 404 NotFound informando que não existe
+
+- ### Validators
+    - Caso o `email` informado não esteja em um formato válido, será retornado um 400 BadRequest 
+    - Caso o `nome` informado não esteja em um formato válido, será retornado um 400 BadRequest  
+    - Caso o `telefone` informado não esteja em um formato válido, será retornado um 400 BadRequest  
+    - Caso o `ddd` informado não seja informado no padrão válido, será retornado um 400 BadRequest
+
+- #### Atributos
+    - :small_orange_diamond: **contatoId** | Guid: Deve ser informado o Id do contato
+    - :small_orange_diamond: **nome** | String: Deve ser informado o nome do contato
+    - :small_orange_diamond: **email** | String: Deve ser informado o e-mail do contato
+    - :small_orange_diamond: **telefone** | String: Deve ser informado o telefone do contato
+    - :small_orange_diamond: **ddd** | String: Deve ser informado o ddd
+
+- #### Exemplo Request
+    - ##### Válido
+    ```
+    {
+        "email": "teste@tes.com",
+        "nome": "Gabriel Teste",
+        "telefone": "956432451",
+        "ddd": "11"
+    }
+    ```
+    - ##### Response - Será retornado um 204 NoContent
+    ```
+    ```
+    - ##### UseCase - Contato não encontrado
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+        "title": "Contatos.NaoEncontrado",
+        "status": 404,
+        "detail": "O contato com Id = '8cefc269-a3a4-46a0-bf81-351d3d220ca4' não foi encontrado"
+    }
+    ```
+    - ##### Validator - Email inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "Email.FormatoInvalido",
+        "status": 400,
+        "detail": "Email está inválido"
+    }
+    ```
+    - ##### Validator - Nome inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "Nome.NomeIncompleto",
+        "status": 400,
+        "detail": "Informe o nome completo"
+    }
+    ```
+    - ##### Validator - Telefone inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "Telefone.FormatoInvalido",
+        "status": 400,
+        "detail": "Formato inválido, deve ser fornecido 9########"
+    }
+    ```
+     - ##### Validator - Ddd inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "CodigoRegiao.ValorInvalido",
+        "status": 400,
+        "detail": "O valor informado para DDD não é valido"
+    }
+    ```
+     - ##### Use Case - ddd não encontrado
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "Ddd.NaoEncontrado",
+        "status": 400,
+        "detail": "Ddd não encontrado para o Valor = '19' informado"
+    }
+    ```
+</details>
+
+<details>
+    <summary>[DELETE - Exclui um cadadastro de contato]</summary>
+    
+`{urlbase}/api/v1/contatos`
+
+- #### Caso de sucesso
+    - Atualiza dados de contato
+
+- #### Use Case
+    - Caso o `contatoId` informado não exista, será retornado um 404 NotFound informando que o contato não existe
+
+- #### Parametros
+    - :small_orange_diamond: **contatoId** | Guid: Deve ser informado o Id do contato
+
+- #### Exemplo Request
+    - ##### Response - Será retornado um 204 NoContent com body vazio
+    ```
+    ```
+    - ##### UseCase - Contato não encontrado
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+        "title": "Contatos.NaoEncontrado",
+        "status": 404,
+        "detail": "O contato com Id = '8cefc269-a3a4-46a0-bf81-351d3d220ca4' não foi encontrado"
+    }
+    ```
+</details>
 
 ## :warning: Requisitos
 - Ter o docker instalado com imagem do SQL Server ou SQL Server Management Studio
@@ -153,9 +269,8 @@ DELETE - Remove o cadastro de um contato
 
 ## :zap: Running
 - Baixar o projeto do GitHub
-- Excluir pasta de Migrations na camada de infrastructure somente CASO exista.
+- Excluir pasta de Migrations na camada de infrastructure se e somente se existir alguma pasta com o nome de Migration.
 - Alterar conexão com o banco de dados no arquivo de appsettings
 - Executar o comando `add-migration inicial` e em seguida `update-databse`, não se esqueça de apontar para camada de Infrastructure para que pegue o contexto correto
 - E por fim, executar a aplicação
 - Caso prefira, você pode optar por importar a collection no seu postman de teste na pasta de collections
-
