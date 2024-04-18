@@ -44,6 +44,10 @@ public class AtualizarContatoCommandTests
             Arg.Is<Guid>(e => e == Command.ContatoId), Arg.Any<CancellationToken>())
             .Returns(Contato);
 
+        _dddRepositoryMock.ObterPorCodigoAsync(
+            Arg.Is<Codigo>(e => e == Codigo.Criar(Command.Ddd).Value), Arg.Any<CancellationToken>())
+            .Returns(Guid.NewGuid());
+
         // Act
         var result = await _handler.Handle(Command, default);
 
