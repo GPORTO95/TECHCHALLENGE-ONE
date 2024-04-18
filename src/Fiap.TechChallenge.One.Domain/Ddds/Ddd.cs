@@ -14,9 +14,17 @@ public sealed class Ddd : Entity
         Estado = estado;
     }
 
-    
+    /// <summary>
+    /// Objeto de valor para preenchimento do Código da Região
+    /// </summary>
+    /// <example>111</example>
     public Codigo CodigoRegiao { get; private set; }
 
+    /// <summary>
+    /// Objeto de valor para preenchimento da sigla e descrição de estado
+    /// </summary>
+    /// <param name="Sigla">Deve ser informado a sigla 'SP'</param>
+    /// <param name="Descrição">Deve ser informado a descrição da sigla 'São Paulo'</param>
     public Estado Estado { get; private set; }
 
     public static Ddd Criar(

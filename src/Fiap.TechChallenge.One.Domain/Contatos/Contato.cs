@@ -22,13 +22,32 @@ public sealed class Contato : Entity
         DddId = dddId;
     }
 
+    /// <summary>
+    /// Objeto de valor para preenchimento de Nome
+    /// </summary>
+    /// <example>Gabriel Test</example>
     public Nome Nome { get; private set; }
 
+    /// <summary>
+    /// Objeto de valor para preenchimento de Email
+    /// </summary>
+    /// <example>gabriel@test.com</example>
     public Email Email { get; private set; }
 
+    /// <summary>
+    /// Objeto de valor para preenchimento de Telene
+    /// </summary>
+    /// <example>989765432</example>
     public Telefone Telefone { get; private set; }
 
+    /// <summary>
+    /// Guid com referencia para Id da tabela de Ddds
+    /// </summary>
     public Guid DddId { get; private set; }
+
+    /// <summary>
+    /// Relacionamento com entidade de Ddd
+    /// </summary>
     public Ddd Ddd { get; private set; }
 
     public static Result<Contato> Criar(

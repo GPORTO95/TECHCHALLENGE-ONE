@@ -1,4 +1,6 @@
-﻿using Fiap.TechChallenge.One.API.Extensions;
+﻿using Azure.Core;
+using Azure;
+using Fiap.TechChallenge.One.API.Extensions;
 using Fiap.TechChallenge.One.API.Infrastructure;
 using Fiap.TechChallenge.One.Application.Contatos;
 using Fiap.TechChallenge.One.Application.Contatos.Atualizar;
@@ -15,6 +17,13 @@ public class Contatos : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
+        /// <summary>
+        /// Obtem lista de contatos
+        /// </summary>
+        /// <param name="ddd">Parametro opcional para filtro de contatos por ddd</param>
+        /// <returns>Será retornado uma lista com todos os contatos</returns>
+        /// <response code="200">Solicitação executada com sucesso</response>
+        /// <response code="400">Caso o ddd informado seja inválido</response>
         app.MapGet("contatos", async (
             [FromQuery] string? ddd,
             ISender sender,
@@ -25,6 +34,20 @@ public class Contatos : IEndpoint
             return result.Match(Results.Ok, CustomResults.Problem);
         });
 
+        /// <summary>
+        /// Cadastra um novo contato
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de requisição:
+        /// {
+        ///     "email": "joao@tes.com",
+        ///     "nome": "Joao Teste",
+        ///     "telefone": "956432451",
+        ///     "ddd": "21"
+        /// }
+        /// </remarks>
+        /// <returns>Será retornado um Guid com id do contato gerado</returns>
+        /// <response code="200">Solicitação executada com sucesso</response>
         app.MapPost("contatos", async (
             CriarContatoCommand command,
             ISender sender,

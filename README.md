@@ -295,13 +295,16 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
 </details>
 
 ## :warning: Requisitos
-- Ter o docker instalado com imagem do SQL Server ou SQL Server Management Studio
-- Caso opte pelo docker, basta seguir este link para dowload da Imagem do SQL [link](https://balta.io/blog/sql-server-docker)
+- Docker Desktop ou SSMS
+    - Em caso de Docker basta seguir este link para dowload da Imagem do SQL (Confesso que é muito mais simples rsrs) [link-download](https://balta.io/blog/sql-server-docker)
+- Visual Studio 2022 [link-download](https://visualstudio.microsoft.com/pt-br/downloads/)
+- SDK .NET 8 [link-download](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.4/8.0.4.md?WT.mc_id=dotnet-35129-website)
+- Postman [link-download](https://www.postman.com/downloads)
 
 ## :zap: Running
-- Baixar o projeto do GitHub
-- Excluir pasta de Migrations na camada de infrastructure se e somente se existir alguma pasta com o nome de Migration.
-- Alterar conexão com o banco de dados no arquivo de appsettings
-- Executar o comando `add-migration inicial` e em seguida `update-databse`, não se esqueça de apontar para camada de Infrastructure para que pegue o contexto correto
-- E por fim, executar a aplicação
-- Caso prefira, você pode optar por importar a collection no seu postman de teste na pasta de collections
+1. Clone o projeto do Github para sua maquina local
+2. Com o projeto aberto, exclua a pasta de Migrations que fica na camada de infrastructure se e somente se existir essa pasta
+3. Alterar conexão com o banco de dados no arquivo de appsettings.development.json que fica na camada de API
+4. No menu de ferramentas do Visual Studio clicar em View > Others > Package Manager ConsoleExecutar o comando `add-migration inicial` e em seguida `update-databse`, não se esqueça de apontar para camada de Infrastructure para que pegue o contexto correto
+5. Dentro do Package selecionar o projeto de Infrastructure e executar os seguintes comandos `add-migration inicial` e em seguida `update-databse`
+6. Executar o projeto, caso prefira, você pode optar por importar a collection no seu postman que está dentro do projeto na pasta de collections

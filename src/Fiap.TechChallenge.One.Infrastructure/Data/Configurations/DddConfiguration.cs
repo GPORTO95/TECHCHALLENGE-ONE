@@ -12,8 +12,6 @@ internal sealed class DddConfiguration : IEntityTypeConfiguration<Ddd>
 
         builder.HasKey(d => d.Id);
 
-        //builder.HasIndex(d => d.Estado.Sigla).IsUnique();
-
         builder.ComplexProperty(
             d => d.Estado,
             b => 
@@ -28,5 +26,12 @@ internal sealed class DddConfiguration : IEntityTypeConfiguration<Ddd>
             {
                 b.Property(e => e.Valor).HasColumnName("Codigo").HasMaxLength(2);
             });
+
+        //builder.OwnsOne(d => d.CodigoRegiao, c =>
+        //{
+        //    c.Property(x => x.Valor).HasColumnName("Codigo");
+
+        //    c.HasIndex(c => c.Valor).IsUnique(true);
+        //});
     }
 }
