@@ -68,7 +68,7 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
 - #### Use Case
     - Caso o `ddd` informado não exista, será retornado um 404 NotFound informando que não existe
 
-- ### Validators
+- #### Validators
     - Caso o `email` informado não esteja em um formato válido, será retornado um 400 BadRequest 
     - Caso o `nome` informado não esteja em um formato válido, será retornado um 400 BadRequest  
     - Caso o `telefone` informado não esteja em um formato válido, será retornado um 400 BadRequest  
@@ -152,7 +152,7 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
     - Caso o `contatoId` informado não exista, será retornado um 404 NotFound informando que o contato não existe
     - Caso o `ddd` informado não exista, será retornado um 404 NotFound informando que não existe
 
-- ### Validators
+- #### Validators
     - Caso o `email` informado não esteja em um formato válido, será retornado um 400 BadRequest 
     - Caso o `nome` informado não esteja em um formato válido, será retornado um 400 BadRequest  
     - Caso o `telefone` informado não esteja em um formato válido, será retornado um 400 BadRequest  
