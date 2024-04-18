@@ -12,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/contatos",
+					"raw": "{{url}}/contatos?ddd=6a",
 					"host": [
 						"{{url}}"
 					],
@@ -22,8 +22,7 @@
 					"query": [
 						{
 							"key": "ddd",
-							"value": "11",
-							"disabled": true
+							"value": "6a"
 						}
 					]
 				}
@@ -37,7 +36,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"teste@tes.com\",\r\n  \"nome\": \"Gabriel Teste\",\r\n  \"telefone\": \"956432451\",\r\n  \"dddId\": \"5c9f6597-0438-4550-b6d5-470e79fbbcb5\"\r\n}",
+					"raw": "{\r\n  \"email\": \"joao@tes.com\",\r\n  \"nome\": \"Joao Teste\",\r\n  \"telefone\": \"956432451\",\r\n  \"ddd\": \"21\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -63,7 +62,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"contatoId\": \"1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc\",\r\n    \"nome\": \"Gabriel Teste\",\r\n    \"email\": \"teste@tes.com.br\",\r\n    \"telefone\": \"956432451\",\r\n    \"dddId\": \"5c9f6597-0438-4550-b6d5-470e79fbbcb5\"\r\n}",
+					"raw": "{\r\n    \"contatoId\": \"8cefc269-a3a4-46a0-bf81-351d3d220ca4\",\r\n    \"nome\": \"Gabriel Teste\",\r\n    \"email\": \"teste@tes.com.br\",\r\n    \"telefone\": \"956432451\",\r\n    \"ddd\": \"21\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,13 +87,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/contatos/1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc",
+					"raw": "{{url}}/contatos/3106293f-cbe4-48ff-8170-0d56a9612813",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"contatos",
-						"1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc"
+						"3106293f-cbe4-48ff-8170-0d56a9612813"
 					]
 				}
 			},
