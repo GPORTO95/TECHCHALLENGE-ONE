@@ -306,6 +306,8 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
 1. Clone o projeto do Github para sua maquina local
 2. Com o projeto aberto, exclua a pasta de Migrations que fica na camada de infrastructure se e somente se existir essa pasta
 3. Alterar conexão com o banco de dados no arquivo de appsettings.development.json que fica na camada de API
-4. No menu de ferramentas do Visual Studio clicar em View > Others > Package Manager ConsoleExecutar o comando `add-migration inicial` e em seguida `update-databse`, não se esqueça de apontar para camada de Infrastructure para que pegue o contexto correto
-5. Dentro do Package selecionar o projeto de Infrastructure e executar os seguintes comandos `add-migration inicial` e em seguida `update-databse`
-6. Executar o projeto, caso prefira, você pode optar por importar a collection no seu postman que está dentro do projeto na pasta de collections
+4. No menu de ferramentas do Visual Studio clicar em View > Others > Package Manager Console
+    - Selecionar o projeto de Infrastructure
+    - Executar o comando o `add-migration inicial`
+    - Após geração do script, executar o comando `update-databse`
+5. Executar o projeto, caso prefira, você pode optar por importar a collection no seu postman que está dentro do projeto na pasta de collections
