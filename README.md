@@ -295,11 +295,12 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
 </details>
 
 ## :warning: Requisitos
-- Docker Desktop ou SSMS
-    - Em caso de Docker basta seguir este link para dowload da Imagem do SQL (Confesso que é muito mais simples rsrs) [link-download](https://balta.io/blog/sql-server-docker)
-- Visual Studio 2022 [link-download](https://visualstudio.microsoft.com/pt-br/downloads/)
-- SDK .NET 8 [link-download](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.4/8.0.4.md?WT.mc_id=dotnet-35129-website)
-- Postman [link-download](https://www.postman.com/downloads)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) ou [SSMS](https://learn.microsoft.com/pt-br/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)
+    - Recomendação de uso do Docker, é muito simples obter uma imagem do SQL, basta seguir esse [link](https://balta.io/blog/sql-server-docker)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/pt-br/downloads/)
+- [SDK .NET 8](https://github.com/dotnet/core/blob/main/release-notes/8.0/8.0.4/8.0.4.md?WT.mc_id=dotnet-35129-website)
+- [Postman](https://www.postman.com/downloads)
+- [Azure Data Studio](https://learn.microsoft.com/pt-br/azure-data-studio/download-azure-data-studio?tabs=win-install%2Cwin-user-install%2Credhat-install%2Cwindows-uninstall%2Credhat-uninstall)
 
 ## :zap: Running
 1. Clone o projeto do Github para sua maquina local
