@@ -237,7 +237,7 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
 <details>
     <summary>[DELETE - Exclui um cadadastro de contato]</summary>
     
-`{urlbase}/api/v1/contatos`
+`{urlbase}/api/v1/contatos/{contatoId}`
 
 - #### Caso de sucesso
     - Atualiza dados de contato
