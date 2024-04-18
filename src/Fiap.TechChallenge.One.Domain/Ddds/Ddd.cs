@@ -1,9 +1,12 @@
-﻿using Fiap.TechChallenge.One.Domain.Kernel;
+﻿using Fiap.TechChallenge.One.Domain.Contatos;
+using Fiap.TechChallenge.One.Domain.Kernel;
 
 namespace Fiap.TechChallenge.One.Domain.Ddds;
 
 public sealed class Ddd : Entity
 {
+    private readonly List<Contato> _contatos = [];
+
     protected Ddd() { }
 
     private Ddd(
@@ -26,6 +29,8 @@ public sealed class Ddd : Entity
     /// <param name="Sigla">Deve ser informado a sigla 'SP'</param>
     /// <param name="Descrição">Deve ser informado a descrição da sigla 'São Paulo'</param>
     public Estado Estado { get; private set; }
+
+    public IReadOnlyList<Contato> Contatos => _contatos.AsReadOnly();
 
     public static Ddd Criar(
         Codigo codigoRegiao, Estado estado)

@@ -20,18 +20,13 @@ internal sealed class DddConfiguration : IEntityTypeConfiguration<Ddd>
                 b.Property(e => e.Descricao).HasColumnName("DescricaoEstado").HasMaxLength(100);
             });
 
-        builder.ComplexProperty(
-            d => d.CodigoRegiao,
-            b =>
-            {
-                b.Property(e => e.Valor).HasColumnName("Codigo").HasMaxLength(2);
-            });
+        builder
+            .Property(x => x.CodigoRegiao)
+            .HasConversion(x => x.Valor, v => Codigo.Criar(v).Value)
+            .HasColumnName("Codigo");
 
-        //builder.OwnsOne(d => d.CodigoRegiao, c =>
-        //{
-        //    c.Property(x => x.Valor).HasColumnName("Codigo");
-
-        //    c.HasIndex(c => c.Valor).IsUnique(true);
-        //});
+        builder
+            .HasIndex(c => c.CodigoRegiao)
+            .IsUnique(true);
     }
 }

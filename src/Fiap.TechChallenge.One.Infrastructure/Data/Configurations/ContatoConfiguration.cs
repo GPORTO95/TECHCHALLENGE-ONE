@@ -1,4 +1,5 @@
 ﻿using Fiap.TechChallenge.One.Domain.Contatos;
+using Fiap.TechChallenge.One.Domain.Ddds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,8 +13,6 @@ internal sealed class ContatoConfiguration : IEntityTypeConfiguration<Contato>
 
         builder.HasKey(c => c.Id);
 
-        builder.HasIndex(c => c.DddId).IsUnique(false);
-
         builder.ComplexProperty(
             c => c.Email,
             b => b.Property(e => e.Value).HasColumnName("Email").HasMaxLength(100));
@@ -26,8 +25,8 @@ internal sealed class ContatoConfiguration : IEntityTypeConfiguration<Contato>
             c => c.Telefone,
             b => b.Property(e => e.Value).HasColumnName("Telefone").HasMaxLength(9));
 
-        builder.HasOne(d => d.Ddd)
-            .WithOne()
-            .HasForeignKey<Contato>(c => c.DddId);
+        builder.HasOne(c => c.Ddd)
+            .WithMany(d => d.Contatos)
+            .HasForeignKey(c => c.DddId);
     }
 }
