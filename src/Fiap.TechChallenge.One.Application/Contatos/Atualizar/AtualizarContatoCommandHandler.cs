@@ -61,13 +61,22 @@ internal sealed class AtualizarContatoCommandHandler(
             contato.AtualizarTelefone(telefoneResult.Value);
         }
 
-        if (request.DddId != contato.DddId)
-        {
-            if (!await _dddRepository.ExisteAsync(request.DddId, cancellationToken))
-            {
-                return Result.Failure<Guid>(DddErrors.NaoEncontrado(request.DddId));
-            }
+        Result<Codigo> codigoRegiaoResult = Codigo.Criar(request.Ddd);
 
+        if (codigoRegiaoResult.IsFailure)
+        {
+            return Result.Failure<Guid>(codigoRegiaoResult.Error);
+        }
+
+        Guid dddId = await _dddRepository.ObterPorCodigoAsync(codigoRegiaoResult.Value, cancellationToken);
+
+        if (dddId == Guid.Empty)
+        {
+            return Result.Failure<Guid>(DddErrors.CodigoNaoEncontrado(request.Ddd));
+        }
+
+        if (dddId != contato.DddId)
+        {
             contato.AtualizarDdd(contato.DddId);
         }
 
