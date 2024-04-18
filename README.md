@@ -33,6 +33,9 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
 - #### Caso de sucesso
     - Retornado lista de Contatos podendo filtrar por Ddd
 
+- #### Use Case
+    - Caso o `ddd` seja informado e não seja um valor válido, será retornado um Bad Request informando que o Ddd não é válido
+
 - #### Query Params
     - **ddd** | string: Deve ser informado o ddd que deseja obter os contatos
 
@@ -55,6 +58,34 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
             "ddd": 11
         }
     ]
+    ```
+    - ##### Response - Caso filtrado por ddd = 11
+    ```
+    [
+        {
+            "contatoId": "1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc",
+            "nome": "Gabriel Teste",
+            "email": "teste@tes.com.br",
+            "telefone": "956432451",
+            "ddd": 11
+        },
+        {
+            "contatoId": "7119a005-575f-4316-bcf4-c0b435b711f6",
+            "nome": "Andre Teste",
+            "email": "andre@tes.com.br",
+            "telefone": "956432453",
+            "ddd": 11
+        }
+    ]
+    ```
+    - ##### Use Case - Ddd inválido
+    ```
+    {
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "CodigoRegiao.ValorInvalido",
+        "status": 400,
+        "detail": "O valor informado para DDD não é valido"
+    }
     ```
 </details>
 <details>
