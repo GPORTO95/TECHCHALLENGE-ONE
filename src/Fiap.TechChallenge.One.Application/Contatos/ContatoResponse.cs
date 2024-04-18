@@ -6,7 +6,8 @@ public sealed record ContatoResponse(
     Guid ContatoId,
     string Nome,
     string Email,
-    string Telefone)
+    string Telefone,
+    string Ddd)
 {
     public static ContatoResponse ContatoParaContatoResponse(Contato contato)
     {
@@ -14,6 +15,7 @@ public sealed record ContatoResponse(
             contato.Id,
             contato.Nome.Value,
             contato.Email.Value,
-            contato.Telefone.Value);
+            contato.Telefone.Value,
+            contato.Ddd?.CodigoRegiao?.Valor);
     }
 };

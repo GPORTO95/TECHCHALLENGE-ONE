@@ -1,5 +1,6 @@
 ﻿using Fiap.TechChallenge.One.Application.Abstractions.Messaging;
 using Fiap.TechChallenge.One.Domain.Contatos;
+using Fiap.TechChallenge.One.Domain.Ddds;
 using Fiap.TechChallenge.One.Domain.Kernel;
 
 namespace Fiap.TechChallenge.One.Application.Contatos.Listar;
@@ -11,7 +12,19 @@ internal sealed class ListarContatosQueryHandler(IContatoRepository contatoRepos
 
     public async Task<Result<IEnumerable<ContatoResponse>>> Handle(ListarContatosQuery request, CancellationToken cancellationToken)
     {
-        List<Contato> contatos = await _contatoRepository.ListarAsync(cancellationToken);
+        Result<Codigo>? codigoResult = null;
+
+        if (!string.IsNullOrWhiteSpace(request.Ddd))
+        {
+            codigoResult = Codigo.Criar(request.Ddd);
+
+            if (codigoResult.IsFailure)
+            {
+                return Result.Failure<IEnumerable<ContatoResponse>>(codigoResult.Error);
+            }
+        }
+
+        List<Contato> contatos = await _contatoRepository.ListarAsync(codigoResult?.Value, cancellationToken);
 
         if (!contatos.Any())
         {

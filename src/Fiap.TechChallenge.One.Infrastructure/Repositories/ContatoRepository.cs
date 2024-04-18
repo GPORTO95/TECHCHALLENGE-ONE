@@ -1,6 +1,9 @@
 ﻿using Fiap.TechChallenge.One.Domain.Contatos;
+using Fiap.TechChallenge.One.Domain.Ddds;
 using Fiap.TechChallenge.One.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Fiap.TechChallenge.One.Infrastructure.Repositories;
 
@@ -8,11 +11,16 @@ internal sealed class ContatoRepository(ApplicationDbContext dbContext) : IConta
 {
     private readonly ApplicationDbContext _dbContext = dbContext;
 
-    public async Task<List<Contato>> ListarAsync(CancellationToken cancellationToken = default)
+    public async Task<List<Contato>> ListarAsync(Codigo? codigo, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Contatos
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+        IQueryable<Contato> query = _dbContext.Contatos.AsNoTracking();
+
+        if (codigo is not null)
+        {
+            query = query.Where(c => c.Ddd.CodigoRegiao == codigo);
+        }
+
+        return await query.Include(c => c.Ddd).ToListAsync(cancellationToken);
     }
 
     public async Task<Contato?> ObterPorIdAsync(Guid contatoId, CancellationToken cancellationToken = default)

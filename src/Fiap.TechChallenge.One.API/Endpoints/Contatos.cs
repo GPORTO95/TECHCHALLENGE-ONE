@@ -16,10 +16,11 @@ public class Contatos : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("contatos", async (
+            [FromQuery] string? ddd,
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            Result<IEnumerable<ContatoResponse>> result = await sender.Send(new ListarContatosQuery(), cancellationToken);
+            Result<IEnumerable<ContatoResponse>> result = await sender.Send(new ListarContatosQuery(ddd), cancellationToken);
 
             return result.Match(Results.Ok, CustomResults.Problem);
         });

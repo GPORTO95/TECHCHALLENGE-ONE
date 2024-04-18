@@ -2,4 +2,4 @@
 
 namespace Fiap.TechChallenge.One.Application.Contatos.Listar;
 
-public sealed record ListarContatosQuery() : IQuery<IEnumerable<ContatoResponse>>;
+public sealed record ListarContatosQuery(string? Ddd) : IQuery<IEnumerable<ContatoResponse>>;

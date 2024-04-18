@@ -1,5 +1,4 @@
 ﻿using Fiap.TechChallenge.One.Domain.Contatos;
-using Fiap.TechChallenge.One.Domain.Ddds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,6 +11,8 @@ internal sealed class ContatoConfiguration : IEntityTypeConfiguration<Contato>
         builder.ToTable("Contatos");
 
         builder.HasKey(c => c.Id);
+
+        builder.HasIndex(c => c.DddId).IsUnique(false);
 
         builder.ComplexProperty(
             c => c.Email,
