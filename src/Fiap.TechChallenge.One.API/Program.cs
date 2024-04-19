@@ -67,6 +67,8 @@ if (app.Environment.IsDevelopment())
             options.SwaggerEndpoint(url, name);
         }
     });
+
+    app.ApplyMigrations();
 }
 
 app.UseExceptionHandler();
