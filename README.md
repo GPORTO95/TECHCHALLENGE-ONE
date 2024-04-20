@@ -311,3 +311,4 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
     - Executar o comando o `add-migration inicial`
     - Após geração do script, executar o comando `update-databse`
 5. Executar o projeto, caso prefira, você pode optar por importar a collection no seu postman que está dentro do projeto na pasta de collections
+6. Caso execute o projeto em modo Debug, na primeira vez será executado um insert inicial com todos os DDDs do Brasil
