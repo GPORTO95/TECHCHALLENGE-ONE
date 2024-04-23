@@ -77,7 +77,7 @@ internal sealed class AtualizarContatoCommandHandler(
 
         if (dddId != contato.DddId)
         {
-            contato.AtualizarDdd(contato.DddId);
+            contato.AtualizarDdd(dddId);
         }
 
         _contatoRepository.Atualizar(contato);
