@@ -309,5 +309,5 @@ Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preench
 4. No menu de ferramentas do Visual Studio clicar em View > Others > Package Manager Console
     - Selecionar o projeto de Infrastructure
     - Executar o comando o `add-migration inicial`
-    - Após geração do script, executar o comando `update-databse`
+    - Após geração do script, executar o comando `update-database`
 5. Executar o projeto, caso prefira, você pode optar por importar a collection no seu postman que está dentro do projeto na pasta de collections
