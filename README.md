@@ -22,6 +22,7 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 - CQRS
 
 ## :building_construction: Arquitetura
+> [!NOTE]
 > Utilizado um arquitetura separada em Camadas (abaixo explico o que cada uma compõe), assim obedecendo os padrões do DDD como separação de responsabilidade, responsabilidade única, objetos de valores, modelos ricos, ... Utilizado o padrão de separação em pastas com a arquitetura Vertical Slices.
 
 - **Application**: CQRS, interfaces para serviços externos, pipeline behaviors e validações de comandos.com fluent validator
@@ -33,8 +34,8 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 <img src="./.assets/vertical-slices.jpg" width="400" height="250">
 
 ## :bookmark: Métodos
-#### :bangbang: ATENÇÃO :bangbang:
-Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preenchimento obrigatório
+> [!IMPORTANT]
+> Propriedades marcadas com o ícone :small_orange_diamond: são de preenchimento obrigatório
 
 <details>
     <summary>[GET - Lista contatos]</summary>
