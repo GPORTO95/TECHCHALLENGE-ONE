@@ -1,9 +1,15 @@
 ## :fire: FIAP | Desafio - TechChallenge One
-O objetivo do desafio é construir uma API em .Net 8 para que seja possível realizar a manutenção de contatos, sendo possível, cadastrar, atualizar, consultar (podendo filtrar por ddd) e até, excluir um contato. Exigir os seguintes campos para cadastro.
-- (Obrigátorio) Nome 
-- (Obrigátorio) Email
-- (Obrigátorio) Telefone
-- (Obrigátorio) Associação de DDD
+O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil).
+
+## :stop_sign: Requisitos
+### Não funcionais
+- Cadastrar um contato deve exigir os campos de Nome, E-mail, Telefone e DDD
+- Atualizar um contato deve exigir os campos de Id Contato, Nome, E-mail, Telefone e DDD
+- Excluir um contato deve exigir o Id do Contato
+- Listar contatos deve ter como parametro opcional poder informar o DDD
+### Funcionais
+- Criar uma aplicação em .NET 8
+- Utilizar de ORM ou Micro ORM (EF Core ou Dapper)
 
 ## :woman_technologist: Tecnologias
 - .NET 8
