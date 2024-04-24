@@ -2,12 +2,12 @@
 O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil).
 
 ## :stop_sign: Requisitos
-### Não funcionais
+### Funcionais
 - Cadastrar um contato deve exigir os campos de Nome, E-mail, Telefone e DDD
 - Atualizar um contato deve exigir os campos de Id Contato, Nome, E-mail, Telefone e DDD
 - Excluir um contato deve exigir o Id do Contato
 - Listar contatos deve ter como parametro opcional poder informar o DDD
-### Funcionais
+### Não funcionais
 - Criar uma aplicação em .NET 8
 - Utilizar de ORM ou Micro ORM (EF Core ou Dapper)
 
