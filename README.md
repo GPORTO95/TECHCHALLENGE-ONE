@@ -20,7 +20,7 @@ O objetivo do desafio é construir uma API em .Net 8 para que seja possível rea
 - **Application.UnitTests**: Testes unitário para classes de comandos, queries e validações
 - **Domain.UnitTests**: Testes unitário para entidades e objetos de valor
 
-<img src="./.assets/vertical-slices.jpg" width="500" height="250" style="border-radius: 6px">
+<img src="./.assets/vertical-slices.jpg" width="400" height="250">
 
 
 ## :bookmark: Métodos
