@@ -9,7 +9,8 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 - Listar contatos deve ter como parametro opcional poder informar o DDD
 ### Não funcionais
 - Criar uma aplicação em .NET 8
-- Utilizar de ORM ou Micro ORM (EF Core ou Dapper)
+- Utilizar de ORM EF Core ou Micro ORM Dapper
+- Seguir o modelo de design do Domain Driven Design
 
 ## :woman_technologist: Tecnologias
 - .NET 8
@@ -18,8 +19,11 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 - MediatR
 - Teste de unidade
 - Unit Of Work
+- CQRS
 
-## :building_construction: Arquitetura 
+## :building_construction: Arquitetura
+> Utilizado um arquitetura separada em Camadas (abaixo explico o que cada uma compõe), assim obedecendo os padrões do DDD como separação de responsabilidade, responsabilidade única, objetos de valores, modelos ricos, ... Utilizado o padrão de separação em pastas com a arquitetura Vertical Slices.
+
 - **Application**: CQRS, interfaces para serviços externos, pipeline behaviors e validações de comandos.com fluent validator
 - **Domain**: Classes compartilhadas, entidades, objetos de valor, interface de repositorios e mensagens de erros
 - **Infrastructure**: Camada de acesso a dados, cache e classes concretas de acesso a serviços externos
@@ -28,9 +32,7 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 
 <img src="./.assets/vertical-slices.jpg" width="400" height="250">
 
-
 ## :bookmark: Métodos
-
 #### :bangbang: ATENÇÃO :bangbang:
 Propriedade que esteja marcado com o ícone :small_orange_diamond: é de preenchimento obrigatório
 
