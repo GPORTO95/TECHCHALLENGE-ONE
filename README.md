@@ -3,8 +3,8 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 
 ## :stop_sign: Requisitos
 ### Funcionais
-- Cadastrar um contato deve exigir os campos de Nome, E-mail, Telefone e DDD
-- Atualizar um contato deve exigir os campos de Id Contato, Nome, E-mail, Telefone e DDD
+- Cadastrar um contato deve exigir a obrigatoriedade dos campos de Nome, E-mail, Telefone e DDD
+- Atualizar um contato deve exigir a obrigatoriedade dos campos de Id Contato, Nome, E-mail, Telefone e DDD
 - Excluir um contato deve exigir o Id do Contato
 - Listar contatos deve ter como parametro opcional poder informar o DDD
 ### Não funcionais
