@@ -278,7 +278,7 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 </details>
 
 <details>
-    <summary>[DELETE - Exclui um cadadastro de contato]</summary>
+    <summary>[DELETE - Exclui um cadastro de contato]</summary>
     
 `{urlbase}/api/v1/contatos/{contatoId}`
 
