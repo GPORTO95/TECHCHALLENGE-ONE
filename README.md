@@ -1,7 +1,6 @@
 ## :fire: FIAP | Desafio - TechChallenge One
 
-[![Tests](https://github.com/GPORTO95/TECHCHALLENGE-ONE/blob/main/.github/workflows/dotnet.yml/badge.svg)](https://github.com/GPORTO95/TECHCHALLENGE-ONE/blob/main/.github/workflows/dotnet.yml)
-
+[![Tests](https://github.com/GPORTO95/TECHCHALLENGE-ONE/actions/workflows/dotnet.yml/badge.svg)](https://github.com/GPORTO95/TECHCHALLENGE-ONE/actions/workflows/dotnet.yml)
 
 O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil).
 
