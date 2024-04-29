@@ -38,7 +38,7 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 > Propriedades marcadas com o ícone :small_orange_diamond: são de preenchimento obrigatório
 
 <details>
-    <summary>[GET - Lista contatos]</summary>
+    <summary>[GET - Listar contatos]</summary>
 
 `{urlbase}/api/v1/contatos`
 
@@ -278,7 +278,7 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 </details>
 
 <details>
-    <summary>[DELETE - Exclui um cadastro de contato]</summary>
+    <summary>[DELETE - Excluir um contato]</summary>
     
 `{urlbase}/api/v1/contatos/{contatoId}`
 
