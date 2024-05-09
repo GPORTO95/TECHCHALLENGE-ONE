@@ -1,11 +1,17 @@
-version: '3.8'
+version: '3.7'
 
 services:
-	sqlserver:
+  db:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    environment:
-      SA_PASSWORD: "1q2w3e4r@#$"
-      ACCEPT_EULA: "Y"
-      MSSQL_PID: "Developer"
+    container_name: sqlservercontainer
     ports:
       - "1433:1433"
+    environment:
+      SA_PASSWORD: "SuaSenhaSegura"
+      ACCEPT_EULA: "Y"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
