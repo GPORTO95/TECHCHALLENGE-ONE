@@ -1,9 +1,8 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5000
+EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -12,7 +11,6 @@ COPY ["src/Fiap.TechChallenge.One.API/Fiap.TechChallenge.One.API.csproj", "src/F
 COPY ["src/Fiap.TechChallenge.One.Infrastructure/Fiap.TechChallenge.One.Infrastructure.csproj", "src/Fiap.TechChallenge.One.Infrastructure/"]
 COPY ["src/Fiap.TechChallenge.One.Application/Fiap.TechChallenge.One.Application.csproj", "src/Fiap.TechChallenge.One.Application/"]
 COPY ["src/Fiap.TechChallenge.One.Domain/Fiap.TechChallenge.One.Domain.csproj", "src/Fiap.TechChallenge.One.Domain/"]
-
 RUN dotnet restore "./src/Fiap.TechChallenge.One.API/Fiap.TechChallenge.One.API.csproj"
 COPY . .
 WORKDIR "/src/src/Fiap.TechChallenge.One.API"

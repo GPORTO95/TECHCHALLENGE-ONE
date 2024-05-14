@@ -1,17 +1,29 @@
-version: '3.7'
+version: '3.4'
 
 services:
-  db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sqlservercontainer
+  fiap.techchallenge.one.api:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeoneapi
+    container_name: techchallenge.api
+    build:
+      context: .
+      dockerfile: src/Fiap.TechChallenge.One.API/Dockerfile
     ports:
+      - "5000:5000"
+      - "5001:5001"
+    depends_on:
+      - techchallenge-database
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  techchallenge-database:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: techchallenge.database
+    ports:
+      - "80:80"
       - "1433:1433"
+    volumes:
+      - ./.containers/db:/var/lib/sqlserver/data
     environment:
       SA_PASSWORD: "1q2w3e4r@#$"
       ACCEPT_EULA: "Y"
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
