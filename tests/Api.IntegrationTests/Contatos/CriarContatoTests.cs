@@ -11,11 +11,13 @@ namespace Api.IntegrationTests.Contatos;
 
 public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFunctionalTests(factory)
 {
+    private readonly CriarContatoCommand Command = new("email@teste.com", "Nome Completo", "954123214", "11");
+
     [Fact]
     public async Task Deve_RetornarBadRequest_QuandoEmailEhVazio()
     {
         // Arrange
-        CriarContatoCommand request = new("", "Nome Completo", "956789087", "11");
+        CriarContatoCommand request = Command with { Email = "" };
 
         // Act
         HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
@@ -32,7 +34,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoEmailEhInvalido()
     {
         // Arrange
-        CriarContatoCommand request = new("emailinvalido", "Nome Completo", "956789087", "11");
+        CriarContatoCommand request = Command with { Email = "invalido" };
 
         // Act
         HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
@@ -49,7 +51,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoNomeEhVazio()
     {
         // Arrange
-        CriarContatoCommand request = new("email@teste.com", "", "956789087", "11");
+        CriarContatoCommand request = Command with { Nome = "" };
 
         // Act
         HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
