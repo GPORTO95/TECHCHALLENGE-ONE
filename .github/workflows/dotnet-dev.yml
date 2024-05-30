@@ -18,6 +18,11 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
+    - name: Create Container
+      run: |
+         docker pull mcr.microsoft.com/mssql/server
+         docker run -v ~/docker --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=1q2w3e4r@#$" -p 1433:1433 -d mcr.microsoft.com/mssql/server
         
     - name: Restore dependencies
       run: dotnet restore Fiap.TechChallenge.One.sln
