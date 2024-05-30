@@ -1,6 +1,7 @@
 ﻿using Api.IntegrationTests.Abstractions;
 using Api.IntegrationTests.Contracts;
 using Api.IntegrationTests.Extensions;
+using Fiap.TechChallenge.One.Application.Contatos.Atualizar;
 using Fiap.TechChallenge.One.Application.Contatos.Criar;
 using Fiap.TechChallenge.One.Domain.Contatos;
 using Fiap.TechChallenge.One.Domain.Ddds;
@@ -10,18 +11,34 @@ using System.Net.Http.Json;
 
 namespace Api.IntegrationTests.Contatos;
 
-public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFunctionalTests(factory)
+public class AtualizarContatoTests(FunctionalTestWebAppFactory factory) : BaseFunctionalTests(factory)
 {
-    private readonly CriarContatoCommand Command = new("email@teste.com", "Nome Completo", "954123214", "11");
+    private readonly AtualizarContatoCommand Command = new(Guid.NewGuid(), "email@teste.com", "Nome Completo", "954123214", "11");
+
+    [Fact]
+    public async Task Deve_RetornarNotFound_QuandoContatoNaoExiste()
+    {
+        // Arrange
+        // Act
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", Command);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+
+        CustomProblemDetails problemDetails = await response.GetProblemDetails();
+
+        problemDetails.Title.Should().Be("Contatos.NaoEncontrado");
+    }
 
     [Fact]
     public async Task Deve_RetornarBadRequest_QuandoEmailEhVazio()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Email = "" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Email = "", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -35,10 +52,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoEmailEhInvalido()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Email = "invalido" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Email = "invalido", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -52,10 +70,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoNomeEhVazio()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Nome = "" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Nome = "", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -69,10 +88,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoNomeEhIncompleto()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Nome = "Teste" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Nome = "Teste", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -86,10 +106,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoNomeEhInvalido()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Nome = "Teste 123" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Nome = "Teste 123", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -103,10 +124,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoTelefoneEhVazio()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Telefone = "" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Telefone = "", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -120,10 +142,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoTelefoneEhInvalido()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Telefone = "9875423A2" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Telefone = "9875423A2", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -137,10 +160,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoTamanhoTelefoneEhInvalido()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Telefone = "98754232" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Telefone = "98754232", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -154,10 +178,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoDddEhVazio()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Ddd = "" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Ddd = "", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -171,10 +196,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoTamanhoDddEhInvalido()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Ddd = "1" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Ddd = "1", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -188,10 +214,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoDddEhInvalido()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Ddd = "1A" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Ddd = "1A", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -205,10 +232,11 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     public async Task Deve_RetornarBadRequest_QuandoDddNaoExiste()
     {
         // Arrange
-        CriarContatoCommand request = Command with { Ddd = "00" };
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Ddd = "00", ContatoId = contatoId };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -219,29 +247,16 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     }
 
     [Fact]
-    public async Task Deve_RetornarOk_QuandoContatoEhValido()
+    public async Task Deve_RetornarOk_QuandoContatoEhAtualizado()
     {
         // Arrange
+        Guid contatoId = await ContatoFixture.CriarContato(HttpClient);
+        AtualizarContatoCommand request = Command with { Ddd = "21", ContatoId = contatoId };
+
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", Command);
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/v1/contatos", request);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-        Guid contatoId = await response.Content.ReadFromJsonAsync<Guid>();
-
-        contatoId.Should().NotBeEmpty();
-    }
-}
-
-public static class ContatoFixture
-{
-    public static async Task<Guid> CriarContato(HttpClient HttpClient)
-    {
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", new CriarContatoCommand("email@teste.com", "Nome Completo", "954123214", "11"));
-
-        Guid contatoId = await response.Content.ReadFromJsonAsync<Guid>();
-
-        return contatoId;
+        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
     }
 }

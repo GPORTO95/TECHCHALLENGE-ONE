@@ -10,7 +10,7 @@ namespace Api.IntegrationTests.Contatos;
 public class ExcluirContatoTests(FunctionalTestWebAppFactory factory) : BaseFunctionalTests(factory)
 {
     [Fact]
-    public async Task Deve_RetornarBadRequest_QuandoContatoNaoExiste()
+    public async Task Deve_RetornarNotFound_QuandoContatoNaoExiste()
     {
         // Arrange
         // Act
