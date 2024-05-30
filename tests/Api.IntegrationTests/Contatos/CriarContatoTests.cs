@@ -185,7 +185,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     }
 
     [Fact]
-    public async Task Deve_RetornarOk_QuandooContatoEhValido()
+    public async Task Deve_RetornarOk_QuandoContatoEhValido()
     {
         // Arrange
         // Act
@@ -197,5 +197,17 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         Guid contatoId = await response.Content.ReadFromJsonAsync<Guid>();
 
         contatoId.Should().NotBeEmpty();
+    }
+}
+
+public static class ContatoFixture
+{
+    public static async Task<Guid> CriarContato(HttpClient HttpClient)
+    {
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", new CriarContatoCommand("email@teste.com", "Nome Completo", "954123214", "11"));
+
+        Guid contatoId = await response.Content.ReadFromJsonAsync<Guid>();
+
+        return contatoId;
     }
 }
