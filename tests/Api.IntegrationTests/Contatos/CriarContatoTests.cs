@@ -63,4 +63,21 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
 
         problemDetails.Detail.Should().Be(NomeErrors.Vazio.Description);
     }
+
+    [Fact]
+    public async Task Deve_RetornarBadRequest_QuandoTelefoneEhVazio()
+    {
+        // Arrange
+        CriarContatoCommand request = Command with { Telefone = "" };
+
+        // Act
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        CustomProblemDetails problemDetails = await response.GetProblemDetails();
+
+        problemDetails.Detail.Should().Be(TelefoneErrors.Vazio.Description);
+    }
 }

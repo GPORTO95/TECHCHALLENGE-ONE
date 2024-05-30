@@ -17,12 +17,7 @@ internal static class HttpResponseMessageExtensions
 
         string result = await response.Content.ReadAsStringAsync();
 
-        var options = new JsonSerializerOptions
-        {
-            IncludeFields = true
-        };
-
-        CustomProblemDetails problemDetails = JsonConvert.DeserializeObject<CustomProblemDetails>(result);
+        CustomProblemDetails? problemDetails = JsonConvert.DeserializeObject<CustomProblemDetails>(result);
 
         Ensure.NotNull(problemDetails);
 
