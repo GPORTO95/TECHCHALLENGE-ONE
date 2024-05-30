@@ -3,6 +3,7 @@ using Api.IntegrationTests.Contracts;
 using Api.IntegrationTests.Extensions;
 using Fiap.TechChallenge.One.Application.Contatos.Criar;
 using Fiap.TechChallenge.One.Domain.Contatos;
+using Fiap.TechChallenge.One.Domain.Ddds;
 using FluentAssertions;
 using System.Net;
 using System.Net.Http.Json;
@@ -79,5 +80,122 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CustomProblemDetails problemDetails = await response.GetProblemDetails();
 
         problemDetails.Detail.Should().Be(TelefoneErrors.Vazio.Description);
+    }
+
+    [Fact]
+    public async Task Deve_RetornarBadRequest_QuandoTelefoneEhInvalido()
+    {
+        // Arrange
+        CriarContatoCommand request = Command with { Telefone = "9875423A2" };
+
+        // Act
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        CustomProblemDetails problemDetails = await response.GetProblemDetails();
+
+        problemDetails.Detail.Should().Be(TelefoneErrors.FormatoInvalido.Description);
+    }
+
+    [Fact]
+    public async Task Deve_RetornarBadRequest_QuandoTamanhoTelefoneEhInvalido()
+    {
+        // Arrange
+        CriarContatoCommand request = Command with { Telefone = "98754232" };
+
+        // Act
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        CustomProblemDetails problemDetails = await response.GetProblemDetails();
+
+        problemDetails.Detail.Should().Be(TelefoneErrors.TamanhoInvalido.Description);
+    }
+
+    [Fact]
+    public async Task Deve_RetornarBadRequest_QuandoDddEhVazio()
+    {
+        // Arrange
+        CriarContatoCommand request = Command with { Ddd = "" };
+
+        // Act
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        CustomProblemDetails problemDetails = await response.GetProblemDetails();
+
+        problemDetails.Detail.Should().Be(CodigoErrors.Vazio.Description);
+    }
+
+    [Fact]
+    public async Task Deve_RetornarBadRequest_QuandoTamanhoDddEhInvalido()
+    {
+        // Arrange
+        CriarContatoCommand request = Command with { Ddd = "1" };
+
+        // Act
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        CustomProblemDetails problemDetails = await response.GetProblemDetails();
+
+        problemDetails.Detail.Should().Be(CodigoErrors.TamanhoInvalido.Description);
+    }
+
+    [Fact]
+    public async Task Deve_RetornarBadRequest_QuandoDddEhInvalido()
+    {
+        // Arrange
+        CriarContatoCommand request = Command with { Ddd = "1A" };
+
+        // Act
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        CustomProblemDetails problemDetails = await response.GetProblemDetails();
+
+        problemDetails.Detail.Should().Be(CodigoErrors.ValorInvalido.Description);
+    }
+
+    [Fact]
+    public async Task Deve_RetornarBadRequest_QuandoDddNaoExiste()
+    {
+        // Arrange
+        CriarContatoCommand request = Command with { Ddd = "00" };
+
+        // Act
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+        CustomProblemDetails problemDetails = await response.GetProblemDetails();
+
+        problemDetails.Title.Should().Be("Ddd.NaoEncontrado");
+    }
+
+    [Fact]
+    public async Task Deve_RetornarOk_QuandooContatoEhValido()
+    {
+        // Arrange
+        // Act
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", Command);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        Guid contatoId = await response.Content.ReadFromJsonAsync<Guid>();
+
+        contatoId.Should().NotBeEmpty();
     }
 }
