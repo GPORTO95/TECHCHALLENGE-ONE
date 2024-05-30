@@ -2,7 +2,6 @@
 using Api.IntegrationTests.Contracts;
 using Api.IntegrationTests.Extensions;
 using Fiap.TechChallenge.One.Application.Contatos.Atualizar;
-using Fiap.TechChallenge.One.Application.Contatos.Criar;
 using Fiap.TechChallenge.One.Domain.Contatos;
 using Fiap.TechChallenge.One.Domain.Ddds;
 using FluentAssertions;

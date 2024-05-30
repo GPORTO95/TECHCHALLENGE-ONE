@@ -236,9 +236,9 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
 
 public static class ContatoFixture
 {
-    public static async Task<Guid> CriarContato(HttpClient HttpClient)
+    public static async Task<Guid> CriarContato(HttpClient HttpClient, string ddd = "11")
     {
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", new CriarContatoCommand("email@teste.com", "Nome Completo", "954123214", "11"));
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", new CriarContatoCommand("email@teste.com", "Nome Completo", "954123214", ddd));
 
         Guid contatoId = await response.Content.ReadFromJsonAsync<Guid>();
 
