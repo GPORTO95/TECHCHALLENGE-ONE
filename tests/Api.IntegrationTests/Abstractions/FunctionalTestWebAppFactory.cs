@@ -16,7 +16,7 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureTestServices(services =>
+        builder.ConfigureTestServices(async services =>
         {
             services.RemoveAll(typeof(DbContextOptions<ApplicationDbContext>));
 
@@ -24,11 +24,11 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
                 options
                     .UseSqlServer(_msSqlContainer.GetConnectionString()));
 
-            CreateTables();
+            await _msSqlContainer.ExecScriptAsync( CreateTables());
         });
     }
 
-    private void CreateTables()
+    private string CreateTables()
     {
         string sql =
             """
@@ -51,15 +51,7 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
             );
             """;
 
-        
-        SqlConnection cnn = new(_msSqlContainer.GetConnectionString());
-        cnn.Open();
-        
-        SqlCommand cmd = new(sql, cnn);
-
-        cmd.ExecuteScalar();
-        cmd.Dispose();
-        cnn.Close();
+        return sql;
     }
 
 
