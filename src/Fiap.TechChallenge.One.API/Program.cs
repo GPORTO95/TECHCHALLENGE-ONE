@@ -7,6 +7,7 @@ using Fiap.TechChallenge.One.Infrastructure;
 using Asp.Versioning.Builder;
 using Asp.Versioning.ApiExplorer;
 using Fiap.TechChallenge.One.API.OpenApi;
+using Prometheus;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +53,8 @@ RouteGroupBuilder versionedGroup = app
 
 app.MapEndpoints(versionedGroup);
 
+app.UseMetricServer();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -70,6 +73,8 @@ if (app.Environment.IsDevelopment())
 
     app.ApplyMigrations();
 }
+
+
 
 app.UseExceptionHandler();
 
