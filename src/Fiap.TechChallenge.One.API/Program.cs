@@ -7,6 +7,7 @@ using Fiap.TechChallenge.One.Infrastructure;
 using Asp.Versioning.Builder;
 using Asp.Versioning.ApiExplorer;
 using Fiap.TechChallenge.One.API.OpenApi;
+using Prometheus;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
+
+builder.Services.UseHttpClientMetrics();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
@@ -58,6 +61,9 @@ app.MapEndpoints(versionedGroup);
 //}
 
 app.ApplyMigrations();
+
+app.UseMetricServer();
+app.UseHttpMetrics();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
