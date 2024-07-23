@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/GPORTO95/TECHCHALLENGE-ONE/actions/workflows/dotnet.yml/badge.svg)](https://github.com/GPORTO95/TECHCHALLENGE-ONE/actions/workflows/dotnet.yml)
 
-O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil).
+O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil) com testes unitários, integração, github actions e telemetria com prometheus e grafana.
 
 ## :film_projector: Vídeo explicativo da aplicação
 Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.youtube.com/watch?v=0DdQRWMjY_I) para ver toda explicação sobre os requisitos, arquitetura, documentação e testes.
