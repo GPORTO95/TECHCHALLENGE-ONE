@@ -23,6 +23,8 @@ builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration);
 
+builder.Services.UseHttpClientMetrics();
+
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
@@ -53,28 +55,29 @@ RouteGroupBuilder versionedGroup = app
 
 app.MapEndpoints(versionedGroup);
 
+//if (app.Environment.IsDevelopment())
+//{
+//    app.ApplyMigrations();
+//}
+
+app.ApplyMigrations();
+
 app.UseMetricServer();
+app.UseHttpMetrics();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
+    IReadOnlyList<ApiVersionDescription> descriptions = app.DescribeApiVersions();
+
+    foreach (ApiVersionDescription description in descriptions)
     {
-        IReadOnlyList<ApiVersionDescription> descriptions = app.DescribeApiVersions();
+        string url = $"/swagger/{description.GroupName}/swagger.json";
+        string name = description.GroupName.ToUpperInvariant();
 
-        foreach (ApiVersionDescription description in descriptions)
-        {
-            string url = $"/swagger/{description.GroupName}/swagger.json";
-            string name = description.GroupName.ToUpperInvariant();
-
-            options.SwaggerEndpoint(url, name);
-        }
-    });
-
-    app.ApplyMigrations();
-}
-
-
+        options.SwaggerEndpoint(url, name);
+    }
+});
 
 app.UseExceptionHandler();
 

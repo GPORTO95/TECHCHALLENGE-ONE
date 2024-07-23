@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  fiap.techchallenge.one.api:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeoneapi
+    container_name: techchallenge.api
+    build:
+      context: .
+      dockerfile: src/Fiap.TechChallenge.One.API/Dockerfile
+    ports:
+      - "5000:5000"
+    ##  - "5001:5001"
+    depends_on:
+      - techchallenge-database
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  techchallenge-database:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: techchallenge.database
+    ports:
+      - "80:80"
+      - "1433:1433"
+    volumes:
+      - ./.containers/db:/var/lib/sqlserver/data
+    environment:
+      SA_PASSWORD: "1q2w3e4r@#$"
+      ACCEPT_EULA: "Y"
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./grafana:/var/lib/grafana
+    depends_on:
+      - prometheus 
