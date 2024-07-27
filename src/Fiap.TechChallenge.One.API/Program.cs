@@ -55,14 +55,10 @@ RouteGroupBuilder versionedGroup = app
 
 app.MapEndpoints(versionedGroup);
 
-//if (app.Environment.IsDevelopment())
-//{
-//    app.ApplyMigrations();
-//}
-
 app.ApplyMigrations();
 
 app.UseMetricServer();
+
 app.UseHttpMetrics();
 
 app.UseSwagger();
