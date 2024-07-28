@@ -5,8 +5,9 @@
 O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil) com testes unitários, integração, github actions e telemetria com prometheus e grafana.
 
 ## :film_projector: Vídeo explicativo da aplicação
-Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.youtube.com/watch?v=0DdQRWMjY_I) para ver toda explicação sobre os requisitos, arquitetura, documentação e testes.
-
+Caso deseje obter mais detalhe sobre a aplicação, clique nos links abaixo para ver toda explicação sobre os requisitos, arquitetura, documentação e testes.
+Fase 1:  [AQUI](https://www.youtube.com/watch?v=0DdQRWMjY_I)
+Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 ## :stop_sign: Requisitos
 ### Funcionais
 - Cadastrar um contato deve exigir a obrigatoriedade dos campos de Nome, E-mail, Telefone e DDD
