@@ -6,7 +6,9 @@ O objetivo do desafio é construir uma aplicação que seja possível realizar o
 
 ## :film_projector: Vídeo explicativo da aplicação
 Caso deseje obter mais detalhe sobre a aplicação, clique nos links abaixo para ver toda explicação sobre os requisitos, arquitetura, documentação e testes.
+
 Fase 1:  [AQUI](https://www.youtube.com/watch?v=0DdQRWMjY_I)
+
 Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 ## :stop_sign: Requisitos
 ### Funcionais
