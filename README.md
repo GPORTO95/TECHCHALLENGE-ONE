@@ -62,7 +62,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 
 - #### Exemplo Request
     - ##### Response - Será retornado uma lista
-    ```
+    ```json
     [
         {
             "contatoId": "1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc",
@@ -81,7 +81,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     ]
     ```
     - ##### Response - Caso filtrado por ddd = 11
-    ```
+    ```json
     [
         {
             "contatoId": "1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc",
@@ -100,7 +100,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     ]
     ```
     - ##### Use Case - Ddd inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "CodigoRegiao.ValorInvalido",
@@ -134,7 +134,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 
 - #### Exemplo Request
     - ##### Válido
-    ```
+    ```json
     {
         "email": "teste@tes.com",
         "nome": "Gabriel Teste",
@@ -147,7 +147,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     "28eb0baa-e67a-4f64-86e1-cfa1326301c6"
     ```
     - ##### Validator - Email inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Email.FormatoInvalido",
@@ -156,7 +156,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
     - ##### Validator - Nome inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Nome.NomeIncompleto",
@@ -165,7 +165,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
     - ##### Validator - Telefone inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Telefone.FormatoInvalido",
@@ -174,7 +174,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
      - ##### Validator - Ddd inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "CodigoRegiao.ValorInvalido",
@@ -183,7 +183,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
      - ##### Use Case - ddd não encontrado
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Ddd.NaoEncontrado",
@@ -219,7 +219,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 
 - #### Exemplo Request
     - ##### Válido
-    ```
+    ```json
     {
         "email": "teste@tes.com",
         "nome": "Gabriel Teste",
@@ -231,7 +231,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     ```
     ```
     - ##### UseCase - Contato não encontrado
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
         "title": "Contatos.NaoEncontrado",
@@ -240,7 +240,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
     - ##### Validator - Email inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Email.FormatoInvalido",
@@ -249,7 +249,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
     - ##### Validator - Nome inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Nome.NomeIncompleto",
@@ -258,7 +258,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
     - ##### Validator - Telefone inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Telefone.FormatoInvalido",
@@ -267,7 +267,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
      - ##### Validator - Ddd inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "CodigoRegiao.ValorInvalido",
@@ -276,7 +276,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     }
     ```
      - ##### Use Case - ddd não encontrado
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Ddd.NaoEncontrado",
@@ -305,7 +305,7 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     ```
     ```
     - ##### UseCase - Contato não encontrado
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
         "title": "Contatos.NaoEncontrado",
