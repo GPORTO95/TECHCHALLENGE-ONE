@@ -47,9 +47,11 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 > Propriedades marcadas com o ícone :small_orange_diamond: são de preenchimento obrigatório
 
 <details>
-    <summary>[GET - Listar contatos]</summary>
+    <summary>[Listar contatos]</summary>
 
-`{urlbase}/api/v1/contatos`
+```http
+GET /api/v1/contatos
+```
 
 - #### Caso de sucesso
     - Retornado lista de Contatos podendo filtrar por Ddd
@@ -110,9 +112,11 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     ```
 </details>
 <details>
-    <summary>[POST - Inserir contato]</summary>
+    <summary>[Inserir contato]</summary>
     
-`{urlbase}/api/v1/contatos`
+```http
+POST /api/v1/contatos
+```
 
 - #### Caso de sucesso
     - Inseri dados de contato na tabela com associação para ddd
@@ -193,9 +197,11 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
     ```
 </details>
 <details>
-    <summary>[PUT - Atualizar contato]</summary>
+    <summary>[Atualizar contato]</summary>
     
-`{urlbase}/api/v1/contatos`
+```http
+PUT /api/v1/contatos
+```
 
 - #### Caso de sucesso
     - Atualiza dados de contato
@@ -287,9 +293,11 @@ Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 </details>
 
 <details>
-    <summary>[DELETE - Excluir um contato]</summary>
+    <summary>[Excluir um contato]</summary>
     
-`{urlbase}/api/v1/contatos/{contatoId}`
+```http
+DELETE /api/v1/contatos/{contatoId}
+```
 
 - #### Caso de sucesso
     - Atualiza dados de contato
