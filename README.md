@@ -2,11 +2,14 @@
 
 [![Tests](https://github.com/GPORTO95/TECHCHALLENGE-ONE/actions/workflows/dotnet.yml/badge.svg)](https://github.com/GPORTO95/TECHCHALLENGE-ONE/actions/workflows/dotnet.yml)
 
-O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil).
+O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil) com testes unitários, integração, github actions e telemetria com prometheus e grafana.
 
 ## :film_projector: Vídeo explicativo da aplicação
-Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.youtube.com/watch?v=0DdQRWMjY_I) para ver toda explicação sobre os requisitos, arquitetura, documentação e testes.
+Caso deseje obter mais detalhe sobre a aplicação, clique nos links abaixo para ver toda explicação sobre os requisitos, arquitetura, documentação e testes.
 
+Fase 1:  [AQUI](https://www.youtube.com/watch?v=0DdQRWMjY_I)
+
+Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 ## :stop_sign: Requisitos
 ### Funcionais
 - Cadastrar um contato deve exigir a obrigatoriedade dos campos de Nome, E-mail, Telefone e DDD
@@ -44,9 +47,11 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
 > Propriedades marcadas com o ícone :small_orange_diamond: são de preenchimento obrigatório
 
 <details>
-    <summary>[GET - Listar contatos]</summary>
+    <summary>[Listar contatos]</summary>
 
-`{urlbase}/api/v1/contatos`
+```http
+GET /api/v1/contatos
+```
 
 - #### Caso de sucesso
     - Retornado lista de Contatos podendo filtrar por Ddd
@@ -59,7 +64,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
 
 - #### Exemplo Request
     - ##### Response - Será retornado uma lista
-    ```
+    ```json
     [
         {
             "contatoId": "1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc",
@@ -78,7 +83,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     ]
     ```
     - ##### Response - Caso filtrado por ddd = 11
-    ```
+    ```json
     [
         {
             "contatoId": "1e6fd294-5ad2-4d4c-8c2b-2bc23a5f45bc",
@@ -97,7 +102,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     ]
     ```
     - ##### Use Case - Ddd inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "CodigoRegiao.ValorInvalido",
@@ -107,9 +112,11 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     ```
 </details>
 <details>
-    <summary>[POST - Inserir contato]</summary>
+    <summary>[Inserir contato]</summary>
     
-`{urlbase}/api/v1/contatos`
+```http
+POST /api/v1/contatos
+```
 
 - #### Caso de sucesso
     - Inseri dados de contato na tabela com associação para ddd
@@ -131,7 +138,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
 
 - #### Exemplo Request
     - ##### Válido
-    ```
+    ```json
     {
         "email": "teste@tes.com",
         "nome": "Gabriel Teste",
@@ -144,7 +151,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     "28eb0baa-e67a-4f64-86e1-cfa1326301c6"
     ```
     - ##### Validator - Email inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Email.FormatoInvalido",
@@ -153,7 +160,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
     - ##### Validator - Nome inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Nome.NomeIncompleto",
@@ -162,7 +169,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
     - ##### Validator - Telefone inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Telefone.FormatoInvalido",
@@ -171,7 +178,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
      - ##### Validator - Ddd inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "CodigoRegiao.ValorInvalido",
@@ -180,7 +187,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
      - ##### Use Case - ddd não encontrado
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Ddd.NaoEncontrado",
@@ -190,9 +197,11 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     ```
 </details>
 <details>
-    <summary>[PUT - Atualizar contato]</summary>
+    <summary>[Atualizar contato]</summary>
     
-`{urlbase}/api/v1/contatos`
+```http
+PUT /api/v1/contatos
+```
 
 - #### Caso de sucesso
     - Atualiza dados de contato
@@ -216,7 +225,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
 
 - #### Exemplo Request
     - ##### Válido
-    ```
+    ```json
     {
         "email": "teste@tes.com",
         "nome": "Gabriel Teste",
@@ -228,7 +237,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     ```
     ```
     - ##### UseCase - Contato não encontrado
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
         "title": "Contatos.NaoEncontrado",
@@ -237,7 +246,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
     - ##### Validator - Email inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Email.FormatoInvalido",
@@ -246,7 +255,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
     - ##### Validator - Nome inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Nome.NomeIncompleto",
@@ -255,7 +264,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
     - ##### Validator - Telefone inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Telefone.FormatoInvalido",
@@ -264,7 +273,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
      - ##### Validator - Ddd inválido
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "CodigoRegiao.ValorInvalido",
@@ -273,7 +282,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     }
     ```
      - ##### Use Case - ddd não encontrado
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
         "title": "Ddd.NaoEncontrado",
@@ -284,9 +293,11 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
 </details>
 
 <details>
-    <summary>[DELETE - Excluir um contato]</summary>
+    <summary>[Excluir um contato]</summary>
     
-`{urlbase}/api/v1/contatos/{contatoId}`
+```http
+DELETE /api/v1/contatos/{contatoId}
+```
 
 - #### Caso de sucesso
     - Atualiza dados de contato
@@ -302,7 +313,7 @@ Caso deseje obter mais detalhe sobre a aplicação, clique [AQUI](https://www.yo
     ```
     ```
     - ##### UseCase - Contato não encontrado
-    ```
+    ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
         "title": "Contatos.NaoEncontrado",
