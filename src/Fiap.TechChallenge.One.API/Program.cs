@@ -9,7 +9,18 @@ using Asp.Versioning.ApiExplorer;
 using Fiap.TechChallenge.One.API.OpenApi;
 using Prometheus;
 
+string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200");
+                      });
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -59,6 +70,8 @@ app.MapEndpoints(versionedGroup);
 //{
 //    app.ApplyMigrations();
 //}
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.ApplyMigrations();
 
