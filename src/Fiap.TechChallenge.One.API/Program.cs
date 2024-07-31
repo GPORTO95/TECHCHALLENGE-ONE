@@ -66,6 +66,8 @@ RouteGroupBuilder versionedGroup = app
 
 app.MapEndpoints(versionedGroup);
 
+app.UseCors(MyAllowSpecificOrigins);
+
 app.ApplyMigrations();
 
 app.UseMetricServer();
