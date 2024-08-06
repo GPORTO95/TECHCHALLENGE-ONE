@@ -1,0 +1,6 @@
+@Fiap.TechChallenge.Exclusao_HostAddress = http://localhost:5180
+
+GET {{Fiap.TechChallenge.Exclusao_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

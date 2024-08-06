@@ -1,0 +1,12 @@
+@URL = http://localhost:5244
+
+POST {{URL}}/api/contatos
+Content-Type: application/json
+
+{
+    "email": "teste@newemail.com",
+    "nome": "Nome Teste",
+    "telefone": "987654321",
+    "ddd": "11"
+}
+###

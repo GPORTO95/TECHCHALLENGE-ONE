@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "blocks", "blocks", "{59F947
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cadastro", "Cadastro", "{4EE56401-2060-45CA-8A3C-F043E265DCEE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Cadastro", "src\services\Fiap.TechChallenge.Cadastro\Fiap.TechChallenge.Cadastro.csproj", "{BFB3D64E-9C58-4BE6-B5BB-7BAB449742A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Cadastro.API", "src\services\Fiap.TechChallenge.Cadastro.API\Fiap.TechChallenge.Cadastro.API.csproj", "{BFB3D64E-9C58-4BE6-B5BB-7BAB449742A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Kernel", "src\blocks\Fiap.TechChallenge.Kernel\Fiap.TechChallenge.Kernel.csproj", "{D806EB8A-F47F-4258-8AE8-CA9935F4D985}"
 EndProject
@@ -37,13 +37,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Api", "src\blocks\Fiap.TechChallenge.Api\Fiap.TechChallenge.Api.csproj", "{887DDBB5-0513-42BC-9BC5-FCB119B36375}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Infrastructure", "src\blocks\Fiap.TechChallenge.Infrastructure\Fiap.TechChallenge.Infrastructure.csproj", "{E6B288CC-1961-4400-8516-0BC611FED0E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Infrastructure", "src\blocks\Fiap.TechChallenge.Infrastructure\Fiap.TechChallenge.Infrastructure.csproj", "{E6B288CC-1961-4400-8516-0BC611FED0E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exclusao", "Exclusao", "{9AA1EEDC-8EF4-468A-B833-CD07D9C9EE95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Listagem", "Listagem", "{28AB5366-5E3F-4341-831A-7D9D3B388AB5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Atualizacao", "Atualizacao", "{33D6F18D-CAF9-4EFB-9E53-B1A99C00731D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Atualizacao.API", "src\services\Fiap.TechChallenge.Atualizacao.API\Fiap.TechChallenge.Atualizacao.API.csproj", "{A9717EF4-FFFC-47FE-BC85-5B70EFEC4370}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Exclusao.API", "src\services\Fiap.TechChallenge.Exclusao.API\Fiap.TechChallenge.Exclusao.API.csproj", "{439E3F1E-6A3E-497F-BF18-9315654BEA65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Listagem.API", "src\services\Fiap.TechChallenge.Listagem.API\Fiap.TechChallenge.Listagem.API.csproj", "{8EFD9B7E-A685-47CB-A597-C522012413C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +109,18 @@ Global
 		{E6B288CC-1961-4400-8516-0BC611FED0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6B288CC-1961-4400-8516-0BC611FED0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6B288CC-1961-4400-8516-0BC611FED0E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9717EF4-FFFC-47FE-BC85-5B70EFEC4370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9717EF4-FFFC-47FE-BC85-5B70EFEC4370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9717EF4-FFFC-47FE-BC85-5B70EFEC4370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9717EF4-FFFC-47FE-BC85-5B70EFEC4370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{439E3F1E-6A3E-497F-BF18-9315654BEA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{439E3F1E-6A3E-497F-BF18-9315654BEA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{439E3F1E-6A3E-497F-BF18-9315654BEA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{439E3F1E-6A3E-497F-BF18-9315654BEA65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EFD9B7E-A685-47CB-A597-C522012413C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EFD9B7E-A685-47CB-A597-C522012413C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EFD9B7E-A685-47CB-A597-C522012413C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EFD9B7E-A685-47CB-A597-C522012413C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +144,9 @@ Global
 		{9AA1EEDC-8EF4-468A-B833-CD07D9C9EE95} = {E207707A-9D39-40BA-87CB-6873CAC77B40}
 		{28AB5366-5E3F-4341-831A-7D9D3B388AB5} = {E207707A-9D39-40BA-87CB-6873CAC77B40}
 		{33D6F18D-CAF9-4EFB-9E53-B1A99C00731D} = {E207707A-9D39-40BA-87CB-6873CAC77B40}
+		{A9717EF4-FFFC-47FE-BC85-5B70EFEC4370} = {33D6F18D-CAF9-4EFB-9E53-B1A99C00731D}
+		{439E3F1E-6A3E-497F-BF18-9315654BEA65} = {9AA1EEDC-8EF4-468A-B833-CD07D9C9EE95}
+		{8EFD9B7E-A685-47CB-A597-C522012413C3} = {28AB5366-5E3F-4341-831A-7D9D3B388AB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A395344-7865-4074-B5EB-CF130E9C451E}
