@@ -47,15 +47,16 @@ internal sealed class CriarContatoCommandHandler(IDddRepository dddRepository, I
             return Result.Failure<Guid>(DddErrors.CodigoNaoEncontrado(request.Ddd));
         }
 
+        Result<Contato> contatoResult =
+            Contato.Criar(
+                nomeResult.Value,
+                emailResult.Value,
+                telefoneResult.Value,
+                dddId);
+
         Guid contatoId = Guid.NewGuid();
 
-        await bus.PublishAsync(
-            new ContatoInseridoEvent(
-                contatoId,
-                nomeResult.Value.Value,
-                emailResult.Value.Value,
-                telefoneResult.Value.Value,
-                dddId), cancellationToken);
+        await bus.PublishAsync(new ContatoInseridoEvent(contatoResult.Value), cancellationToken);
 
         return contatoId;
     }

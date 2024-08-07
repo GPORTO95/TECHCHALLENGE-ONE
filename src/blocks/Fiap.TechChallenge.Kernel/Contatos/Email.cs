@@ -4,9 +4,11 @@ namespace Fiap.TechChallenge.Kernel.Contatos;
 
 public sealed record Email
 {
+    public Email() { }
+
     private Email(string value) => Value = value;
 
-    public string Value { get; }
+    public string Value { get; set; }
 
     public static Result<Email> Criar(string? email)
     {

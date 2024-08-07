@@ -6,12 +6,14 @@ public sealed record Codigo
 {
     private const int TAMANHA_DDD = 2;
 
+    public Codigo() { }
+
     private Codigo(string valor)
     {
         Valor = valor;
     }
 
-    public string Valor { get; }
+    public string Valor { get; set;  }
 
     public static Result<Codigo> Criar(
         string valor)

@@ -6,9 +6,11 @@ public sealed record Telefone
 {
     public const int Length = 9;
 
+    public Telefone() { }
+    
     private Telefone(string value) => Value = value;
 
-    public string Value { get; }
+    public string Value { get; set; }
 
     public static Result<Telefone> Criar(string? telefone)
     {
