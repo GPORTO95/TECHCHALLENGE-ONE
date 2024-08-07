@@ -1,6 +1,6 @@
-@Fiap.TechChallenge.Exclusao_HostAddress = http://localhost:5180
+@URL = http://localhost:5180
 
-GET {{Fiap.TechChallenge.Exclusao_HostAddress}}/weatherforecast/
+DELETE {{URL}}/api/contatos/cce1b19e-78ad-4d41-9e78-ae65b621a39a
 Accept: application/json
 
 ###

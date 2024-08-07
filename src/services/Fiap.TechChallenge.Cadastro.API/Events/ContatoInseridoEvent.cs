@@ -2,5 +2,4 @@
 
 namespace Fiap.TechChallenge.Cadastro.API.Events;
 
-public sealed record ContatoInseridoEvent(
-    Contato Contato);
+public sealed record ContatoInseridoEvent(Contato Contato);
