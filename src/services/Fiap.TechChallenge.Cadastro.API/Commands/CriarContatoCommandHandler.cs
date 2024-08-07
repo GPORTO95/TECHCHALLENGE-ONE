@@ -1,11 +1,11 @@
 ﻿using Fiap.TechChallenge.Application.Abstractions.EventBus;
 using Fiap.TechChallenge.Application.Abstractions.Messaging;
-using Fiap.TechChallenge.Cadastro.Events;
+using Fiap.TechChallenge.Cadastro.API.Events;
 using Fiap.TechChallenge.Kernel;
 using Fiap.TechChallenge.Kernel.Contatos;
 using Fiap.TechChallenge.Kernel.Ddds;
 
-namespace Fiap.TechChallenge.Cadastro.Commands;
+namespace Fiap.TechChallenge.Cadastro.API.Commands;
 
 internal sealed class CriarContatoCommandHandler(IDddRepository dddRepository, IEventBus bus) : ICommandHandler<CriarContatoCommand, Guid>
 {

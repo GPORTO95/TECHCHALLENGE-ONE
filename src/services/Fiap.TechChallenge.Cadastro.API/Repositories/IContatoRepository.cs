@@ -1,6 +1,6 @@
 ﻿using Fiap.TechChallenge.Kernel.Contatos;
 
-namespace Fiap.TechChallenge.Cadastro.Repositories;
+namespace Fiap.TechChallenge.Cadastro.API.Repositories;
 
 public interface IContatoRepository
 {

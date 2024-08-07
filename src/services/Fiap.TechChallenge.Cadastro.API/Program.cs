@@ -1,12 +1,11 @@
 using Fiap.TechChallenge.API.Infrastructure;
 using Fiap.TechChallenge.Application;
-using Fiap.TechChallenge.Cadastro.Repositories;
+using Fiap.TechChallenge.Cadastro.API;
+using Fiap.TechChallenge.Cadastro.API.Repositories;
 using Fiap.TechChallenge.Infrastructure;
+using Fiap.TechChallenge.Infrastructure.Data;
 using Fiap.TechChallenge.Kernel.Ddds;
 using System.Reflection;
-using Fiap.TechChallenge.Infrastructure.Data;
-using FluentValidation;
-using Fiap.TechChallenge.Cadastro;
 
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 

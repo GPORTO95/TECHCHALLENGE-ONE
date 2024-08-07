@@ -1,7 +1,7 @@
 ﻿using Fiap.TechChallenge.Infrastructure.Data;
 using Fiap.TechChallenge.Kernel.Contatos;
 
-namespace Fiap.TechChallenge.Cadastro.Repositories;
+namespace Fiap.TechChallenge.Cadastro.API.Repositories;
 
 internal sealed class ContatoRepository(ApplicationDbContext dbContext) : IContatoRepository
 {

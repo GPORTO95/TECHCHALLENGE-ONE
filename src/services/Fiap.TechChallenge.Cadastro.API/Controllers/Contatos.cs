@@ -1,11 +1,11 @@
 ﻿using Fiap.TechChallenge.API.Extensions;
-using Fiap.TechChallenge.Cadastro.Commands;
+using Fiap.TechChallenge.Cadastro.API.Commands;
 using Fiap.TechChallenge.Kernel;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace Fiap.TechChallenge.Cadastro.Controllers;
+namespace Fiap.TechChallenge.Cadastro.API.Controllers;
 
 [ApiController]
 [Route("api/contatos")]

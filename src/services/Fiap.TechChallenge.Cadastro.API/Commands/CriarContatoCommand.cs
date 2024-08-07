@@ -1,6 +1,6 @@
 ﻿using Fiap.TechChallenge.Application.Abstractions.Messaging;
 
-namespace Fiap.TechChallenge.Cadastro.Commands;
+namespace Fiap.TechChallenge.Cadastro.API.Commands;
 
 public sealed record CriarContatoCommand(
     string Email,

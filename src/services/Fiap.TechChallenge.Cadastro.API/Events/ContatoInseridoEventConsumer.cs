@@ -1,8 +1,8 @@
 ﻿using Fiap.TechChallenge.Application.Abstractions.Data;
-using Fiap.TechChallenge.Cadastro.Repositories;
+using Fiap.TechChallenge.Cadastro.API.Repositories;
 using MassTransit;
 
-namespace Fiap.TechChallenge.Cadastro.Events;
+namespace Fiap.TechChallenge.Cadastro.API.Events;
 
 internal sealed class ContatoInseridoEventConsumer(
     IContatoRepository contatoRepository,

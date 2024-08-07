@@ -1,10 +1,10 @@
-﻿using Fiap.TechChallenge.Cadastro.Events;
+﻿using Fiap.TechChallenge.Cadastro.API.Events;
 using Fiap.TechChallenge.Infrastructure.MessageBroker;
 using FluentValidation;
 using MassTransit;
 using Microsoft.Extensions.Options;
 
-namespace Fiap.TechChallenge.Cadastro;
+namespace Fiap.TechChallenge.Cadastro.API;
 
 public static class DependencyInjection
 {

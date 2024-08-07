@@ -11,9 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Events\" />
     <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\blocks\Fiap.TechChallenge.Api\Fiap.TechChallenge.Api.csproj" />
   </ItemGroup>
 
 </Project>
