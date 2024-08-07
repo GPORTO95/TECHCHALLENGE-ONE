@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace Fiap.TechChallenge.Exclusao.API.Controllers;
+namespace Fiap.TechChallenge.Exclusao.API.Endpoints;
 
 [ApiController]
 [Route("api/contatos")]

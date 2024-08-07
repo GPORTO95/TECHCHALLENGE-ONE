@@ -1,6 +1,9 @@
 @URL = http://localhost:5180
 
-DELETE {{URL}}/api/contatos/cce1b19e-78ad-4d41-9e78-ae65b621a39a
+### NoContent | Contato enviado para fila para exclusão
+DELETE {{URL}}/api/contatos/75299632-00fd-4534-bd64-d50897787dd1
 Accept: application/json
 
-###
+### NotFound | Contato não encontrado
+DELETE {{URL}}/api/contatos/cce1b19e-78ad-4d41-9e78-ae65b621a39a
+Accept: application/json
