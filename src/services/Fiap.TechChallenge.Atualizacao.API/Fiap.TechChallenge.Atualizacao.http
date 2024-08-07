@@ -72,7 +72,7 @@ Content-Type: application/json
     "ddd": "1"
 }
 
-### NotFound | Ddd não encontrado
+### BadRequest | Ddd não encontrado
 PUT {{URL}}/api/contatos/
 Content-Type: application/json
 

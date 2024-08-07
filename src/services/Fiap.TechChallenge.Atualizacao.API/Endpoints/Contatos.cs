@@ -19,7 +19,7 @@ public class Contatos(ISender sender) : ControllerBase
     /// <returns></returns>
     /// <response code="204">Dados atualizado com sucesso</response>
     /// <response code="400">Problemas de validação</response>
-    /// <response code="404">Contato/Ddd não encontrado</response>
+    /// <response code="404">Contato não encontrado</response>
     [HttpPut]
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Accepted)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
