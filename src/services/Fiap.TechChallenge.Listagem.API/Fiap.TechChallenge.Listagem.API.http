@@ -1,11 +1,10 @@
 @URL = http://localhost:5138
 
+### OK | Filtra todos os contatos
 GET {{URL}}/api/contatos
 Accept: application/json
 
-###
+### OK | Filtra contatos por Ddd
 
 GET {{URL}}/api/contatos?ddd=85
 Accept: application/json
-
-###
