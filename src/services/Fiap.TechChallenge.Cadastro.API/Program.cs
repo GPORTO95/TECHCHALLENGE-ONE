@@ -5,6 +5,7 @@ using Fiap.TechChallenge.Cadastro.API.Repositories;
 using Fiap.TechChallenge.Infrastructure;
 using Fiap.TechChallenge.Infrastructure.Data;
 using Fiap.TechChallenge.Kernel.Ddds;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -27,6 +28,14 @@ builder.Services.AddSwaggerGen(c =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
+
+    c.SwaggerDoc("v1", new OpenApiInfo()
+    {
+        Title = "API Cadastro Contato",
+        Version = "v1",
+        Description = "Esta API faz parte do desafio da pós graduação da FIAP",
+        Contact = new OpenApiContact() { Name = "Departamento de Desenvolvimento", Email = "gr_porto@hotmail.com" },
+    });
 });
 
 builder.Services
