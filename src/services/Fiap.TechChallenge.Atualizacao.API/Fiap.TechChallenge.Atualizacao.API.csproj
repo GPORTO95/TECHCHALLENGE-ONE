@@ -20,8 +20,4 @@
 		<ProjectReference Include="..\..\blocks\Fiap.TechChallenge.Api\Fiap.TechChallenge.Api.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Events\" />
-	</ItemGroup>
-
 </Project>

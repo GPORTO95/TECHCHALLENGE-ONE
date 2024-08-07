@@ -1,13 +1,49 @@
-var builder = WebApplication.CreateBuilder(args);
+using Fiap.TechChallenge.API.Infrastructure;
+using Fiap.TechChallenge.Application;
+using Fiap.TechChallenge.Atualizacao.API;
+using Fiap.TechChallenge.Atualizacao.Repositories;
+using Fiap.TechChallenge.Infrastructure;
+using Fiap.TechChallenge.Infrastructure.Data;
+using Fiap.TechChallenge.Kernel.Ddds;
+using System.Reflection;
 
-// Add services to the container.
+string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200");
+                      });
+});
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
-var app = builder.Build();
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
+
+builder.Services
+    .AddContatoApplication()
+    .AddContatoInfrastructure(builder.Configuration);
+
+builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
+builder.Services.AddScoped<IDddRepository, DddRepository>();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -16,10 +52,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
-app.UseAuthorization();
+app.UseHttpsRedirection();
 
 app.MapControllers();
 
+app.UseExceptionHandler();
+
 app.Run();
+
+public partial class Program;

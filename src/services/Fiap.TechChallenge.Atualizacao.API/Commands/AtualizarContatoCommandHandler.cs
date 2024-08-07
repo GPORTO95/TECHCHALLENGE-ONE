@@ -1,5 +1,7 @@
 ﻿using Fiap.TechChallenge.Application.Abstractions.Data;
+using Fiap.TechChallenge.Application.Abstractions.EventBus;
 using Fiap.TechChallenge.Application.Abstractions.Messaging;
+using Fiap.TechChallenge.Atualizacao.API.Events;
 using Fiap.TechChallenge.Atualizacao.Repositories;
 using Fiap.TechChallenge.Kernel;
 using Fiap.TechChallenge.Kernel.Contatos;
@@ -9,15 +11,13 @@ namespace Fiap.TechChallenge.Atualizacao.API.Commands;
 
 internal sealed class AtualizarContatoCommandHandler(
     IContatoRepository contatoRepository,
-    IDddRepository dddRepository)
+    IDddRepository dddRepository,
+    IEventBus bus)
     : ICommandHandler<AtualizarContatoCommand>
 {
-    private readonly IContatoRepository _contatoRepository = contatoRepository;
-    private readonly IDddRepository _dddRepository = dddRepository;
-
     public async Task<Result> Handle(AtualizarContatoCommand request, CancellationToken cancellationToken)
     {
-        Contato? contato = await _contatoRepository.ObterPorIdAsync(request.ContatoId, cancellationToken);
+        Contato? contato = await contatoRepository.ObterPorIdAsync(request.ContatoId, cancellationToken);
 
         if (contato is null)
         {
@@ -67,7 +67,7 @@ internal sealed class AtualizarContatoCommandHandler(
             return Result.Failure<Guid>(codigoRegiaoResult.Error);
         }
 
-        Guid dddId = await _dddRepository.ObterPorCodigoAsync(codigoRegiaoResult.Value, cancellationToken);
+        Guid dddId = await dddRepository.ObterPorCodigoAsync(codigoRegiaoResult.Value, cancellationToken);
 
         if (dddId == Guid.Empty)
         {
@@ -79,9 +79,7 @@ internal sealed class AtualizarContatoCommandHandler(
             contato.AtualizarDdd(dddId);
         }
 
-        //_contatoRepository.Atualizar(contato);
-
-        //await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await bus.PublishAsync(new ContatoAtualizadoEvent(contato), cancellationToken);
 
         return Result.Success();
     }
