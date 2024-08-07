@@ -11,15 +11,9 @@ using Integration.BaseTests.Extensions;
 
 namespace Api.IntegrationTests.Contatos;
 
-public class ListarContatoTests : BaseFunctionalTests
+public class ListarContatoTests(FunctionalTestWebAppFactory factory) : BaseFunctionalTests(factory)
 {
-    private readonly ContatoFixture _contatoFixture;
-
-    public ListarContatoTests(FunctionalTestWebAppFactory factory)
-        : base(factory)
-    {
-        _contatoFixture = new(factory._msSqlContainer.GetConnectionString());
-    }
+    private readonly ContatoFixture _contatoFixture = new(factory._msSqlContainer.GetConnectionString());
 
     [Fact(DisplayName = "Obter lista filtrada")]
     public async Task Deve_RetornarOk_QuandoListaFiltrada()
