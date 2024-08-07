@@ -1,5 +1,6 @@
 @URL = http://localhost:5250
 
+### NoContent | Enviado para fila
 PUT {{URL}}/api/contatos/
 Content-Type: application/json
 
@@ -11,4 +12,74 @@ Content-Type: application/json
     "ddd": "11"
 }
 
-###
+### NotFound | Contato não encontrado
+PUT {{URL}}/api/contatos/
+Content-Type: application/json
+
+{
+    "contatoId": "8ddbbdbe-7cdd-4c96-ba6c-5c8e1eb2c44a",
+    "email": "teste.update@newemail.com",
+    "nome": "Nome Teste Update",
+    "telefone": "987654325",
+    "ddd": "11"
+}
+
+### BadRequest | Nome inválido
+PUT {{URL}}/api/contatos/
+Content-Type: application/json
+
+{
+    "contatoId": "5f22db3b-faa9-4d4a-b6bf-57909bc20318",
+    "email": "teste.update@newemail.com",
+    "nome": "Nome",
+    "telefone": "987654325",
+    "ddd": "11"
+}
+
+### BadRequest | Email inválido
+PUT {{URL}}/api/contatos/
+Content-Type: application/json
+
+{
+    "contatoId": "5f22db3b-faa9-4d4a-b6bf-57909bc20318",
+    "email": "teste.update@newemail",
+    "nome": "Nome Update",
+    "telefone": "987654325",
+    "ddd": "11"
+}
+
+### BadRequest | Telefone inválido
+PUT {{URL}}/api/contatos/
+Content-Type: application/json
+
+{
+    "contatoId": "5f22db3b-faa9-4d4a-b6bf-57909bc20318",
+    "email": "teste.update@newemail.com",
+    "nome": "Nome Update",
+    "telefone": "98765432",
+    "ddd": "11"
+}
+
+### BadRequest | Ddd inválido
+PUT {{URL}}/api/contatos/
+Content-Type: application/json
+
+{
+    "contatoId": "5f22db3b-faa9-4d4a-b6bf-57909bc20318",
+    "email": "teste.update@newemail.com",
+    "nome": "Nome Update",
+    "telefone": "987654321",
+    "ddd": "1"
+}
+
+### NotFound | Ddd não encontrado
+PUT {{URL}}/api/contatos/
+Content-Type: application/json
+
+{
+    "contatoId": "5f22db3b-faa9-4d4a-b6bf-57909bc20318",
+    "email": "teste.update@newemail.com",
+    "nome": "Nome Update",
+    "telefone": "987654321",
+    "ddd": "00"
+}
