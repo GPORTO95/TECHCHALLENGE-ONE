@@ -1,7 +1,5 @@
 ﻿using Fiap.TechChallenge.Application.Abstractions.Data;
-using Fiap.TechChallenge.Application.Abstractions.EventBus;
 using Fiap.TechChallenge.Infrastructure.Data;
-using Fiap.TechChallenge.Infrastructure.MessageBroker;
 using Fiap.TechChallenge.Kernel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,8 +13,6 @@ public static class DependencyInjection
     {
         AddRepositories(services, configuration);
 
-        AddEventBus(services);
-
         return services;
     }
 
@@ -29,10 +25,5 @@ public static class DependencyInjection
             (sp, options) => options.UseSqlServer(connectionString));
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
-    }
-
-    private static void AddEventBus(IServiceCollection services)
-    {
-        services.AddTransient<IEventBus, EventBus>();
     }
 }

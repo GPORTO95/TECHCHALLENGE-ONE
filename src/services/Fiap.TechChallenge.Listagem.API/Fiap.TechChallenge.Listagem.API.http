@@ -1,6 +1,11 @@
-@Fiap.TechChallenge.Listagem.API_HostAddress = http://localhost:5138
+@URL = http://localhost:5138
 
-GET {{Fiap.TechChallenge.Listagem.API_HostAddress}}/weatherforecast/
+GET {{URL}}/api/contatos
+Accept: application/json
+
+###
+
+GET {{URL}}/api/contatos?ddd=85
 Accept: application/json
 
 ###

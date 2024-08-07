@@ -1,4 +1,5 @@
-﻿using Fiap.TechChallenge.Cadastro.API.Events;
+﻿using Fiap.TechChallenge.Application.Abstractions.EventBus;
+using Fiap.TechChallenge.Cadastro.API.Events;
 using Fiap.TechChallenge.Infrastructure.MessageBroker;
 using FluentValidation;
 using MassTransit;
@@ -43,6 +44,8 @@ public static class DependencyInjection
                 configurator.ConfigureEndpoints(context);
             });
         });
+
+        services.AddTransient<IEventBus, EventBus>();
 
         return services;
     }
