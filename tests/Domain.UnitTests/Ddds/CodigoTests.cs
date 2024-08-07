@@ -1,4 +1,4 @@
-﻿using Fiap.TechChallenge.One.Domain.Ddds;
+﻿using Fiap.TechChallenge.Kernel.Ddds;
 using FluentAssertions;
 
 namespace Domain.UnitTests.Ddds;

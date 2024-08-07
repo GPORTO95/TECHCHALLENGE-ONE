@@ -1,4 +1,4 @@
-﻿using Fiap.TechChallenge.One.Domain.Contatos;
+﻿using Fiap.TechChallenge.Kernel.Contatos;
 using FluentAssertions;
 
 namespace Domain.TestsUnits.Contatos;

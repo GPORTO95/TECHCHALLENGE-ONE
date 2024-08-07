@@ -21,7 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Fiap.TechChallenge.One.Domain\Fiap.TechChallenge.One.Domain.csproj" />
+	  <ProjectReference Include="..\..\src\blocks\Fiap.TechChallenge.Kernel\Fiap.TechChallenge.Kernel.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
