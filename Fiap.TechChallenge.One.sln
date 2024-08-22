@@ -59,6 +59,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Listagem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.BaseTests", "tests\Integration.BaseTests\Integration.BaseTests.csproj", "{7182F189-D97B-43CF-BE75-AFD4DDECE6E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cadastro", "Cadastro", "{5BD3ED6E-EDBF-450E-B9A9-6EA06004F7A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Cadastro.UnitTests", "tests\Fiap.TechChallenge.Cadastro.UnitTests\Fiap.TechChallenge.Cadastro.UnitTests.csproj", "{C0E6D59E-F08C-4082-A331-898ECDBCA1AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +145,10 @@ Global
 		{7182F189-D97B-43CF-BE75-AFD4DDECE6E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7182F189-D97B-43CF-BE75-AFD4DDECE6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7182F189-D97B-43CF-BE75-AFD4DDECE6E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0E6D59E-F08C-4082-A331-898ECDBCA1AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0E6D59E-F08C-4082-A331-898ECDBCA1AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0E6D59E-F08C-4082-A331-898ECDBCA1AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0E6D59E-F08C-4082-A331-898ECDBCA1AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,6 +179,8 @@ Global
 		{B6CCF6D7-C8C3-4AFF-8848-DB9A7143D214} = {3605DCC1-2802-4FE0-B727-46E775FD8DFB}
 		{48595325-BABA-45C8-A80D-A2FA5E994D91} = {3605DCC1-2802-4FE0-B727-46E775FD8DFB}
 		{7182F189-D97B-43CF-BE75-AFD4DDECE6E1} = {8EC14828-C4B2-41B3-A211-453035CBE632}
+		{5BD3ED6E-EDBF-450E-B9A9-6EA06004F7A5} = {8EC14828-C4B2-41B3-A211-453035CBE632}
+		{C0E6D59E-F08C-4082-A331-898ECDBCA1AC} = {5BD3ED6E-EDBF-450E-B9A9-6EA06004F7A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A395344-7865-4074-B5EB-CF130E9C451E}
