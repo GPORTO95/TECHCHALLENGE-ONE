@@ -45,86 +45,86 @@ public class CriarContatoCommandTests
             Arg.Any<CancellationToken>());
     }
 
-    //[Fact]
-    //public async Task Handle_Deve_RetornarErro_QuandoEmailEhInvalido()
-    //{
-    //    // Arrange
-    //    CriarContatoCommand emailInvalidoCommand = Command with
-    //    {
-    //        Email = "teste@test"
-    //    };
+    [Fact]
+    public async Task Handle_Deve_RetornarErro_QuandoEmailEhInvalido()
+    {
+        // Arrange
+        CriarContatoCommand emailInvalidoCommand = Command with
+        {
+            Email = "teste@test"
+        };
 
-    //    // Act
-    //    var result = await _handler.Handle(emailInvalidoCommand, default);
+        // Act
+        var result = await _handler.Handle(emailInvalidoCommand, default);
 
-    //    // Assert
-    //    result.IsFailure.Should().BeTrue();
-    //    result.Error.Should().Be(EmailErrors.FormatoInvalido);
-    //}
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(EmailErrors.FormatoInvalido);
+    }
 
-    //[Fact]
-    //public async Task Handle_Deve_RetornarErro_QuandoNomeEhInvalido()
-    //{
-    //    // Arrange
-    //    CriarContatoCommand nomeInvalidoCommand = Command with
-    //    {
-    //        Nome = "Gabriel T3ste"
-    //    };
+    [Fact]
+    public async Task Handle_Deve_RetornarErro_QuandoNomeEhInvalido()
+    {
+        // Arrange
+        CriarContatoCommand nomeInvalidoCommand = Command with
+        {
+            Nome = "Gabriel T3ste"
+        };
 
-    //    // Act
-    //    var result = await _handler.Handle(nomeInvalidoCommand, default);
+        // Act
+        var result = await _handler.Handle(nomeInvalidoCommand, default);
 
-    //    // Assert
-    //    result.IsFailure.Should().BeTrue();
-    //    result.Error.Should().Be(NomeErrors.FormatoInvalido);
-    //}
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(NomeErrors.FormatoInvalido);
+    }
 
-    //[Fact]
-    //public async Task Handle_Deve_RetornarErro_QuandoTelefoneEhInvalido()
-    //{
-    //    // Arrange
-    //    CriarContatoCommand telefoneInvalido = Command with
-    //    {
-    //        Telefone = "9765490A1"
-    //    };
+    [Fact]
+    public async Task Handle_Deve_RetornarErro_QuandoTelefoneEhInvalido()
+    {
+        // Arrange
+        CriarContatoCommand telefoneInvalido = Command with
+        {
+            Telefone = "9765490A1"
+        };
 
-    //    // Act
-    //    var result = await _handler.Handle(telefoneInvalido, default);
+        // Act
+        var result = await _handler.Handle(telefoneInvalido, default);
 
-    //    // Assert
-    //    result.IsFailure.Should().BeTrue();
-    //    result.Error.Should().Be(TelefoneErrors.FormatoInvalido);
-    //}
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(TelefoneErrors.FormatoInvalido);
+    }
 
-    //[Fact]
-    //public async Task Handle_Deve_RetornarErro_QuandoDddNaoEhValido()
-    //{
-    //    // Arrange
-    //    CriarContatoCommand dddInvalido = Command with
-    //    {
-    //        Ddd = "1a"
-    //    };
+    [Fact]
+    public async Task Handle_Deve_RetornarErro_QuandoDddNaoEhValido()
+    {
+        // Arrange
+        CriarContatoCommand dddInvalido = Command with
+        {
+            Ddd = "1a"
+        };
 
-    //    // Act
-    //    var result = await _handler.Handle(dddInvalido, default);
+        // Act
+        var result = await _handler.Handle(dddInvalido, default);
 
-    //    // Assert
-    //    result.IsFailure.Should().BeTrue();
-    //    result.Error.Should().Be(CodigoErrors.ValorInvalido);
-    //}
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(CodigoErrors.ValorInvalido);
+    }
 
-    //[Fact]
-    //public async Task Handle_Deve_RetornarErro_QuandoDddNaoExiste()
-    //{
-    //    // Arrange
-    //    _dddRepositoryMock.ObterPorCodigoAsync(Arg.Is<Codigo>(e => e == Codigo.Criar(Command.Ddd).Value), Arg.Any<CancellationToken>())
-    //        .Returns(Guid.Empty);
+    [Fact]
+    public async Task Handle_Deve_RetornarErro_QuandoDddNaoExiste()
+    {
+        // Arrange
+        _dddRepositoryMock.ObterPorCodigoAsync(Arg.Is<Codigo>(e => e == Codigo.Criar(Command.Ddd).Value), Arg.Any<CancellationToken>())
+            .Returns(Guid.Empty);
 
-    //    // Act
-    //    var result = await _handler.Handle(Command, default);
+        // Act
+        var result = await _handler.Handle(Command, default);
 
-    //    // Assert
-    //    result.IsFailure.Should().BeTrue();
-    //    result.Error.Should().Be(DddErrors.CodigoNaoEncontrado(Command.Ddd));
-    //}
+        // Assert
+        result.IsFailure.Should().BeTrue();
+        result.Error.Should().Be(DddErrors.CodigoNaoEncontrado(Command.Ddd));
+    }
 }
