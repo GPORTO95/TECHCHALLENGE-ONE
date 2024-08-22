@@ -24,4 +24,10 @@
 		<ProjectReference Include="..\..\blocks\Fiap.TechChallenge.Api\Fiap.TechChallenge.Api.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>Fiap.TechChallenge.Atualizacao.UnitTests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
 </Project>

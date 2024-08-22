@@ -1,11 +1,13 @@
-﻿using Fiap.TechChallenge.One.Application.Abstractions.Data;
-using Fiap.TechChallenge.One.Application.Contatos.Atualizar;
-using Fiap.TechChallenge.One.Domain.Contatos;
-using Fiap.TechChallenge.One.Domain.Ddds;
+﻿using Fiap.TechChallenge.Application.Abstractions.EventBus;
+using Fiap.TechChallenge.Atualizacao.API.Commands;
+using Fiap.TechChallenge.Kernel.Contatos;
+using Fiap.TechChallenge.Kernel.Ddds;
 using FluentAssertions;
 using NSubstitute;
+using Fiap.TechChallenge.Atualizacao.Repositories;
+using Fiap.TechChallenge.Atualizacao.API.Events;
 
-namespace Application.UnitTests.Contatos;
+namespace Fiap.TechChallenge.Cadastro.UnitTests;
 
 public class AtualizarContatoCommandTests
 {
@@ -24,16 +26,16 @@ public class AtualizarContatoCommandTests
 
     private readonly AtualizarContatoCommandHandler _handler;
     private readonly IContatoRepository _contatoRepositoryMock;
-    private readonly IUnitOfWork _unitOfWorkMock;
     private readonly IDddRepository _dddRepositoryMock;
+    private readonly IEventBus _busMock;
 
     public AtualizarContatoCommandTests()
     {
         _contatoRepositoryMock = Substitute.For<IContatoRepository>();
-        _unitOfWorkMock = Substitute.For<IUnitOfWork>();
+        _busMock = Substitute.For<IEventBus>();
         _dddRepositoryMock = Substitute.For<IDddRepository>();
 
-        _handler = new(_contatoRepositoryMock, _unitOfWorkMock, _dddRepositoryMock);
+        _handler = new(_contatoRepositoryMock, _dddRepositoryMock, _busMock);
     }
 
     [Fact]
@@ -54,8 +56,8 @@ public class AtualizarContatoCommandTests
         // Assert
         result.IsSuccess.Should().BeTrue();
 
-        _contatoRepositoryMock.Received(1).Atualizar(Arg.Is<Contato>(u => u.Id == Contato.Id));
-        await _unitOfWorkMock.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
+        await _busMock.Received(1).PublishAsync(
+            Arg.Any<ContatoAtualizadoEvent>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]

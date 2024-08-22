@@ -1,5 +1,4 @@
-﻿using Fiap.TechChallenge.Application.Abstractions.Data;
-using Fiap.TechChallenge.Application.Abstractions.EventBus;
+﻿using Fiap.TechChallenge.Application.Abstractions.EventBus;
 using Fiap.TechChallenge.Application.Abstractions.Messaging;
 using Fiap.TechChallenge.Atualizacao.API.Events;
 using Fiap.TechChallenge.Atualizacao.Repositories;
