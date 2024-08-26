@@ -1,11 +1,13 @@
-﻿using Fiap.TechChallenge.One.Application.Abstractions.Data;
-using Fiap.TechChallenge.One.Application.Contatos.Excluir;
-using Fiap.TechChallenge.One.Domain.Contatos;
-using Fiap.TechChallenge.One.Domain.Kernel;
+﻿using Fiap.TechChallenge.Application.Abstractions.EventBus;
+using Fiap.TechChallenge.Exclusao.API.Commands;
+using Fiap.TechChallenge.Exclusao.API.Events;
+using Fiap.TechChallenge.Exclusao.API.Repositories;
+using Fiap.TechChallenge.Kernel;
+using Fiap.TechChallenge.Kernel.Contatos;
 using FluentAssertions;
 using NSubstitute;
 
-namespace Application.UnitTests.Contatos;
+namespace Fiap.TechChallenge.Exclusao.UnitTests;
 
 public class ExcluirContatoCommandTests
 {
@@ -13,14 +15,14 @@ public class ExcluirContatoCommandTests
 
     private readonly ExcluirContatoCommandHandler _handler;
     private readonly IContatoRepository _contatoRepositoryMock;
-    private readonly IUnitOfWork _unitOfWorkMock;
+    private readonly IEventBus _busMock;
 
     public ExcluirContatoCommandTests()
     {
         _contatoRepositoryMock = Substitute.For<IContatoRepository>();
-        _unitOfWorkMock = Substitute.For<IUnitOfWork>();
+        _busMock = Substitute.For<IEventBus>();
 
-        _handler = new(_contatoRepositoryMock, _unitOfWorkMock);
+        _handler = new(_contatoRepositoryMock, _busMock);
     }
 
     [Fact]
@@ -59,7 +61,8 @@ public class ExcluirContatoCommandTests
 
         // Assert
         result.IsSuccess.Should().BeTrue();
-        _contatoRepositoryMock.Received(1).Excluir(Arg.Is<Contato>(u => u.Id == contato.Id));
-        await _unitOfWorkMock.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
+        await _busMock.Received(1).PublishAsync(
+            Arg.Any<ContatoExcluidoEvent>(),
+            Arg.Any<CancellationToken>());
     }
 }
