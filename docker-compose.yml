@@ -1,17 +1,18 @@
 version: '3.4'
 
 services:
-  fiap.techchallenge.one.api:
-    image: ${DOCKER_REGISTRY-}fiaptechchallengeoneapi
-    container_name: techchallenge.api
+  fiap.techchallenge.api.cadastro:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeapicadastro
+    container_name: techchallenge.api.cadastro
     build:
       context: .
-      dockerfile: src/Fiap.TechChallenge.One.API/Dockerfile
+      dockerfile: src/services/Fiap.TechChallenge.Cadastro.API/Dockerfile
     ports:
       - "5000:5000"
     ##  - "5001:5001"
     depends_on:
       - techchallenge-database
+      - techchallenge-rabbitmq
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -28,22 +29,36 @@ services:
       SA_PASSWORD: "1q2w3e4r@#$"
       ACCEPT_EULA: "Y"
 
-  prometheus:
-    image: prom/prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3000:3000"
+  techchallenge-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: techchallenge.rabbitmq
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - 5672:5672
+      - 15672:15672
     volumes:
-      - ./grafana:/var/lib/grafana
-    depends_on:
-      - prometheus 
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+  # prometheus:
+  #   image: prom/prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=admin
+  #   volumes:
+  #     - ./grafana:/var/lib/grafana
+  #   depends_on:
+  #     - prometheus 
