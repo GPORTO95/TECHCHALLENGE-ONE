@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Http.Json;
 using Integration.BaseTests.Extensions;
 
-namespace Api.IntegrationTests.Contatos;
+namespace Fiap.TechChallenge.Listagem.IntegrationTests;
 
 public class ListarContatoTests(FunctionalTestWebAppFactory factory) : BaseFunctionalTests(factory)
 {

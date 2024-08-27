@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Exclusao
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Exclusao.IntegrationTests", "tests\Fiap.TechChallenge.Exclusao.IntegrationTests\Fiap.TechChallenge.Exclusao.IntegrationTests.csproj", "{E14711EE-CF5D-481B-8AE8-074A13CEFB04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Cadastro.IntegrationTests", "tests\Fiap.TechChallenge.Cadastro.IntegrationTests\Fiap.TechChallenge.Cadastro.IntegrationTests.csproj", "{A9E5D376-A8A4-45D7-A617-3971344DF18D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{E14711EE-CF5D-481B-8AE8-074A13CEFB04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E14711EE-CF5D-481B-8AE8-074A13CEFB04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E14711EE-CF5D-481B-8AE8-074A13CEFB04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E5D376-A8A4-45D7-A617-3971344DF18D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E5D376-A8A4-45D7-A617-3971344DF18D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E5D376-A8A4-45D7-A617-3971344DF18D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E5D376-A8A4-45D7-A617-3971344DF18D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,6 +207,7 @@ Global
 		{2373E2FD-B31A-48F9-BEBD-19AC6F655539} = {8EC14828-C4B2-41B3-A211-453035CBE632}
 		{6A466F0F-5289-41F1-AFC2-1469D146D3DD} = {2373E2FD-B31A-48F9-BEBD-19AC6F655539}
 		{E14711EE-CF5D-481B-8AE8-074A13CEFB04} = {2373E2FD-B31A-48F9-BEBD-19AC6F655539}
+		{A9E5D376-A8A4-45D7-A617-3971344DF18D} = {5BD3ED6E-EDBF-450E-B9A9-6EA06004F7A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A395344-7865-4074-B5EB-CF130E9C451E}

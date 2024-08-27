@@ -1,14 +1,14 @@
-﻿using Api.IntegrationTests.Abstractions;
-using Api.IntegrationTests.Contracts;
-using Api.IntegrationTests.Extensions;
-using Fiap.TechChallenge.One.Application.Contatos.Criar;
-using Fiap.TechChallenge.One.Domain.Contatos;
-using Fiap.TechChallenge.One.Domain.Ddds;
+﻿using Fiap.TechChallenge.Cadastro.API.Commands;
+using Fiap.TechChallenge.Cadastro.IntegrationTests.Abstractions;
+using Fiap.TechChallenge.Kernel.Contatos;
 using FluentAssertions;
+using Integration.BaseTests.Contracts;
 using System.Net;
 using System.Net.Http.Json;
+using Integration.BaseTests.Extensions;
+using Fiap.TechChallenge.Kernel.Ddds;
 
-namespace Api.IntegrationTests.Contatos;
+namespace Fiap.TechChallenge.Cadastro.IntegrationTests;
 
 public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFunctionalTests(factory)
 {
@@ -21,7 +21,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Email = "" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -38,7 +38,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Email = "invalido" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -55,7 +55,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Nome = "" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -72,7 +72,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Nome = "Teste" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -89,7 +89,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Nome = "Teste 123" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -106,7 +106,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Telefone = "" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -123,7 +123,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Telefone = "9875423A2" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -140,7 +140,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Telefone = "98754232" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -157,7 +157,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Ddd = "" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -174,7 +174,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Ddd = "1" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -191,7 +191,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Ddd = "1A" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -208,7 +208,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
         CriarContatoCommand request = Command with { Ddd = "00" };
 
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", request);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", request);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -223,7 +223,7 @@ public class CriarContatoTests(FunctionalTestWebAppFactory factory) : BaseFuncti
     {
         // Arrange
         // Act
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", Command);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", Command);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -238,7 +238,7 @@ public static class ContatoFixture
 {
     public static async Task<Guid> CriarContato(HttpClient HttpClient, string ddd = "11")
     {
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/v1/contatos", new CriarContatoCommand("email@teste.com", "Nome Completo", "954123214", ddd));
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/contatos", new CriarContatoCommand("email@teste.com", "Nome Completo", "954123214", ddd));
 
         Guid contatoId = await response.Content.ReadFromJsonAsync<Guid>();
 

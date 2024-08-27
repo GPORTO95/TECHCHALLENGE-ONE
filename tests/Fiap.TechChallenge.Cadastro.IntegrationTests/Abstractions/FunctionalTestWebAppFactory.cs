@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Testcontainers.MsSql;
 using Testcontainers.RabbitMq;
 
-namespace Fiap.TechChallenge.Exclusao.IntegrationTests.Abstractions;
+namespace Fiap.TechChallenge.Cadastro.IntegrationTests.Abstractions;
 
 public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
