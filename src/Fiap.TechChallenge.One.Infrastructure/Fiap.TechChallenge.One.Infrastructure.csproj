@@ -14,8 +14,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Fiap.TechChallenge.One.Application\Fiap.TechChallenge.One.Application.csproj" />
-  </ItemGroup>
-
 </Project>

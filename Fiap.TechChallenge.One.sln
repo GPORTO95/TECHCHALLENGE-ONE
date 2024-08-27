@@ -7,15 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{60222516-469
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8EC14828-C4B2-41B3-A211-453035CBE632}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.One.Domain", "src\Fiap.TechChallenge.One.Domain\Fiap.TechChallenge.One.Domain.csproj", "{CC57DB52-5383-4810-AEB9-430F6E7827A4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.UnitTests", "tests\Domain.UnitTests\Domain.UnitTests.csproj", "{56135C3C-CBAF-4C29-AE74-B16EC6C191EF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.One.Application", "src\Fiap.TechChallenge.One.Application\Fiap.TechChallenge.One.Application.csproj", "{B9694ED5-9F7A-49E0-AA46-D83B6E2ADA1B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.One.Infrastructure", "src\Fiap.TechChallenge.One.Infrastructure\Fiap.TechChallenge.One.Infrastructure.csproj", "{42CD5E68-0573-4855-9B05-133E2E291C9D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.One.API", "src\Fiap.TechChallenge.One.API\Fiap.TechChallenge.One.API.csproj", "{8ED16DFA-E569-40EC-8082-D15F77F6503B}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B5B349F3-00A4-4DEB-991C-90DBD1C22A57}"
 EndProject
@@ -65,13 +57,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Atualiza
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exclusao", "Exclusao", "{2373E2FD-B31A-48F9-BEBD-19AC6F655539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Exclusao.UnitTests", "tests\Fiap.TechChallenge.Exclusao.UnitTests\Fiap.TechChallenge.Exclusao.UnitTests.csproj", "{6A466F0F-5289-41F1-AFC2-1469D146D3DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Exclusao.UnitTests", "tests\Fiap.TechChallenge.Exclusao.UnitTests\Fiap.TechChallenge.Exclusao.UnitTests.csproj", "{6A466F0F-5289-41F1-AFC2-1469D146D3DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Exclusao.IntegrationTests", "tests\Fiap.TechChallenge.Exclusao.IntegrationTests\Fiap.TechChallenge.Exclusao.IntegrationTests.csproj", "{E14711EE-CF5D-481B-8AE8-074A13CEFB04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Exclusao.IntegrationTests", "tests\Fiap.TechChallenge.Exclusao.IntegrationTests\Fiap.TechChallenge.Exclusao.IntegrationTests.csproj", "{E14711EE-CF5D-481B-8AE8-074A13CEFB04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Cadastro.IntegrationTests", "tests\Fiap.TechChallenge.Cadastro.IntegrationTests\Fiap.TechChallenge.Cadastro.IntegrationTests.csproj", "{A9E5D376-A8A4-45D7-A617-3971344DF18D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Cadastro.IntegrationTests", "tests\Fiap.TechChallenge.Cadastro.IntegrationTests\Fiap.TechChallenge.Cadastro.IntegrationTests.csproj", "{A9E5D376-A8A4-45D7-A617-3971344DF18D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.TechChallenge.Atualizacao.IntegrationTests", "tests\Fiap.TechChallenge.Atualizacao.IntegrationTests\Fiap.TechChallenge.Atualizacao.IntegrationTests.csproj", "{BB1FAF0F-8D5A-4229-9F87-981B2EE24BBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.TechChallenge.Atualizacao.IntegrationTests", "tests\Fiap.TechChallenge.Atualizacao.IntegrationTests\Fiap.TechChallenge.Atualizacao.IntegrationTests.csproj", "{BB1FAF0F-8D5A-4229-9F87-981B2EE24BBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,26 +71,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CC57DB52-5383-4810-AEB9-430F6E7827A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC57DB52-5383-4810-AEB9-430F6E7827A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC57DB52-5383-4810-AEB9-430F6E7827A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC57DB52-5383-4810-AEB9-430F6E7827A4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56135C3C-CBAF-4C29-AE74-B16EC6C191EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56135C3C-CBAF-4C29-AE74-B16EC6C191EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56135C3C-CBAF-4C29-AE74-B16EC6C191EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56135C3C-CBAF-4C29-AE74-B16EC6C191EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9694ED5-9F7A-49E0-AA46-D83B6E2ADA1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9694ED5-9F7A-49E0-AA46-D83B6E2ADA1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9694ED5-9F7A-49E0-AA46-D83B6E2ADA1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9694ED5-9F7A-49E0-AA46-D83B6E2ADA1B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42CD5E68-0573-4855-9B05-133E2E291C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42CD5E68-0573-4855-9B05-133E2E291C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42CD5E68-0573-4855-9B05-133E2E291C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42CD5E68-0573-4855-9B05-133E2E291C9D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8ED16DFA-E569-40EC-8082-D15F77F6503B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8ED16DFA-E569-40EC-8082-D15F77F6503B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8ED16DFA-E569-40EC-8082-D15F77F6503B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8ED16DFA-E569-40EC-8082-D15F77F6503B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B5B349F3-00A4-4DEB-991C-90DBD1C22A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5B349F3-00A4-4DEB-991C-90DBD1C22A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5B349F3-00A4-4DEB-991C-90DBD1C22A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -176,11 +152,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CC57DB52-5383-4810-AEB9-430F6E7827A4} = {60222516-4696-41F1-BC3A-A8E0709FB662}
 		{56135C3C-CBAF-4C29-AE74-B16EC6C191EF} = {8EC14828-C4B2-41B3-A211-453035CBE632}
-		{B9694ED5-9F7A-49E0-AA46-D83B6E2ADA1B} = {60222516-4696-41F1-BC3A-A8E0709FB662}
-		{42CD5E68-0573-4855-9B05-133E2E291C9D} = {60222516-4696-41F1-BC3A-A8E0709FB662}
-		{8ED16DFA-E569-40EC-8082-D15F77F6503B} = {60222516-4696-41F1-BC3A-A8E0709FB662}
 		{E207707A-9D39-40BA-87CB-6873CAC77B40} = {60222516-4696-41F1-BC3A-A8E0709FB662}
 		{59F94796-33F8-4DA7-B09F-443D9BDD170F} = {60222516-4696-41F1-BC3A-A8E0709FB662}
 		{4EE56401-2060-45CA-8A3C-F043E265DCEE} = {E207707A-9D39-40BA-87CB-6873CAC77B40}
