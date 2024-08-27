@@ -6,10 +6,13 @@ namespace Fiap.TechChallenge.Atualizacao.API.Events;
 
 internal sealed class ContatoAtualizadoEventConsumer(
     IContatoRepository contatoRepository,
-    IUnitOfWork unitOfWork) : IConsumer<ContatoAtualizadoEvent>
+    IUnitOfWork unitOfWork,
+    ILogger<ContatoAtualizadoEventConsumer> logger) : IConsumer<ContatoAtualizadoEvent>
 {
     public async Task Consume(ConsumeContext<ContatoAtualizadoEvent> context)
     {
+        logger.LogInformation("Mensagem recebida de atualização de Contato");
+
         contatoRepository.Atualizar(context.Message.Contato);
 
         await unitOfWork.SaveChangesAsync(context.CancellationToken);

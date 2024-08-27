@@ -17,6 +17,22 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
 
+  fiap.techchallenge.api.atualizacao:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeapiatualizacao
+    container_name: techchallenge.api.atualizacao
+    build:
+      context: .
+      dockerfile: src/services/Fiap.TechChallenge.Atualizacao.API/Dockerfile
+    ports:
+      - "5100:5100"
+    ##  - "5001:5001"
+    depends_on:
+      - techchallenge-database
+      - techchallenge-rabbitmq
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
   techchallenge-database:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: techchallenge.database
