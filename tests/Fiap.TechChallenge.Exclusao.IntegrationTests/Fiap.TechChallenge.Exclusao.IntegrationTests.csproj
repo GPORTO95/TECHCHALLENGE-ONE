@@ -10,23 +10,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentAssertions" Version="6.12.0" />
+		<PackageReference Include="Bogus" Version="35.5.1" />
 		<PackageReference Include="coverlet.collector" Version="6.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.7" />
-		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-		<PackageReference Include="Testcontainers.RabbitMq" Version="3.9.0" />
 		<PackageReference Include="xunit" Version="2.5.3" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
-		<PackageReference Include="Testcontainers.MsSql" Version="3.9.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\blocks\Fiap.TechChallenge.Kernel\Fiap.TechChallenge.Kernel.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Using Include="Xunit" />
+		<ProjectReference Include="..\..\src\services\Fiap.TechChallenge.Exclusao.API\Fiap.TechChallenge.Exclusao.API.csproj" />
+		<ProjectReference Include="..\Integration.BaseTests\Integration.BaseTests.csproj" />
 	</ItemGroup>
 
 </Project>
