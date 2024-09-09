@@ -33,6 +33,38 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
 
+  fiap.techchallenge.api.exclusao:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeapiexclusao
+    container_name: techchallenge.api.exclusao
+    build:
+      context: .
+      dockerfile: src/services/Fiap.TechChallenge.Exclusao.API/Dockerfile
+    ports:
+      - "5200:5200"
+    ##  - "5001:5001"
+    depends_on:
+      - techchallenge-database
+      - techchallenge-rabbitmq
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  fiap.techchallenge.api.listagem:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeapilistagem
+    container_name: techchallenge.api.listagem
+    build:
+      context: .
+      dockerfile: src/services/Fiap.TechChallenge.Listagem.API/Dockerfile
+    ports:
+      - "5300:5300"
+    ##  - "5001:5001"
+    depends_on:
+      - techchallenge-database
+      - techchallenge-rabbitmq
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
   techchallenge-database:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: techchallenge.database
