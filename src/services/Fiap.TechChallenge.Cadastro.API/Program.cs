@@ -7,6 +7,7 @@ using Fiap.TechChallenge.Infrastructure.Data;
 using Fiap.TechChallenge.Kernel.Ddds;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Prometheus;
 
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -64,6 +65,10 @@ if (app.Environment.IsDevelopment())
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
+
+app.UseMetricServer();
+
+app.UseHttpMetrics();
 
 app.MapControllers();
 
