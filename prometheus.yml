@@ -1,6 +1,19 @@
 global:
-  scrape_interval: 10s 
+  scrape_interval: 20s
+
 scrape_configs:
-  - job_name: 'Challenge-Fiap'
+  - job_name: 'fiap-techchallenge-api-cadastro'
     static_configs:
-    - targets: ['fiap.techchallenge.one.api:8080']
+      - targets: ['techchallenge.api.cadastro:8080']
+
+  - job_name: 'fiap-techchallenge-api-atualizacao'
+    static_configs:
+      - targets: ['techchallenge.api.atualizacao:8082']
+
+  - job_name: 'fiap-techchallenge-api-exclusao'
+    static_configs:
+      - targets: ['techchallenge.api.exclusao:8083']
+
+  - job_name: 'fiap-techchallenge-api-listagem'
+    static_configs:
+      - targets: ['techchallenge.api.listagem:8084']

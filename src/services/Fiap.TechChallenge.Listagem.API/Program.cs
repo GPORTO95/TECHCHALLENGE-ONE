@@ -61,9 +61,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection(); 
+}
+
 app.UseCors(MyAllowSpecificOrigins);
 
-app.UseHttpsRedirection();
+app.MapMetrics();
 
 app.UseMetricServer();
 
