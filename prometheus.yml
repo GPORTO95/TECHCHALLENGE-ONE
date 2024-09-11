@@ -8,12 +8,12 @@ scrape_configs:
 
   - job_name: 'fiap-techchallenge-api-atualizacao'
     static_configs:
-      - targets: ['techchallenge.api.atualizacao:8082']
+      - targets: ['techchallenge.api.atualizacao:8081']
 
   - job_name: 'fiap-techchallenge-api-exclusao'
     static_configs:
-      - targets: ['techchallenge.api.exclusao:8083']
+      - targets: ['techchallenge.api.exclusao:8082']
 
   - job_name: 'fiap-techchallenge-api-listagem'
     static_configs:
-      - targets: ['techchallenge.api.listagem:8084']
+      - targets: ['techchallenge.api.listagem:8083']

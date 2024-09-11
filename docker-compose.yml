@@ -8,7 +8,7 @@ services:
       dockerfile: src/services/Fiap.TechChallenge.Cadastro.API/Dockerfile
     ports:
       - 5000:5000
-      - 8081:8080
+      - 8080:8080
     depends_on:
       - techchallenge-database
       - techchallenge-rabbitmq
@@ -38,7 +38,7 @@ services:
       dockerfile: src/services/Fiap.TechChallenge.Exclusao.API/Dockerfile
     ports:
       - 5200:5200
-      - 8083:8080
+      - 8082:8080
     depends_on:
       - techchallenge-database
       - techchallenge-rabbitmq
@@ -53,7 +53,7 @@ services:
       dockerfile: src/services/Fiap.TechChallenge.Listagem.API/Dockerfile
     ports:
       - 5300:5300
-      - 8084:8080
+      - 8083:8080
     depends_on:
       - techchallenge-database
       - techchallenge-rabbitmq
