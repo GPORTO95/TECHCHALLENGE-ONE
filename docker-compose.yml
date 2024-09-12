@@ -15,6 +15,9 @@ services:
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - techchallenge-network
+
   fiap.techchallenge.api.atualizacao:
     image: ${DOCKER_REGISTRY-}fiaptechchallengeapiatualizacao
     container_name: techchallenge.api.atualizacao
@@ -30,6 +33,9 @@ services:
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - techchallenge-network
+
   fiap.techchallenge.api.exclusao:
     image: ${DOCKER_REGISTRY-}fiaptechchallengeapiexclusao
     container_name: techchallenge.api.exclusao
@@ -45,6 +51,9 @@ services:
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - techchallenge-network
+
   fiap.techchallenge.api.listagem:
     image: ${DOCKER_REGISTRY-}fiaptechchallengeapilistagem
     container_name: techchallenge.api.listagem
@@ -60,6 +69,9 @@ services:
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - techchallenge-network
+
   techchallenge-database:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: techchallenge.database
@@ -71,6 +83,9 @@ services:
     environment:
       SA_PASSWORD: 1q2w3e4r@#$
       ACCEPT_EULA: Y
+    networks:
+      - techchallenge-network
+
   techchallenge-rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: techchallenge.rabbitmq
@@ -84,6 +99,9 @@ services:
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - techchallenge-network
+
   prometheus:
     image: prom/prometheus
     ports:
@@ -92,6 +110,9 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     command:
       - --config.file=/etc/prometheus/prometheus.yml
+    networks:
+      - techchallenge-network
+
   grafana:
     image: grafana/grafana
     ports:
@@ -102,3 +123,9 @@ services:
       - ./grafana:/var/lib/grafana
     depends_on:
       - prometheus
+    networks:
+      - techchallenge-network
+
+networks:
+  techchallenge-network:
+    driver: bridge
