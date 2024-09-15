@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/GPORTO95/TECHCHALLENGE-ONE/actions/workflows/dotnet.yml/badge.svg)](https://github.com/GPORTO95/TECHCHALLENGE-ONE/actions/workflows/dotnet.yml)
 
-O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil) com testes unitários, integração, github actions e telemetria com prometheus e grafana.
+O objetivo do desafio é construir uma aplicação que seja possível realizar o gerenciamento de contatos, podendo assim, cadastrar, atualizar, excluir e até listar (podendo filtrar por DDD de cada região do Brasil) com testes unitários, integração, github actions, serviço de mensageria(RabbitMQ com MassTransit) permitindo o consumo e o envio de eventos de forma assíncrona usando filas de mensagens e telemetria com Prometheus e Grafana.
 
 ## :film_projector: Vídeo explicativo da aplicação
 Caso deseje obter mais detalhe sobre a aplicação, clique nos links abaixo para ver toda explicação sobre os requisitos, arquitetura, documentação e testes.
@@ -343,3 +343,26 @@ DELETE /api/v1/contatos/{contatoId}
     - Após geração do script, executar o comando `update-database`
 5. Executar o projeto, caso prefira, você pode optar por importar a collection no seu postman que está dentro do projeto na pasta de collections
 6. Caso execute o projeto em modo Debug, na primeira vez será executado um insert inicial com todos os DDDs do Brasil
+
+## :zap: Running - Docker Compose
+1. Clone o projeto do Github para sua maquina local
+2. Acessar a pasta raiz do projeto e identifique o arquivo docker-compose.yml
+3. Execute o comando "docker-compose up --build"
+
+Detalhamento e descrição da execução do arquivo Docker Compose:
+Serviços:
+
+fiap.techchallenge.api.cadastro: Serviço para a API de cadastro.
+fiap.techchallenge.api.atualizacao: Serviço para a API de atualização.
+fiap.techchallenge.api.exclusao: Serviço para a API de exclusão.
+fiap.techchallenge.api.listagem: Serviço para a API de listagem.
+
+techchallenge-database: Serviço de banco de dados SQL Server.
+techchallenge-rabbitmq: Serviço RabbitMQ para gerenciamento de mensagens.
+prometheus: Serviço para monitoramento, usando a imagem prom/prometheus.
+grafana: Serviço para visualização de métricas, usando a imagem grafana/grafana.
+
+Rede:
+techchallenge-network: Rede bridge criada para conectar todos os serviços mencionados. Isso permite que os containers se comuniquem entre si usando o nome do serviço como hostname.
+
+![image](https://github.com/user-attachments/assets/76f5f3c6-1aac-4eca-b000-55f742fe75b6)
