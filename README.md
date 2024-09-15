@@ -10,6 +10,8 @@ Caso deseje obter mais detalhe sobre a aplicação, clique nos links abaixo para
 Fase 1:  [AQUI](https://www.youtube.com/watch?v=0DdQRWMjY_I)
 
 Fase 2:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
+
+Fase 3:  [AQUI](https://www.youtube.com/watch?v=3RNeOU7Tp84)
 ## :stop_sign: Requisitos
 ### Funcionais
 - Cadastrar um contato deve exigir a obrigatoriedade dos campos de Nome, E-mail, Telefone e DDD
