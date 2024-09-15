@@ -352,17 +352,24 @@ DELETE /api/v1/contatos/{contatoId}
 Detalhamento e descrição da execução do arquivo Docker Compose:
 Serviços:
 
-fiap.techchallenge.api.cadastro: Serviço para a API de cadastro.
-fiap.techchallenge.api.atualizacao: Serviço para a API de atualização.
-fiap.techchallenge.api.exclusao: Serviço para a API de exclusão.
-fiap.techchallenge.api.listagem: Serviço para a API de listagem.
-
-techchallenge-database: Serviço de banco de dados SQL Server.
-techchallenge-rabbitmq: Serviço RabbitMQ para gerenciamento de mensagens.
-prometheus: Serviço para monitoramento, usando a imagem prom/prometheus.
-grafana: Serviço para visualização de métricas, usando a imagem grafana/grafana.
+- fiap.techchallenge.api.cadastro: Serviço para a API de cadastro.
+- 
+- fiap.techchallenge.api.atualizacao: Serviço para a API de atualização.
+- 
+- fiap.techchallenge.api.exclusao: Serviço para a API de exclusão.
+- 
+- fiap.techchallenge.api.listagem: Serviço para a API de listagem.
+  
+- techchallenge-database: Serviço de banco de dados SQL Server.
+  
+- techchallenge-rabbitmq: Serviço RabbitMQ para gerenciamento de mensagens.
+  
+- prometheus: Serviço para monitoramento, usando a imagem prom/prometheus.
+  
+- grafana: Serviço para visualização de métricas, usando a imagem grafana/grafana.
 
 Rede:
-techchallenge-network: Rede bridge criada para conectar todos os serviços mencionados. Isso permite que os containers se comuniquem entre si usando o nome do serviço como hostname.
+techchallenge-network: Rede bridge criada para conectar todos os serviços mencionados. 
+Isso permite que os containers se comuniquem entre si usando o nome do serviço como hostname.
 
 ![image](https://github.com/user-attachments/assets/76f5f3c6-1aac-4eca-b000-55f742fe75b6)
