@@ -367,4 +367,3 @@ Rede:
 techchallenge-network: Rede bridge criada para conectar todos os serviços mencionados. 
 Isso permite que os containers se comuniquem entre si usando o nome do serviço como hostname.
 
-![image](https://github.com/user-attachments/assets/76f5f3c6-1aac-4eca-b000-55f742fe75b6)
