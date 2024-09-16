@@ -4,6 +4,7 @@ using MassTransit;
 
 namespace Fiap.TechChallenge.Atualizacao.API.Events;
 
+
 internal sealed class ContatoAtualizadoEventConsumer(
     IContatoRepository contatoRepository,
     IUnitOfWork unitOfWork,
