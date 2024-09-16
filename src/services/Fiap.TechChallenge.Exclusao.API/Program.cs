@@ -69,7 +69,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseCors(MyAllowSpecificOrigins);
 
+app.MapMetrics();
+
 app.UseMetricServer();
+
+app.UseHttpMetrics();
 
 app.UseHttpMetrics();
 
