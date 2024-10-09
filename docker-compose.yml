@@ -1,49 +1,131 @@
-version: '3.4'
-
+version: "3.8"
 services:
-  fiap.techchallenge.one.api:
-    image: ${DOCKER_REGISTRY-}fiaptechchallengeoneapi
-    container_name: techchallenge.api
+  fiap.techchallenge.api.cadastro:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeapicadastro
+    container_name: techchallenge.api.cadastro
     build:
       context: .
-      dockerfile: src/Fiap.TechChallenge.One.API/Dockerfile
+      dockerfile: src/services/Fiap.TechChallenge.Cadastro.API/Dockerfile
     ports:
-      - "5000:5000"
-    ##  - "5001:5001"
+      - 5000:5000
+      - 8080:8080
     depends_on:
       - techchallenge-database
+      - techchallenge-rabbitmq
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - techchallenge-network
+
+  fiap.techchallenge.api.atualizacao:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeapiatualizacao
+    container_name: techchallenge.api.atualizacao
+    build:
+      context: .
+      dockerfile: src/services/Fiap.TechChallenge.Atualizacao.API/Dockerfile
+    ports:
+      - 5100:5100
+      - 8081:8080
+    depends_on:
+      - techchallenge-database
+      - techchallenge-rabbitmq
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - techchallenge-network
+
+  fiap.techchallenge.api.exclusao:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeapiexclusao
+    container_name: techchallenge.api.exclusao
+    build:
+      context: .
+      dockerfile: src/services/Fiap.TechChallenge.Exclusao.API/Dockerfile
+    ports:
+      - 5200:5200
+      - 8082:8080
+    depends_on:
+      - techchallenge-database
+      - techchallenge-rabbitmq
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - techchallenge-network
+
+  fiap.techchallenge.api.listagem:
+    image: ${DOCKER_REGISTRY-}fiaptechchallengeapilistagem
+    container_name: techchallenge.api.listagem
+    build:
+      context: .
+      dockerfile: src/services/Fiap.TechChallenge.Listagem.API/Dockerfile
+    ports:
+      - 5300:5300
+      - 8083:8080
+    depends_on:
+      - techchallenge-database
+      - techchallenge-rabbitmq
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - techchallenge-network
 
   techchallenge-database:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: techchallenge.database
     ports:
-      - "80:80"
-      - "1433:1433"
+      - 80:80
+      - 1433:1433
     volumes:
       - ./.containers/db:/var/lib/sqlserver/data
     environment:
-      SA_PASSWORD: "1q2w3e4r@#$"
-      ACCEPT_EULA: "Y"
+      SA_PASSWORD: 1q2w3e4r@#$
+      ACCEPT_EULA: Y
+    networks:
+      - techchallenge-network
+
+  techchallenge-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: techchallenge.rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: /
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - techchallenge-network
 
   prometheus:
     image: prom/prometheus
     ports:
-      - "9090:9090"
+      - 9090:9090
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+      - --config.file=/etc/prometheus/prometheus.yml
+    networks:
+      - techchallenge-network
 
   grafana:
     image: grafana/grafana
     ports:
-      - "3000:3000"
+      - 3000:3000
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
       - ./grafana:/var/lib/grafana
     depends_on:
-      - prometheus 
+      - prometheus
+    networks:
+      - techchallenge-network
+
+networks:
+  techchallenge-network:
+    driver: bridge
