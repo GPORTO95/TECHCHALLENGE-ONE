@@ -18,8 +18,19 @@ public static class DependencyInjection
 
     private static void AddRepositories(IServiceCollection services, IConfiguration configuration)
     {
-        string? connectionString = configuration.GetConnectionString("Database");
-        Ensure.NotNullOrEmpty(connectionString);
+        string connectionString = configuration.GetConnectionString("Database");
+
+        if(connectionString == null) 
+        {
+            var sqlServerHost = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "sqlserver-service";
+            var sqlServerUser = "sa";
+            var sqlServerPassword = Environment.GetEnvironmentVariable("SQLSERVER_PASSWORD") ?? "YourStrong!Passw0rd"; 
+            var databaseName = "PublicEnterpriseDb";
+
+            connectionString = $"Server={sqlServerHost};Database={databaseName};User Id={sqlServerUser};Password={sqlServerPassword};";
+        }
+
+
 
         services.AddDbContext<ApplicationDbContext>(
             (sp, options) => options.UseSqlServer(connectionString));
