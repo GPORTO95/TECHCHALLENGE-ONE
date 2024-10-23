@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlserver-deployment
+  namespace: sqlserver-namespace
+  labels:
+    app: sqlserver
+    tier: backend
+  annotations:
+    description: "SQL Server deployment"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sqlserver
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+      annotations:
+        description: "SQL Server pod"
+    spec:
+      containers:
+      - name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        ports:
+        - containerPort: 1433
+        env:
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sqlserver-secret
+              key: sa-password
+        - name: ACCEPT_EULA
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-config
+              key: ACCEPT_EULA
+        volumeMounts:
+        - name: sqlserver-storage
+          mountPath: /var/opt/mssql
+        resources:
+          requests:
+            memory: "2Gi"  # Minimum memory SQL Server requires
+            cpu: "500m"     # Minimum CPU request (0.5 of a core)
+          limits:
+            memory: "4Gi"  # Maximum memory
+            cpu: "1000m"   # Maximum CPU (1 core)
+      volumes:
+      - name: sqlserver-storage
+        persistentVolumeClaim:
+          claimName: sqlserver-pvc
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver-service
+  namespace: sqlserver-namespace
+  labels:
+    app: sqlserver
+  annotations:
+    description: "SQL Server ClusterIP service"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 1433
+      targetPort: 1433
+  selector:
+    app: sqlserver
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver-external-service
+  namespace: sqlserver-namespace
+  labels:
+    app: sqlserver
+  annotations:
+    description: "External SQL Server service with NodePort"
+spec:
+  type: NodePort
+  ports:
+    - port: 1433         # Service port
+      targetPort: 1433   # Container's port (SQL Server default)
+      nodePort: 31433    # External port to access SQL Server (must be between 30000-32767)
+  selector:
+    app: sqlserver
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver-external-service
+  namespace: sqlserver-namespace
+  labels:
+    app: sqlserver
+  annotations:
+    description: "External SQL Server service with LoadBalancer"
+spec:
+  type: LoadBalancer  # Changed from NodePort to LoadBalancer
+  ports:
+    - port: 14331    # Service port
+      targetPort: 1433   # Container's port (SQL Server default)
+  selector:
+    app: sqlserver
+    
+
+    
