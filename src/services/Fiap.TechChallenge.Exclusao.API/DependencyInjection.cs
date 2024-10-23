@@ -25,6 +25,11 @@ public static class DependencyInjection
         services.AddSingleton(sp =>
             sp.GetRequiredService<IOptions<MessageBrokerSettings>>().Value);
 
+        var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+        var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USER") ?? "guest";
+        var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASS") ?? "guest";
+
+
         services.AddMassTransit(busConfigurator =>
         {
             busConfigurator.SetKebabCaseEndpointNameFormatter();
@@ -35,11 +40,22 @@ public static class DependencyInjection
             {
                 MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
 
-                configurator.Host(new Uri(settings.Host), h =>
+                if (settings.Host == string.Empty || settings.Username == string.Empty || settings.Password == string.Empty)
                 {
-                    h.Username(settings.Username);
-                    h.Password(settings.Password);
-                });
+                    configurator.Host(new Uri(rabbitMqHost), h =>
+                    {
+                        h.Username(rabbitMqUser);
+                        h.Password(rabbitMqPass);
+                    });
+                }
+                else
+                {
+                    configurator.Host(new Uri(settings.Host), h =>
+                    {
+                        h.Username(settings.Username);
+                        h.Password(settings.Password);
+                    });
+                }
 
                 configurator.ConfigureEndpoints(context);
             });
