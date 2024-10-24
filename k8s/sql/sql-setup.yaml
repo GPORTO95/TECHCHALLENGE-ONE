@@ -1,3 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sqlserver-namespace
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sqlserver-pvc
+  namespace: sqlserver-namespace
+  labels:
+    app: sqlserver
+  annotations:
+    description: "SQL Server PVC for persistent data storage"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sqlserver-config
+  namespace: sqlserver-namespace
+  labels:
+    app: sqlserver
+  annotations:
+    description: "SQL Server ConfigMap to store environment variables including credentials"
+data:
+  MSSQL_USER: "sa"
+  SA_PASSWORD: "sqlpassword!123"
+  ACCEPT_EULA: "Y"
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,11 +67,16 @@ spec:
         ports:
         - containerPort: 1433
         env:
+        - name: MSSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-config
+              key: MSSQL_USER
         - name: SA_PASSWORD
           valueFrom:
-            secretKeyRef:
-              name: sqlserver-secret
-              key: sa-password
+            configMapKeyRef:
+              name: sqlserver-config
+              key: SA_PASSWORD
         - name: ACCEPT_EULA
           valueFrom:
             configMapKeyRef:
@@ -51,9 +97,7 @@ spec:
         persistentVolumeClaim:
           claimName: sqlserver-pvc
 
-
 ---
-
 
 apiVersion: v1
 kind: Service
@@ -77,20 +121,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sqlserver-external-service
+  name: sqlserver-loadbalancer-service
   namespace: sqlserver-namespace
   labels:
     app: sqlserver
   annotations:
-    description: "External SQL Server service with NodePort"
+    description: "SQL Server LoadBalancer service for external access"
 spec:
   type: LoadBalancer
   ports:
-    - port: 1433         
-      targetPort: 1433   
-      nodePort: 31433  
+    - port: 1433       # The external port exposed by the load balancer
+      targetPort: 1433   # The port on the container (SQL Server default)
   selector:
     app: sqlserver
-
-
-    

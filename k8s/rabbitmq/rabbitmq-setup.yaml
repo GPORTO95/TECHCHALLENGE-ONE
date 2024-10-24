@@ -1,0 +1,121 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rabbitmq-namespace
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config
+  namespace: rabbitmq-namespace
+data:
+  rabbitmq.conf: |
+    listeners.tcp.default = 5672
+    management.listener.port = 15672
+  username: rabbitmq
+  password: password 
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rabbitmq-pvc
+  namespace: rabbitmq-namespace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+  namespace: rabbitmq-namespace
+  labels:
+    app: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3-management
+        ports:
+        - containerPort: 5672
+        - containerPort: 15672
+        env:
+        - name: RABBITMQ_DEFAULT_USER
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: username
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: password
+        volumeMounts:
+        - name: rabbitmq-storage
+          mountPath: /var/lib/rabbitmq
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+      volumes:
+      - name: rabbitmq-storage
+        persistentVolumeClaim:
+          claimName: rabbitmq-pvc
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-loadbalancer
+  namespace: rabbitmq-namespace
+  labels:
+    app: rabbitmq
+  annotations:
+    description: "LoadBalancer service for RabbitMQ"
+spec:
+  type: LoadBalancer
+  ports:
+    - name: rabbitmq
+      port: 5672
+      targetPort: 5672
+    - name: management
+      port: 15672
+      targetPort: 15672
+  selector:
+    app: rabbitmq
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-clusterip
+  namespace: rabbitmq-namespace
+  labels:
+    app: rabbitmq
+  annotations:
+    description: "ClusterIP service for RabbitMQ"
+spec:
+  type: ClusterIP
+  ports:
+    - name: rabbitmq
+      port: 5672
+      targetPort: 5672
+  selector:
+    app: rabbitmq
