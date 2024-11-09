@@ -22,6 +22,8 @@ builder.Services.AddCors(options =>
                       });
 });
 
+builder.Configuration.AddEnvironmentVariables();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
@@ -39,9 +41,17 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+
+ILoggerFactory loggerFactory = LoggerFactory.Create(logging =>
+{
+    logging.AddConsole();
+    logging.AddDebug();
+});
+
+
 builder.Services
     .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration, loggerFactory);
 
 builder.Services
     .AddContatoApplication()
@@ -55,18 +65,9 @@ builder.Services.AddProblemDetails();
 
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
 
-}
-
-if (!app.Environment.IsDevelopment())
-{
-    app.UseHttpsRedirection(); 
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors(MyAllowSpecificOrigins);
 

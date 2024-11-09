@@ -25,12 +25,6 @@ public static class DependencyInjection
         services.AddSingleton(sp =>
             sp.GetRequiredService<IOptions<MessageBrokerSettings>>().Value);
 
-
-        var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
-        var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USER") ?? "guest";
-        var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASS") ?? "guest";
-
-
         services.AddMassTransit(busConfigurator =>
         {
             busConfigurator.SetKebabCaseEndpointNameFormatter();
@@ -41,22 +35,21 @@ public static class DependencyInjection
             {
                 MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
 
-                if (settings.Host == string.Empty || settings.Username == string.Empty || settings.Password == string.Empty)
+                // Check if the Host is valid
+                if (string.IsNullOrEmpty(settings.Host))
                 {
-                    configurator.Host(new Uri(rabbitMqHost), h =>
-                    {
-                        h.Username(rabbitMqUser);
-                        h.Password(rabbitMqPass);
-                    });
+                    throw new Exception("RabbitMQ host cannot be null or empty.");
                 }
-                else
+
+                // Log the RabbitMQ connection details
+                var rabbitMqUri = new Uri($"amqp://{settings.Username}:{settings.Password}@{settings.Host}");
+                Console.WriteLine($"Connecting to RabbitMQ at: {rabbitMqUri}");
+
+                configurator.Host(rabbitMqUri, h =>
                 {
-                    configurator.Host(new Uri(settings.Host), h =>
-                    {
-                        h.Username(settings.Username);
-                        h.Password(settings.Password);
-                    });
-                }
+                    h.Username(settings.Username);
+                    h.Password(settings.Password);
+                });
 
                 configurator.ConfigureEndpoints(context);
             });

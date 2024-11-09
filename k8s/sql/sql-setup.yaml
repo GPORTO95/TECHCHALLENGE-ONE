@@ -72,7 +72,7 @@ spec:
             configMapKeyRef:
               name: sqlserver-config
               key: MSSQL_USER
-        - name: SA_PASSWORD
+        - name: MSSQL_SA_PASSWORD
           valueFrom:
             configMapKeyRef:
               name: sqlserver-config
@@ -117,20 +117,20 @@ spec:
     app: sqlserver
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: sqlserver-loadbalancer-service
+  name: sqlserver-nodeport-service
   namespace: sqlserver-namespace
   labels:
     app: sqlserver
   annotations:
-    description: "SQL Server LoadBalancer service for external access"
+    description: "SQL Server NodePort service for external access"
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
-    - port: 1433       # The external port exposed by the load balancer
-      targetPort: 1433   # The port on the container (SQL Server default)
+    - port: 1433           
+      targetPort: 1433        
+      nodePort: 30000      
   selector:
     app: sqlserver

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  namespace: api-cadastro
+  labels:
+    app: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: lucaslearningsw/tech-api-cadastro:latest
+        ports:
+        - containerPort: 80  # Change this to your app's port
+        env:
+          - name: DATABASE_CONNECTION_STRING
+            value: "Server=sqlserver-nodeport-service.sqlserver-namespace,1433;Database=PublicEnterpriseDb;User ID=sa;Password=sqlpassword!123;Encrypt=True;TrustServerCertificate=True;"
+        resources:
+          requests:
+            memory: "512Mi"  # Minimum memory request
+            cpu: "250m"      # Minimum CPU request
+          limits:
+            memory: "1Gi"    # Maximum memory limit
+            cpu: "500m"      # Maximum CPU limit
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-cadastro-service
+  namespace: api-cadastro
+spec:
+  type: NodePort  
+  ports:
+    - port: 80         
+      targetPort: 8080     
+  selector:
+    app: myapp   

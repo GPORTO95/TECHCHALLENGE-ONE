@@ -83,39 +83,22 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rabbitmq-loadbalancer
+  name: rrabbitmq-clusterip
   namespace: rabbitmq-namespace
   labels:
     app: rabbitmq
   annotations:
-    description: "LoadBalancer service for RabbitMQ"
+    description: "NodePort service for external access to RabbitMQ"
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
     - name: rabbitmq
       port: 5672
       targetPort: 5672
+      nodePort: 30092
     - name: management
       port: 15672
       targetPort: 15672
-  selector:
-    app: rabbitmq
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: rabbitmq-clusterip
-  namespace: rabbitmq-namespace
-  labels:
-    app: rabbitmq
-  annotations:
-    description: "ClusterIP service for RabbitMQ"
-spec:
-  type: ClusterIP
-  ports:
-    - name: rabbitmq
-      port: 5672
-      targetPort: 5672
+      nodePort: 30002 
   selector:
     app: rabbitmq

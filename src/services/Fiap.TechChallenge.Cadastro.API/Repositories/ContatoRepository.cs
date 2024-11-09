@@ -7,6 +7,15 @@ internal sealed class ContatoRepository(ApplicationDbContext dbContext) : IConta
 {
     public void Adicionar(Contato contato)
     {
-        dbContext.Contatos.Add(contato);
+		try
+		{
+            dbContext.Contatos.Add(contato);
+        }
+		catch (Exception ex)
+		{
+
+			throw;
+		}
+        
     }
 }

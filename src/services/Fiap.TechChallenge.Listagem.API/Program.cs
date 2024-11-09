@@ -39,9 +39,16 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+ILoggerFactory loggerFactory = LoggerFactory.Create(logging =>
+{
+    logging.AddConsole();
+    logging.AddDebug();
+});
+
+
 builder.Services
     .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration, loggerFactory);
 
 builder.Services
     .AddContatoApplication();
