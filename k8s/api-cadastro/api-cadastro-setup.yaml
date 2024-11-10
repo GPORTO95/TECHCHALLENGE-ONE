@@ -19,28 +19,57 @@ spec:
       - name: myapp
         image: lucaslearningsw/tech-api-cadastro:latest
         ports:
-        - containerPort: 80  # Change this to your app's port
+        - containerPort: 8080
         env:
-          - name: DATABASE_CONNECTION_STRING
-            value: "Server=sqlserver-nodeport-service.sqlserver-namespace,1433;Database=PublicEnterpriseDb;User ID=sa;Password=sqlpassword!123;Encrypt=True;TrustServerCertificate=True;"
+        - name: MSSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-config
+              key: MSSQL_USER
+        - name: SA_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-config
+              key: SA_PASSWORD
+        - name: MSSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-config
+              key: MSSQL_HOST
+        - name: RABBITMQ_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: username
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: password
+        - name: RABBITMQ_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: host
         resources:
           requests:
-            memory: "512Mi"  # Minimum memory request
-            cpu: "250m"      # Minimum CPU request
+            memory: "512Mi"
+            cpu: "250m"
           limits:
-            memory: "1Gi"    # Maximum memory limit
-            cpu: "500m"      # Maximum CPU limit
----
+            memory: "1Gi"
+            cpu: "500m"
 
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-cadastro-service
+  name: myapp-service
   namespace: api-cadastro
 spec:
-  type: NodePort  
-  ports:
-    - port: 80         
-      targetPort: 8080     
   selector:
-    app: myapp   
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 80        # Port exposed externally
+      targetPort: 8080  # Port on the container
+  type: NodePort

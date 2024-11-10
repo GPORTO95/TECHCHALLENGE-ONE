@@ -26,33 +26,27 @@ public static class DependencyInjection
             sp.GetRequiredService<IOptions<MessageBrokerSettings>>().Value);
 
         services.AddMassTransit(busConfigurator =>
-        {
+       {
             busConfigurator.SetKebabCaseEndpointNameFormatter();
 
             busConfigurator.AddConsumer<ContatoInseridoEventConsumer>();
 
             busConfigurator.UsingRabbitMq((context, configurator) =>
             {
-                MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
+                var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+                var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
+                var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
 
-                // Check if the Host is valid
-                if (string.IsNullOrEmpty(settings.Host))
-                {
-                    throw new Exception("RabbitMQ host cannot be null or empty.");
-                }
+                Console.WriteLine($"Connecting to RabbitMQ at: {rabbitMqHost},{rabbitMqUser},{rabbitMqPass}");
 
-                // Log the RabbitMQ connection details
-                var rabbitMqUri = new Uri($"amqp://{settings.Username}:{settings.Password}@{settings.Host}");
-                Console.WriteLine($"Connecting to RabbitMQ at: {rabbitMqUri}");
+                    configurator.Host(new Uri($"amqp://{rabbitMqHost}"), h =>
+                    {
+                        h.Username(rabbitMqUser);
+                        h.Password(rabbitMqPass);
+                    });
 
-                configurator.Host(rabbitMqUri, h =>
-                {
-                    h.Username(settings.Username);
-                    h.Password(settings.Password);
+                    configurator.ConfigureEndpoints(context);
                 });
-
-                configurator.ConfigureEndpoints(context);
-            });
         });
 
         services.AddTransient<IEventBus, EventBus>();

@@ -83,7 +83,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rrabbitmq-clusterip
+  name: rabbitmq-nodeport
   namespace: rabbitmq-namespace
   labels:
     app: rabbitmq

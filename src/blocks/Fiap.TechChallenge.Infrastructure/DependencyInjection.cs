@@ -19,22 +19,26 @@ public static class DependencyInjection
 
     private static void AddRepositories(IServiceCollection services, IConfiguration configuration, ILoggerFactory loggerFactory)
     {
-       
-
         var logger  = loggerFactory.CreateLogger("Test");
 
 
         string? connectionString = configuration.GetConnectionString("Database");
         Ensure.NotNullOrEmpty(connectionString);
 
+
+        var sqlUser = Environment.GetEnvironmentVariable("MSSQL_USER");
+
+        var saPassword = Environment.GetEnvironmentVariable("SA_PASSWORD");
+
+        var host = Environment.GetEnvironmentVariable("MSSQL_HOST");
+
+        connectionString = connectionString.Replace("{MSSQL_USER}",sqlUser)
+                                           .Replace("{SA_PASSWORD}", saPassword)
+                                           .Replace("{MSSQL_HOST}", host);
+
         logger.LogInformation("TestConnection");
         logger.LogInformation(connectionString);
 
-
-        logger.LogInformation("TestConnection2");
-        connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
-
-        logger.LogInformation(connectionString);
 
         services.AddDbContext<ApplicationDbContext>(
             (sp, options) => options.UseSqlServer(connectionString));
@@ -42,3 +46,4 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
     }
 }
+    
