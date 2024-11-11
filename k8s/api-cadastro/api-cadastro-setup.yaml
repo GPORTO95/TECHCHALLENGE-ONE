@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: api-cadastro-deployment
   namespace: api-cadastro
   labels:
-    app: myapp
+    app: apicadastro
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myapp
+      app: apicadastro
   template:
     metadata:
       labels:
-        app: myapp
+        app: apicadastro
     spec:
       containers:
-      - name: myapp
+      - name: apicadastro
         image: lucaslearningsw/tech-api-cadastro:latest
         ports:
         - containerPort: 8080
@@ -63,11 +63,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: myapp-service
+  name: apicadastro-service
   namespace: api-cadastro
 spec:
   selector:
-    app: myapp
+    app: apicadastro
   ports:
     - protocol: TCP
       port: 80        # Port exposed externally
