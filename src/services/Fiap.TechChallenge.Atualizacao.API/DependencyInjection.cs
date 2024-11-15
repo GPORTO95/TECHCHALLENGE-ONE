@@ -3,7 +3,6 @@ using Fiap.TechChallenge.Atualizacao.API.Events;
 using Fiap.TechChallenge.Infrastructure.MessageBroker;
 using FluentValidation;
 using MassTransit;
-using Microsoft.Extensions.Options;
 
 namespace Fiap.TechChallenge.Atualizacao.API;
 
@@ -20,11 +19,6 @@ public static class DependencyInjection
 
     public static IServiceCollection AddContatoInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-
-        var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
-        var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
-        var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
-
         services.AddMassTransit(busConfigurator =>
         {
             busConfigurator.SetKebabCaseEndpointNameFormatter();
@@ -33,11 +27,17 @@ public static class DependencyInjection
 
             busConfigurator.UsingRabbitMq((context, configurator) =>
             {
-                    configurator.Host(new Uri(rabbitMqHost), h =>
-                    {
-                        h.Username(rabbitMqUser);
-                        h.Password(rabbitMqPass);
-                    });
+                var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+                var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
+                var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
+
+                Console.WriteLine($"Connecting to RabbitMQ at: {rabbitMqHost},{rabbitMqUser},{rabbitMqPass}");
+
+                configurator.Host(new Uri($"amqp://{rabbitMqHost}"), h =>
+                {
+                    h.Username(rabbitMqUser);
+                    h.Password(rabbitMqPass);
+                });
 
                 configurator.ConfigureEndpoints(context);
             });

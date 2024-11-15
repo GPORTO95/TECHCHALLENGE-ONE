@@ -63,6 +63,7 @@ builder.Services.AddScoped<IDddRepository, DddRepository>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
+
 WebApplication app = builder.Build();
 
 

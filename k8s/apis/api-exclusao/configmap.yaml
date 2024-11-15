@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config
+  namespace: api-exclusao
+data:
+  username: rabbitmq
+  password: password
+  host: rabbitmq-nodeport.rabbitmq-namespace.svc.cluster.local
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sqlserver-config
+  namespace: api-exclusao
+  labels:
+    app: sqlserver
+  annotations:
+    description: "SQL Server ConfigMap to store environment variables including credentials"
+data:
+  MSSQL_USER: "sa"
+  SA_PASSWORD: "sqlpassword!123"
+  ACCEPT_EULA: "Y"
+  MSSQL_HOST: "sqlserver-nodeport-service.sqlserver-namespace.svc.cluster.local"

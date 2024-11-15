@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: api-exclusao
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-exclusao-deployment
+  namespace: api-exclusao
+  labels:
+    app: apiexclusao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apiexclusao
+  template:
+    metadata:
+      labels:
+        app: apiexclusao
+    spec:
+      containers:
+      - name: apiexclusao
+        image: lucaslearningsw/tech-api-exclusao:latest
+        ports:
+        - containerPort: 8082
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://0.0.0.0:8082"
+        - name: MSSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-config
+              key: MSSQL_USER
+        - name: SA_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-config
+              key: SA_PASSWORD
+        - name: MSSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-config
+              key: MSSQL_HOST
+        - name: RABBITMQ_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: username
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: password
+        - name: RABBITMQ_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: host
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apiexclusao-service
+  namespace: api-exclusao
+spec:
+  selector:
+    app: apiexclusao
+  ports:
+    - protocol: TCP
+      port: 8083      # Port exposed externally
+      targetPort: 8082  # Port on the container
+  type: NodePort

@@ -38,24 +38,17 @@ public static class DependencyInjection
 
             busConfigurator.UsingRabbitMq((context, configurator) =>
             {
-                MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
+                var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+                var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
+                var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
 
-                if (settings.Host == string.Empty || settings.Username == string.Empty || settings.Password == string.Empty)
+                Console.WriteLine($"Connecting to RabbitMQ at: {rabbitMqHost},{rabbitMqUser},{rabbitMqPass}");
+
+                configurator.Host(new Uri($"amqp://{rabbitMqHost}"), h =>
                 {
-                    configurator.Host(new Uri(rabbitMqHost), h =>
-                    {
-                        h.Username(rabbitMqUser);
-                        h.Password(rabbitMqPass);
-                    });
-                }
-                else
-                {
-                    configurator.Host(new Uri(settings.Host), h =>
-                    {
-                        h.Username(settings.Username);
-                        h.Password(settings.Password);
-                    });
-                }
+                    h.Username(rabbitMqUser);
+                    h.Password(rabbitMqPass);
+                });
 
                 configurator.ConfigureEndpoints(context);
             });

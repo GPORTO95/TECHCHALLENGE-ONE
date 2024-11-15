@@ -1,26 +1,35 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: api-atualizacao
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-cadastro-deployment
-  namespace: api-cadastro
+  name: api-atualizacao-deployment
+  namespace: api-atualizacao
   labels:
-    app: apicadastro
+    app: apiatualizacao
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: apicadastro
+      app: apiatualizacao
   template:
     metadata:
       labels:
-        app: apicadastro
+        app: apiatualizacao
     spec:
       containers:
-      - name: apicadastro
-        image: lucaslearningsw/tech-api-cadastro:latest
+      - name: apiatualizacao
+        image: lucaslearningsw/tech-api-atualizacao:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8084
         env:
+        - name: ASPNETCORE_URLS
+          value: "http://0.0.0.0:8084"
         - name: MSSQL_USER
           valueFrom:
             configMapKeyRef:
@@ -63,13 +72,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: apicadastro-service
-  namespace: api-cadastro
+  name: apiatualizacao-service
+  namespace: api-atualizacao
 spec:
   selector:
-    app: apicadastro
+    app: apiatualizacao
   ports:
     - protocol: TCP
-      port: 80        # Port exposed externally
-      targetPort: 8080  # Port on the container
+      port: 8085        # Port exposed externally
+      targetPort: 8084 # Port on the container
   type: NodePort
