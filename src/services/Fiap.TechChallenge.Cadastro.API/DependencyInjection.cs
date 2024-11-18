@@ -27,27 +27,32 @@ public static class DependencyInjection
 
         services.AddMassTransit(busConfigurator =>
        {
-            busConfigurator.SetKebabCaseEndpointNameFormatter();
+           busConfigurator.SetKebabCaseEndpointNameFormatter();
 
-            busConfigurator.AddConsumer<ContatoInseridoEventConsumer>();
+           busConfigurator.AddConsumer<ContatoInseridoEventConsumer>();
 
-            busConfigurator.UsingRabbitMq((context, configurator) =>
-            {
-                var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "host.docker.internal:5672";
-                var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
-                var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
+           busConfigurator.UsingRabbitMq((context, configurator) =>
+           {
+               var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "host.docker.internal:5672";
+               var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
+               var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
 
-                Console.WriteLine($"Connecting to RabbitMQ at: {rabbitMqHost},{rabbitMqUser},{rabbitMqPass}");
+               MessageBrokerSettings settings = new()
+               {
+                   Host = rabbitMqHost,
+                   Password = rabbitMqPass,
+                   Username = rabbitMqUser
+               };
 
-                    configurator.Host(new Uri($"amqp://{rabbitMqHost}"), h =>
-                    {
-                        h.Username(rabbitMqUser);
-                        h.Password(rabbitMqPass);
-                    });
+               configurator.Host(new Uri($"amqp://{settings.Host}"), h =>
+               {
+                   h.Username(settings.Username);
+                   h.Password(settings.Password);
+               });
 
-                    configurator.ConfigureEndpoints(context);
-                });
-        });
+               configurator.ConfigureEndpoints(context);
+           });
+       });
 
         services.AddTransient<IEventBus, EventBus>();
 

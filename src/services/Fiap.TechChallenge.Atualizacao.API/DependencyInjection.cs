@@ -31,12 +31,17 @@ public static class DependencyInjection
                 var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
                 var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
 
-                Console.WriteLine($"Connecting to RabbitMQ at: {rabbitMqHost},{rabbitMqUser},{rabbitMqPass}");
-
-                configurator.Host(new Uri($"amqp://{rabbitMqHost}"), h =>
+                MessageBrokerSettings settings = new()
                 {
-                    h.Username(rabbitMqUser);
-                    h.Password(rabbitMqPass);
+                    Host = rabbitMqHost,
+                    Password = rabbitMqPass,
+                    Username = rabbitMqUser
+                };
+
+                configurator.Host(new Uri($"amqp://{settings.Host}"), h =>
+                {
+                    h.Username(settings.Username);
+                    h.Password(settings.Password);
                 });
 
                 configurator.ConfigureEndpoints(context);
