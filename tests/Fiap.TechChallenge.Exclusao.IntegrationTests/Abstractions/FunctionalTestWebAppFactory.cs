@@ -18,7 +18,6 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
     private readonly RabbitMqContainer _rabbitMqContainer = new RabbitMqBuilder()
         .WithUsername("guest")
         .WithPassword("guest")
-        .WithExposedPort("5672")
         .Build();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -39,8 +38,6 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
 
             await _msSqlContainer.ExecScriptAsync(ScriptInitialExtensions.CreateTables());
         });
-
-        builder.UseEnvironment("Development");
     }
 
     public Task InitializeAsync()
