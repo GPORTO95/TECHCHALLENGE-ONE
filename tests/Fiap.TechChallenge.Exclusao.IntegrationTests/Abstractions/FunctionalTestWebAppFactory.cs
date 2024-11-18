@@ -38,6 +38,8 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
 
             await _msSqlContainer.ExecScriptAsync(ScriptInitialExtensions.CreateTables());
         });
+
+        builder.UseEnvironment("Development");
     }
 
     public Task InitializeAsync()
