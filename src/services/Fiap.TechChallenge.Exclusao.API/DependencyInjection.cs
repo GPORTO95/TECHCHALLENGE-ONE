@@ -33,22 +33,15 @@ public static class DependencyInjection
 
             busConfigurator.UsingRabbitMq((context, configurator) =>
             {
-                //var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "host.docker.internal:5672";
-                //var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
-                //var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
-                MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
+                var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+                var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
+                var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
+                //MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
 
-                //MessageBrokerSettings settings = new()
-                //{
-                //    Host = rabbitMqHost,
-                //    Password = rabbitMqPass,
-                //    Username = rabbitMqUser
-                //};
-
-                configurator.Host(new Uri(settings.Host), h =>
+                configurator.Host(new Uri(rabbitMqHost), h =>
                 {
-                    h.Username(settings.Username);
-                    h.Password(settings.Password);
+                    h.Username(rabbitMqUser);
+                    h.Password(rabbitMqPass);
                 });
 
                 configurator.ConfigureEndpoints(context);

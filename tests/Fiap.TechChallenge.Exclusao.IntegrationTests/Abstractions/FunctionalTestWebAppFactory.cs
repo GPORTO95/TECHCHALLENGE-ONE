@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Testcontainers.MsSql;
@@ -37,6 +38,17 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
             });
 
             await _msSqlContainer.ExecScriptAsync(ScriptInitialExtensions.CreateTables());
+        });
+
+        builder.ConfigureAppConfiguration((ctx, builder) =>
+        {
+            var configuration = new Dictionary<string, string?>
+            {
+                ["MessageBroker:Host"] = _rabbitMqContainer.GetConnectionString()
+            };
+
+            builder.Sources.Clear();
+            builder.AddInMemoryCollection(configuration);
         });
     }
 
