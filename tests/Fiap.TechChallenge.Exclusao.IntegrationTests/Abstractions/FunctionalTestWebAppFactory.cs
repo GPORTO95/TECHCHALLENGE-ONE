@@ -44,7 +44,10 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
         {
             var configuration = new Dictionary<string, string?>
             {
-                ["MessageBroker:Host"] = _rabbitMqContainer.GetConnectionString()
+                ["ConnectionStrings:Database"] = _msSqlContainer.GetConnectionString(),
+                ["MessageBroker:Host"] = _rabbitMqContainer.GetConnectionString(),
+                ["MessageBroker:Username"] = "guest",
+                ["MessageBroker:Password"] = "guest"
             };
 
             builder.Sources.Clear();
