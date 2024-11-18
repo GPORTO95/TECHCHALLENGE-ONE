@@ -25,11 +25,6 @@ public static class DependencyInjection
         services.AddSingleton(sp =>
             sp.GetRequiredService<IOptions<MessageBrokerSettings>>().Value);
 
-        var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "host.docker.internal:5672";
-        var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USER") ?? "guest";
-        var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASS") ?? "guest";
-
-
         services.AddMassTransit(busConfigurator =>
         {
             busConfigurator.SetKebabCaseEndpointNameFormatter();
@@ -38,18 +33,19 @@ public static class DependencyInjection
 
             busConfigurator.UsingRabbitMq((context, configurator) =>
             {
-                var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "host.docker.internal:5672";
-                var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
-                var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
+                //var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "host.docker.internal:5672";
+                //var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
+                //var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
+                MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
 
-                MessageBrokerSettings settings = new()
-                {
-                    Host = rabbitMqHost,
-                    Password = rabbitMqPass,
-                    Username = rabbitMqUser
-                };
+                //MessageBrokerSettings settings = new()
+                //{
+                //    Host = rabbitMqHost,
+                //    Password = rabbitMqPass,
+                //    Username = rabbitMqUser
+                //};
 
-                configurator.Host(new Uri($"amqp://{settings.Host}"), h =>
+                configurator.Host(new Uri(settings.Host), h =>
                 {
                     h.Username(settings.Username);
                     h.Password(settings.Password);
