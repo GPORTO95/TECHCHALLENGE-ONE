@@ -26,11 +26,11 @@ public static class DependencyInjection
         Ensure.NotNullOrEmpty(connectionString);
 
 
-        var sqlUser = Environment.GetEnvironmentVariable("MSSQL_USER");
+        var sqlUser = Environment.GetEnvironmentVariable("MSSQL_USER") ?? "sa";
 
-        var saPassword = Environment.GetEnvironmentVariable("SA_PASSWORD");
+        var saPassword = Environment.GetEnvironmentVariable("SA_PASSWORD") ?? "1q2w3e4r@#$";
 
-        var host = Environment.GetEnvironmentVariable("MSSQL_HOST");
+        var host = Environment.GetEnvironmentVariable("MSSQL_HOST") ?? "host.docker.internal,1433";
 
         connectionString = connectionString.Replace("{MSSQL_USER}",sqlUser)
                                            .Replace("{SA_PASSWORD}", saPassword)
