@@ -40,19 +40,7 @@ public class FunctionalTestWebAppFactory : WebApplicationFactory<Program>, IAsyn
             await _msSqlContainer.ExecScriptAsync(ScriptInitialExtensions.CreateTables());
         });
 
-        builder.ConfigureAppConfiguration((ctx, builder) =>
-        {
-            var configuration = new Dictionary<string, string?>
-            {
-                ["ConnectionStrings:Database"] = _msSqlContainer.GetConnectionString(),
-                ["MessageBroker:Host"] = _rabbitMqContainer.GetConnectionString(),
-                ["MessageBroker:Username"] = "guest",
-                ["MessageBroker:Password"] = "guest"
-            };
-
-            builder.Sources.Clear();
-            builder.AddInMemoryCollection(configuration);
-        });
+        builder.UseEnvironment("Development");
     }
 
     public Task InitializeAsync()

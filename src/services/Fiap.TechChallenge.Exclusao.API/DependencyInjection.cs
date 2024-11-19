@@ -18,7 +18,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddContatoInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddContatoInfrastructure(this IServiceCollection services, IConfiguration configuration, string environmentName)
     {
         services.Configure<MessageBrokerSettings>(configuration.GetSection("MessageBroker"));
 
@@ -33,16 +33,28 @@ public static class DependencyInjection
 
             busConfigurator.UsingRabbitMq((context, configurator) =>
             {
-                var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
-                var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
-                var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
-                //MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
-
-                configurator.Host(new Uri(rabbitMqHost), h =>
+                if (environmentName == "Development")
                 {
-                    h.Username(rabbitMqUser);
-                    h.Password(rabbitMqPass);
-                });
+                    MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
+
+                    configurator.Host(new Uri(settings.Host), h =>
+                    {
+                        h.Username(settings.Username);
+                        h.Password(settings.Password);
+                    });
+                }
+                else
+                {
+                    var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+                    var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
+                    var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
+                    
+                    configurator.Host(new Uri(rabbitMqHost), h =>
+                    {
+                        h.Username(rabbitMqUser);
+                        h.Password(rabbitMqPass);
+                    });
+                }
 
                 configurator.ConfigureEndpoints(context);
             });
