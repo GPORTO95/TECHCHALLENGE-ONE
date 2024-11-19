@@ -18,7 +18,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddContatoInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddContatoInfrastructure(this IServiceCollection services, IConfiguration configuration, string environmentName)
     {
         services.Configure<MessageBrokerSettings>(configuration.GetSection("MessageBroker"));
 
@@ -33,22 +33,28 @@ public static class DependencyInjection
 
            busConfigurator.UsingRabbitMq((context, configurator) =>
            {
-               var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "host.docker.internal:5672";
-               var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
-               var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
-
-               MessageBrokerSettings settings = new()
+               if (environmentName == "Development")
                {
-                   Host = rabbitMqHost,
-                   Password = rabbitMqPass,
-                   Username = rabbitMqUser
-               };
+                   MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
 
-               configurator.Host(new Uri($"amqp://{settings.Host}"), h =>
+                   configurator.Host(new Uri(settings.Host), h =>
+                   {
+                       h.Username(settings.Username);
+                       h.Password(settings.Password);
+                   });
+               }
+               else
                {
-                   h.Username(settings.Username);
-                   h.Password(settings.Password);
-               });
+                   var rabbitMqHost = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "localhost";
+                   var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
+                   var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
+
+                   configurator.Host(new Uri($"amqp://{rabbitMqHost}"), h =>
+                   {
+                       h.Username(rabbitMqUser);
+                       h.Password(rabbitMqPass);
+                   });
+               }
 
                configurator.ConfigureEndpoints(context);
            });

@@ -49,7 +49,7 @@ public static class DependencyInjection
                     var rabbitMqUser = Environment.GetEnvironmentVariable("RABBITMQ_USERNAME") ?? "guest";
                     var rabbitMqPass = Environment.GetEnvironmentVariable("RABBITMQ_PASSWORD") ?? "guest";
                     
-                    configurator.Host(new Uri(rabbitMqHost), h =>
+                    configurator.Host(new Uri($"amqp://{rabbitMqHost}"), h =>
                     {
                         h.Username(rabbitMqUser);
                         h.Password(rabbitMqPass);

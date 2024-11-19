@@ -55,7 +55,7 @@ builder.Services
 
 builder.Services
     .AddContatoApplication()
-    .AddContatoInfrastructure(builder.Configuration);
+    .AddContatoInfrastructure(builder.Configuration, builder.Environment.EnvironmentName);
 
 builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
 builder.Services.AddScoped<IDddRepository, DddRepository>();
