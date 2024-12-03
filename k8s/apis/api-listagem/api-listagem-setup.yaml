@@ -9,19 +9,19 @@ metadata:
   name: api-listagem-deployment
   namespace: api-listagem
   labels:
-    app: apilistagem
+    app: api-listagem
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: apilistagem
+      app: api-listagem
   template:
     metadata:
       labels:
-        app: apilistagem
+        app: api-listagem
     spec:
       containers:
-      - name: apilistagem
+      - name: api-listagem
         image: lucaslearningsw/tech-api-listagem:latest
         ports:
         - containerPort: 8085
@@ -70,11 +70,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: apilistagem-service
+  name: api-listagem-service
   namespace: api-listagem
 spec:
   selector:
-    app: apilistagem
+    app: api-listagem
   ports:
     - protocol: TCP
       port: 8085      # Port exposed externally

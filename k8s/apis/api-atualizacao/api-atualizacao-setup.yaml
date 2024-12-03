@@ -11,19 +11,19 @@ metadata:
   name: api-atualizacao-deployment
   namespace: api-atualizacao
   labels:
-    app: apiatualizacao
+    app: api-atualizacao
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: apiatualizacao
+      app: api-atualizacao
   template:
     metadata:
       labels:
-        app: apiatualizacao
+        app: api-atualizacao
     spec:
       containers:
-      - name: apiatualizacao
+      - name: api-atualizacao
         image: lucaslearningsw/tech-api-atualizacao:latest
         ports:
         - containerPort: 8084
@@ -72,13 +72,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: apiatualizacao-service
+  name: api-atualizacao-service
   namespace: api-atualizacao
 spec:
   selector:
-    app: apiatualizacao
+    app: api-atualizacao
   ports:
     - protocol: TCP
-      port: 8085        # Port exposed externally
+      port: 8084        # Port exposed externally
       targetPort: 8084 # Port on the container
   type: NodePort

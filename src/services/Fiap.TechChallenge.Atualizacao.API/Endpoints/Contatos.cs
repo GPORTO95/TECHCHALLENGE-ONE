@@ -24,7 +24,7 @@ public class Contatos(ISender sender) : ControllerBase
     [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Accepted)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NotFound)]
-    public async Task<IResult> CriarContato([FromBody] AtualizarContatoCommand command, CancellationToken cancellationToken)
+    public async Task<IResult> AtualizarContato([FromBody] AtualizarContatoCommand command, CancellationToken cancellationToken)
     {
         Result result = await sender.Send(command, cancellationToken);
 

@@ -9,19 +9,19 @@ metadata:
   name: api-exclusao-deployment
   namespace: api-exclusao
   labels:
-    app: apiexclusao
+    app: api-exclusao
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: apiexclusao
+      app: api-exclusao
   template:
     metadata:
       labels:
-        app: apiexclusao
+        app: api-exclusao
     spec:
       containers:
-      - name: apiexclusao
+      - name: api-exclusao
         image: lucaslearningsw/tech-api-exclusao:latest
         ports:
         - containerPort: 8082
@@ -70,11 +70,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: apiexclusao-service
+  name: api-exclusao-service
   namespace: api-exclusao
 spec:
   selector:
-    app: apiexclusao
+    app: api-exclusao
   ports:
     - protocol: TCP
       port: 8083      # Port exposed externally

@@ -22,7 +22,7 @@ public class Contatos(ISender sender) : ControllerBase
     [HttpDelete("{contatoId}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.NotFound)]
-    public async Task<IResult> CriarContato([FromRoute] Guid contatoId, CancellationToken cancellationToken)
+    public async Task<IResult> DeleteContato([FromRoute] Guid contatoId, CancellationToken cancellationToken)
     {
         Result result = await sender.Send(new ExcluirContatoCommand(contatoId), cancellationToken);
 
