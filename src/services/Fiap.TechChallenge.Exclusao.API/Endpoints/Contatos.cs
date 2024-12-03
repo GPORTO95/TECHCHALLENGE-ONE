@@ -27,5 +27,7 @@ public class Contatos(ISender sender) : ControllerBase
         Result result = await sender.Send(new ExcluirContatoCommand(contatoId), cancellationToken);
 
         return result.Match(Results.NoContent, CustomResults.Problem);
+
+        //test
     }
 }
